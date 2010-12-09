@@ -6,5 +6,5 @@ Linki do stron związanych z tematem projektu.
 
 
 = Details =
-
-http://www.uz.zgora.pl/~jbiegano/agipe09/agipe09/wyklad/agipe09jb_w05.pdf
+Podstawowe informacje o operatorach CX, OX, MPX:
+ * http://www.uz.zgora.pl/~jbiegano/agipe09/agipe09/wyklad/agipe09jb_w05.pdf
