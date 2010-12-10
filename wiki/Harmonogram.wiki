@@ -10,8 +10,6 @@
 3. Stworzenie opracowania do uzyskanych wyników (19.12)
 
 
-
-
 = Cele projektu =
 
   * Sprawdzenie skuteczności poszczególnych operatorów.
