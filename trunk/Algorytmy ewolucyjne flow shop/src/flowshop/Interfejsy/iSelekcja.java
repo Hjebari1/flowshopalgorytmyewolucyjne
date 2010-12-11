@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package flowshop;
+package flowshop.Interfejsy;
 
+import flowshop.*;
 import java.util.List;
 
 /**
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface iSelekcja 
 {
-    List<iOsobnik> wybranaPopulacja();
+    List<iOsobnik> wybranaPopulacja(populacja p);
 }
