@@ -11,8 +11,8 @@ package flowshop.Interfejsy;
  */
 public interface iOperatorKrzyżowania
 {
-    void dodajOsobnika(iOsobnik o);
-    void usunOsobnika(iOsobnik o);
+    void dodajOsobnika(iOsobnik o) throws Exception;
+    void usunOsobnika(iOsobnik o) throws Exception;
 
-    void wykonaj();
+    void wykonaj() throws Exception;
 }

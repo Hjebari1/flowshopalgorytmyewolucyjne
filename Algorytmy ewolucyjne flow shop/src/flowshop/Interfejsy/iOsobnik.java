@@ -10,8 +10,8 @@ package flowshop.Interfejsy;
  */
 public interface iOsobnik
 {
-    void modyfikujGen(int pozycja,int wartosc);
+    void modyfikujGen(int pozycja,Object wartosc);
     Object wartoscOsobnika(int pozycja);
-
     int dlugoscGenomu();
+    // znajdzOsobnika??
 }
