@@ -75,6 +75,11 @@ public class osobnikFlowShop implements iOsobnik
         return this.permutacja[pozycja];
     }
 
+    public int dlugoscGenomu()
+    {
+        return this.dlugoscPermutacji;
+    }
+
 
 
 
