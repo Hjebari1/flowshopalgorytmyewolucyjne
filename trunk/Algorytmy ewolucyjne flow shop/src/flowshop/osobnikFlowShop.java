@@ -65,9 +65,10 @@ public class osobnikFlowShop implements iOsobnik
     }
 
 
-    public void modyfikujGen(int pozycja, int wartosc)
+    public void modyfikujGen(int pozycja, Object wartosc)
     {
-        if (pozycja<this.dlugoscPermutacji) this.permutacja[pozycja] = wartosc;
+        int wartInt = (Integer) (wartosc);
+        if (pozycja<this.dlugoscPermutacji) this.permutacja[pozycja] = wartInt;
     }
 
     public Object wartoscOsobnika(int pozycja)
