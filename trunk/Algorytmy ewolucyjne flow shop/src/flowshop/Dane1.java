@@ -15,8 +15,8 @@ import java.util.Random;
 public class Dane1 implements iDane
 {
 
-    int iloscMaszyn=10;
-    int iloscZadan=10;
+    int iloscMaszyn=5;
+    int iloscZadan=5;
     double[][] T = new double[iloscMaszyn][iloscZadan];
     public Dane1()
     {

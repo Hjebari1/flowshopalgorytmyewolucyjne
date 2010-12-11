@@ -35,7 +35,7 @@ public class osobnikFlowShop implements iOsobnik
         for (int i=this.dlugoscPermutacji;i>0;i--)
         {
             a = r.nextInt(i);
-            this.permutacja[a] = pula.remove(a);
+            this.permutacja[i-1] = pula.remove(a);
         }
     }
 
@@ -54,7 +54,7 @@ public class osobnikFlowShop implements iOsobnik
         for (int i=this.dlugoscPermutacji;i>0;i--)
         {
             a = r.nextInt(i);
-            this.permutacja[a] = pula.remove(a);
+            this.permutacja[i-1] = pula.remove(a);
         }
     }
 
