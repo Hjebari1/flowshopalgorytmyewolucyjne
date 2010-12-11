@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package flowshop;
+package flowshop.Interfejsy;
 /**
  *
  * @author Łukasz Synówka
@@ -11,4 +11,5 @@ package flowshop;
 public interface iOsobnik
 {
     void modyfikujGen(int pozycja,int wartosc);
+    Object wartoscOsobnika(int pozycja);
 }
