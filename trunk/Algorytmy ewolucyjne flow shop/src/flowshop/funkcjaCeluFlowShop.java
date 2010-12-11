@@ -21,9 +21,16 @@ public class funkcjaCeluFlowShop implements iFunkcjaCelu
         double calkowityCzas=0;
         double max = 0;
         int index = 0;
+        int W[] = new int[osobnik.dlugoscGenomu()];
         double q[][] = new double[dane.iloscMaszyn()][dane.iloscZadan()];
+        for (int i=0;i<osobnik.dlugoscGenomu();i++)
+        {
+            
+        }
         index = (Integer)osobnik.wartoscOsobnika(0);
         q[0][0] = dane.czasZadania(0,index);
+
+
         index = (Integer)osobnik.wartoscOsobnika(1);
         q[1][1] = dane.czasZadania(0,index);
         return 0.0;

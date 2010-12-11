@@ -13,5 +13,5 @@ import flowshop.*;
  */
 public interface iZastepowanie
 {
-    populacja wykonaj(populacja p1,populacja p2,iFunkcjaCelu fukcja,int iloscKoncowa);
+    populacja wykonaj(populacja p1,populacja p2);
 }

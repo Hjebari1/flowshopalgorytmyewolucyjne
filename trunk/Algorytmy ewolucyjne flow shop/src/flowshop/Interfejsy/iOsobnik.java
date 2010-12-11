@@ -12,4 +12,6 @@ public interface iOsobnik
 {
     void modyfikujGen(int pozycja,int wartosc);
     Object wartoscOsobnika(int pozycja);
+
+    int dlugoscGenomu();
 }

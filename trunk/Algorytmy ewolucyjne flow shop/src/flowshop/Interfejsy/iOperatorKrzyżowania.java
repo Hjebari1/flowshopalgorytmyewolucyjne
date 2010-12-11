@@ -5,8 +5,6 @@
 
 package flowshop.Interfejsy;
 
-import flowshop.Interfejsy.iOsobnik;
-
 /**
  *
  * @author Łukasz Synówka
