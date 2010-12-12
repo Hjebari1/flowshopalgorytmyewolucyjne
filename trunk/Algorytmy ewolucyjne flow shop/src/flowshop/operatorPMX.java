@@ -7,9 +7,9 @@ import java.util.Random;
 /**
  *
  * @author Jakub Banaszewski
- * Operator krzyżowania osobników OX (Order Crossover)
+ * Operator krzyżowania osobników PMX (Order Crossover)
  */
-public class operatorOX implements iOperatorKrzyżowania {
+public class operatorPMX implements iOperatorKrzyżowania {
 
     public void dodajOsobnika(iOsobnik o) throws Exception {
     }
@@ -54,39 +54,7 @@ public class operatorOX implements iOperatorKrzyżowania {
             pozZmian = wyn1.znajdzPozGenuPoza(poz1, poz2, zmGen);
             wyn1.modyfikujGen(pozZmian, wyn1.wartoscOsobnika(i));
         }
-        //faza OX
-        iOsobnik wyn4 = wyn1.makeCopy();
-        iOsobnik wyn3 = wyn2.makeCopy();
-
-        for (int i = 1; i < size; i++) {
-            pozZmian = wyn2.znajdzPozGenu(0, size, wyn4.wartoscOsobnika(i));
-            if (poz1 <= pozZmian && pozZmian < poz2) {
-                wyn4.modyfikujGen(i,null);
-            }
-            pozZmian = wyn1.znajdzPozGenu(0, size, wyn3.wartoscOsobnika(i));
-            if (poz1 <= pozZmian && pozZmian < poz2) {
-                wyn3.modyfikujGen(i,null);
-            }
-            
-            int j = 0;
-            for (i = 0; i < size ; i ++)
-            {
-                if (wyn4.wartoscOsobnika((i + poz2) % size) == null) continue;
-                else {
-                    wyn1.modyfikujGen((poz2 + j) % size ,wyn4.wartoscOsobnika((i + poz2)% size));
-                    j++;
-                    }
-            }
-            for (i = 0; i < size ; i ++)
-            {
-                if (wyn3.wartoscOsobnika((i + poz2) % size) == null) continue;
-                else {
-                    wyn2.modyfikujGen((poz2 + j) % size ,wyn3.wartoscOsobnika((i + poz2)% size));
-                    j++;
-                    }
-            }
-
-        }
+        
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
 }
