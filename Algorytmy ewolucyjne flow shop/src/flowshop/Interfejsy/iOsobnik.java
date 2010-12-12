@@ -1,17 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowshop.Interfejsy;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Łukasz Synówka
  */
-public interface iOsobnik
-{
-    void modyfikujGen(int pozycja,Object wartosc);
-    Object wartoscOsobnika(int pozycja);
-    int dlugoscGenomu();
-    // znajdzOsobnika??
+public abstract class iOsobnik implements Cloneable {
+
+    abstract public void modyfikujGen(int pozycja, Object wartosc);
+
+    abstract public Object wartoscOsobnika(int pozycja);
+
+    abstract public int dlugoscGenomu();
+
+    abstract public int znajdzPozGenu(int zakresOd,int zakresDo,Object wartosc);
+
+    abstract public int znajdzPozGenuPoza(int zakresOd,int zakresDo,Object wartosc);
+
+    public iOsobnik makeCopy() {
+        try {
+            return (iOsobnik) this.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(iOsobnik.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
