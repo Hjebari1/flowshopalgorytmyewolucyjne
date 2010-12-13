@@ -15,15 +15,18 @@ import java.util.List;
  */
 public class populacja
 {
-    int iloscOsobnikow;
-    List<iOsobnik> osobniki;
+    private int iloscOsobnikow;
+    private List<iOsobnik> osobniki;
 
     public populacja()
     {
         this.iloscOsobnikow = 0;
         this.osobniki = new LinkedList<iOsobnik>();
     }
-
+    public int rozmiarPopulacji()
+    {
+        return osobniki.size();
+    }
     public void dodajOsobnika(iOsobnik osobnik)
     {
         this.osobniki.add(osobnik);
