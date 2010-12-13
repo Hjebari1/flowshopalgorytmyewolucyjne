@@ -5,6 +5,7 @@
 package flowshop;
 
 import flowshop.Interfejsy.iOsobnik;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -79,17 +80,54 @@ public class osobnikFlowShop extends iOsobnik {
 
     @Override
     public int znajdzPozGenu(int zakresOd, int zakresDo, Object wartosc) {
-        for (int i = zakresOd;i<zakresDo;i++)
-            if (wartosc.equals(permutacja[i])) return i;
+        for (int i = zakresOd; i < zakresDo; i++)
+            if (wartosc.equals(permutacja[i]))
+                return i;
         return zakresDo;
     }
 
     @Override
     public int znajdzPozGenuPoza(int zakresOd, int zakresDo, Object wartosc) {
-        for (int i = 1;i<zakresOd;i++)
-            if (wartosc.equals(permutacja[i])) return i;
-        for (int i= zakresDo; i < dlugoscPermutacji; i++)
-            if (wartosc.equals(permutacja[i])) return i;
+        for (int i = 0; i < zakresOd; i++)
+            if (wartosc.equals(permutacja[i]))
+                return i;
+        for (int i = zakresDo; i < dlugoscPermutacji; i++)
+            if (wartosc.equals(permutacja[i]))
+                return i;
         return dlugoscPermutacji;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof osobnikFlowShop)) 
+            throw new ClassCastException("Porównianie osobnikFlowShop ze złym obiektem");
+        osobnikFlowShop osFS = (osobnikFlowShop) o;
+        if (osFS.dlugoscGenomu() != dlugoscPermutacji)
+            return false;
+        for (int i = 0; i < dlugoscPermutacji; i++)
+            if (!(osFS.wartoscOsobnika(i).equals(permutacja[i])))
+                return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Arrays.hashCode(this.permutacja);
+        hash = 71 * hash + this.dlugoscPermutacji;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(dlugoscPermutacji);
+        sb.append("\n { ");
+        for (int i = 0; i < dlugoscPermutacji; i++) {
+            sb.append(permutacja[i]);
+            sb.append(", ");
+        }
+        sb.append("} \n");
+        return sb.toString();
     }
 }

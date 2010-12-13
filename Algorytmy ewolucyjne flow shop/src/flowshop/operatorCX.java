@@ -29,6 +29,7 @@ public class operatorCX implements iOperatorKrzyżowania {
     }
 
     public iOsobnik krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+        // mozna dodac losowanie pozycji startowej do szukania cyklu
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) throw new Exception("Nierówne genomy do krzyżowania!");
         int size = o1.dlugoscGenomu();
         if (size == 0) throw new Exception("Pusty genom do krzyżowania!");

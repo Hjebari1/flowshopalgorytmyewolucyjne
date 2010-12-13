@@ -19,6 +19,11 @@ public abstract class iOsobnik implements Cloneable {
 
     abstract public int znajdzPozGenuPoza(int zakresOd,int zakresDo,Object wartosc);
 
+    @Override
+    abstract public boolean equals(Object o);
+    @Override
+    abstract public int hashCode();
+
     public iOsobnik makeCopy() {
         try {
             return (iOsobnik) this.clone();
