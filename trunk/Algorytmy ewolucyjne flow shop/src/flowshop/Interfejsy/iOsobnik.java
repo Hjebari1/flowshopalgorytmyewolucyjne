@@ -1,5 +1,6 @@
 package flowshop.Interfejsy;
 
+import flowshop.populacja;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,7 +9,6 @@ import java.util.logging.Logger;
  * @author Łukasz Synówka
  */
 public abstract class iOsobnik implements Cloneable {
-
     abstract public void modyfikujGen(int pozycja, Object wartosc);
 
     abstract public Object wartoscOsobnika(int pozycja);
@@ -28,7 +28,7 @@ public abstract class iOsobnik implements Cloneable {
         try {
             return (iOsobnik) this.clone();
         } catch (CloneNotSupportedException ex) {
-            Logger.getLogger(iOsobnik.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(iOsobnik.class.getName()).log(Level.SEVERE, null, ex); //??TODO:coś sensownego
         }
         return null;
     }
