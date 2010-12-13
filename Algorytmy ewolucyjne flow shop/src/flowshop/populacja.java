@@ -41,4 +41,9 @@ public class populacja
         this.iloscOsobnikow+=p2.iloscOsobnikow;
         this.osobniki.addAll(p2.osobniki);
     }
+
+    boolean usunOsobnika(iOsobnik o) {
+        this.iloscOsobnikow--;
+        return this.osobniki.remove(o);
+    }
 }

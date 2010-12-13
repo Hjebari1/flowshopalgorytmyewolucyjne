@@ -8,22 +8,30 @@ import java.util.LinkedList;
  *
  * @author Jakub Banaszewski
  */
-public class OperatorCX implements iOperatorKrzyżowania {
+public class operatorCX implements iOperatorKrzyżowania {
 
-    public void dodajOsobnika(iOsobnik o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+    populacja zbiorOsobnikow = null;
+
+    public operatorCX(populacja daneWejsciowe) {
+        zbiorOsobnikow = daneWejsciowe;
     }
 
-    public void usunOsobnika(iOsobnik o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void dodajOsobnika(iOsobnik o) throws Exception {
+        zbiorOsobnikow.dodajOsobnika(o);
+    }
+
+    public void usunOsobnika(iOsobnik o) {
+        zbiorOsobnikow.usunOsobnika(o);
     }
 
     public void wykonaj() throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public iOsobnik krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException { //domyślnie private, dla testów public
+    public iOsobnik krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+        if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) throw new Exception("Nierówne genomy do krzyżowania!");
         int size = o1.dlugoscGenomu();
+        if (size == 0) throw new Exception("Pusty genom do krzyżowania!");
         iOsobnik wyn = o1.makeCopy();
         int i = 0;
         LinkedList<Integer> listaCyklu = new LinkedList<Integer>();

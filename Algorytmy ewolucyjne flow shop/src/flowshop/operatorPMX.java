@@ -11,18 +11,28 @@ import java.util.Random;
  */
 public class operatorPMX implements iOperatorKrzyżowania {
 
+    populacja zbiorOsobnikow = null;
+
+    public operatorPMX(populacja daneWejsciowe) {
+        zbiorOsobnikow = daneWejsciowe;
+    }
+
     public void dodajOsobnika(iOsobnik o) throws Exception {
+        zbiorOsobnikow.dodajOsobnika(o);
     }
 
     public void usunOsobnika(iOsobnik o) {
+        zbiorOsobnikow.usunOsobnika(o);
     }
 
     public void wykonaj() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException { //domyślnie private, dla testów public
+    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) throw new Exception("Nierówne genomy do krzyżowania!");
         int size = o1.dlugoscGenomu();
+        if (size == 0) throw new Exception("Pusty genom do krzyżowania!");
         iOsobnik wyn1 = o1.makeCopy();
         iOsobnik wyn2 = o2.makeCopy();
         Random ktorePola = new Random();
@@ -54,7 +64,7 @@ public class operatorPMX implements iOperatorKrzyżowania {
             pozZmian = wyn1.znajdzPozGenuPoza(poz1, poz2, zmGen);
             wyn1.modyfikujGen(pozZmian, wyn1.wartoscOsobnika(i));
         }
-        
+
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
 }
