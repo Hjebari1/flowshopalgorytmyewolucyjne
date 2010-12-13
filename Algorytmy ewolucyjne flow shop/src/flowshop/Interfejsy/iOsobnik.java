@@ -9,6 +9,8 @@ import java.util.logging.Logger;
  * @author Łukasz Synówka
  */
 public abstract class iOsobnik implements Cloneable {
+    public static Object pusto=null;
+
     abstract public void modyfikujGen(int pozycja, Object wartosc);
 
     abstract public Object wartoscOsobnika(int pozycja);

@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Łukasz Synówka
  */
 public class osobnikFlowShop extends iOsobnik {
-
+    
     int[] permutacja;
     int dlugoscPermutacji;
 
@@ -57,14 +57,14 @@ public class osobnikFlowShop extends iOsobnik {
     }
 
     public void modyfikujGen(int pozycja, Object wartosc) {
-        int wartInt = (Integer) (wartosc);
+        int wartInt = (wartosc == iOsobnik.pusto) ? 0 : (Integer) (wartosc);
         if (pozycja < this.dlugoscPermutacji) {
             this.permutacja[pozycja] = wartInt;
         }
     }
 
     public Object wartoscOsobnika(int pozycja) {
-        return this.permutacja[pozycja];
+        return (this.permutacja[pozycja] == 0) ? iOsobnik.pusto : this.permutacja[pozycja];
     }
 
     public int dlugoscGenomu() {
