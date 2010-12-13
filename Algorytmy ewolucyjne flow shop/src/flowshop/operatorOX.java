@@ -9,21 +9,13 @@ import java.util.Random;
  * @author Jakub Banaszewski
  * Operator krzyżowania osobników OX (Order Crossover)
  */
-public class operatorOX implements iOperatorKrzyżowania {
-    populacja zbiorOsobnikow = null;
+public class operatorOX extends iOperatorKrzyżowania {
+    
 
     public operatorOX(populacja daneWejsciowe) {
         zbiorOsobnikow = daneWejsciowe;
     }
 
-
-    public void dodajOsobnika(iOsobnik o) throws Exception {
-        zbiorOsobnikow.dodajOsobnika(o);
-    }
-
-    public void usunOsobnika(iOsobnik o) {
-        zbiorOsobnikow.usunOsobnika(o);
-    }
 
     public void wykonaj() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -97,4 +89,5 @@ public class operatorOX implements iOperatorKrzyżowania {
         }
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
+
 }

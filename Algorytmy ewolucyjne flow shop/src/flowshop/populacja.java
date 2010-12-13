@@ -24,25 +24,26 @@ public class populacja
         this.osobniki = new LinkedList<iOsobnik>();
     }
 
-    void dodajOsobnika(iOsobnik osobnik)
+    public void dodajOsobnika(iOsobnik osobnik)
     {
         this.osobniki.add(osobnik);
         this.iloscOsobnikow++;
     }
 
-    iOsobnik usunOsobnika(int pozycja)
+    public iOsobnik usunOsobnika(int pozycja)
     {
         this.iloscOsobnikow--;
         return this.osobniki.remove(pozycja);
     }
 
-    void polaczPopulacje(populacja p2)
+    public void polaczPopulacje(populacja p2)
     {
         this.iloscOsobnikow+=p2.iloscOsobnikow;
         this.osobniki.addAll(p2.osobniki);
     }
 
-    boolean usunOsobnika(iOsobnik o) {
+    public boolean usunOsobnika(iOsobnik o) {
+        // usuwa tylko jednego osobnika
         this.iloscOsobnikow--;
         return this.osobniki.remove(o);
     }

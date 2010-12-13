@@ -8,20 +8,10 @@ import java.util.LinkedList;
  *
  * @author Jakub Banaszewski
  */
-public class operatorCX implements iOperatorKrzyżowania {
-
-    populacja zbiorOsobnikow = null;
+public class operatorCX extends iOperatorKrzyżowania {
 
     public operatorCX(populacja daneWejsciowe) {
         zbiorOsobnikow = daneWejsciowe;
-    }
-
-    public void dodajOsobnika(iOsobnik o) throws Exception {
-        zbiorOsobnikow.dodajOsobnika(o);
-    }
-
-    public void usunOsobnika(iOsobnik o) {
-        zbiorOsobnikow.usunOsobnika(o);
     }
 
     public void wykonaj() throws Exception {

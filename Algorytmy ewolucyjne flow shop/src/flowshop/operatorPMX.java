@@ -9,20 +9,10 @@ import java.util.Random;
  * @author Jakub Banaszewski
  * Operator krzyżowania osobników PMX (Order Crossover)
  */
-public class operatorPMX implements iOperatorKrzyżowania {
-
-    populacja zbiorOsobnikow = null;
+public class operatorPMX extends iOperatorKrzyżowania {
 
     public operatorPMX(populacja daneWejsciowe) {
         zbiorOsobnikow = daneWejsciowe;
-    }
-
-    public void dodajOsobnika(iOsobnik o) throws Exception {
-        zbiorOsobnikow.dodajOsobnika(o);
-    }
-
-    public void usunOsobnika(iOsobnik o) {
-        zbiorOsobnikow.usunOsobnika(o);
     }
 
     public void wykonaj() {
