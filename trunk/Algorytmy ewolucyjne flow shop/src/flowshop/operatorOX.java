@@ -10,27 +10,41 @@ import java.util.Random;
  * Operator krzyżowania osobników OX (Order Crossover)
  */
 public class operatorOX implements iOperatorKrzyżowania {
+    populacja zbiorOsobnikow = null;
+
+    public operatorOX(populacja daneWejsciowe) {
+        zbiorOsobnikow = daneWejsciowe;
+    }
+
 
     public void dodajOsobnika(iOsobnik o) throws Exception {
+        zbiorOsobnikow.dodajOsobnika(o);
     }
 
     public void usunOsobnika(iOsobnik o) {
+        zbiorOsobnikow.usunOsobnika(o);
     }
 
     public void wykonaj() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException { //domyślnie private, dla testów public
+    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+        if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) throw new Exception("Nierówne genomy do krzyżowania!");
         int size = o1.dlugoscGenomu();
+        if (size == 0) throw new Exception("Pusty genom do krzyżowania!");
+
         iOsobnik wyn1 = o1.makeCopy();
         iOsobnik wyn2 = o2.makeCopy();
         Random ktorePola = new Random();
         int poz1 = ktorePola.nextInt(size);
         int poz2 = ktorePola.nextInt(size);
-        while (poz1 == poz2) {
+
+        if (poz1 == poz2) {
             poz2 = ktorePola.nextInt(size); //!! TODO:: to tak nie można
         }
+        if (poz1 == poz2)
+            return new Para<iOsobnik, iOsobnik>(o1, o2);
         if (poz1 > poz2) {
             int tmp = poz1;
             poz1 = poz2;
@@ -68,12 +82,12 @@ public class operatorOX implements iOperatorKrzyżowania {
                 wyn3.modyfikujGen(i,null);
             }
             
-            int j = 0;
+            int j = poz2;
             for (i = 0; i < size ; i ++)
             {
                 if (wyn4.wartoscOsobnika((i + poz2) % size) == null) continue;
                 else {
-                    wyn1.modyfikujGen((poz2 + j) % size ,wyn4.wartoscOsobnika((i + poz2)% size));
+                    wyn1.modyfikujGen( j % size ,wyn4.wartoscOsobnika((i + poz2)% size));
                     j++;
                     }
             }
@@ -81,7 +95,7 @@ public class operatorOX implements iOperatorKrzyżowania {
             {
                 if (wyn3.wartoscOsobnika((i + poz2) % size) == null) continue;
                 else {
-                    wyn2.modyfikujGen((poz2 + j) % size ,wyn3.wartoscOsobnika((i + poz2)% size));
+                    wyn2.modyfikujGen(j % size ,wyn3.wartoscOsobnika((i + poz2)% size));
                     j++;
                     }
             }
