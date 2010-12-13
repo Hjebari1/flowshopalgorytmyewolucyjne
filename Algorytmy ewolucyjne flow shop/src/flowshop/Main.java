@@ -35,7 +35,7 @@ public class Main {
         iOsobnik o;
         Dane1 d = new Dane1();
         iFunkcjaCelu f = new funkcjaCeluFlowShop();
-        while(p1.iloscOsobnikow>0)
+        while(p1.rozmiarPopulacji()>0)
         {
             o = p1.usunOsobnika(0);
             for (int i=0;i<5;i++) System.out.print(o.wartoscOsobnika(i)+" ");

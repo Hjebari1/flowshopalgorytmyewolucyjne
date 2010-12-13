@@ -3,6 +3,8 @@ package flowshop;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,14 +17,14 @@ public class operatorPMX extends iOperatorKrzyżowania {
         zbiorOsobnikow = daneWejsciowe;
     }
 
-    public void wykonaj() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2,int poz1,int poz2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
-         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) throw new Exception("Nierówne genomy do krzyżowania!");
+    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+        if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
+            throw new Exception("Nierówne genomy do krzyżowania!");
+        }
         int size = o1.dlugoscGenomu();
-        if (size == 0) throw new Exception("Pusty genom do krzyżowania!");
+        if (size == 0) {
+            throw new Exception("Pusty genom do krzyżowania!");
+        }
         iOsobnik wyn1 = o1.makeCopy();
         iOsobnik wyn2 = o2.makeCopy();
 
@@ -51,5 +53,29 @@ public class operatorPMX extends iOperatorKrzyżowania {
         }
 
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
+    }
+
+    public populacja wykonaj() {
+        Random losPoz = new Random();
+        populacja pochodneOsobniki = new populacja();
+        populacja rodzice = new populacja();
+        rodzice.polaczPopulacje(zbiorOsobnikow);
+
+        while (rodzice.rozmiarPopulacji() > 0) {
+            try {
+                iOsobnik o1 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
+                iOsobnik o2 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
+                int poz1 = losPoz.nextInt(o1.dlugoscGenomu());
+                int poz2 = losPoz.nextInt(o2.dlugoscGenomu());
+                Para<iOsobnik, iOsobnik> wynik = krzyzuj(o1, o2, poz1, poz2);
+                pochodneOsobniki.dodajOsobnika(wynik.getFirst());
+                pochodneOsobniki.dodajOsobnika(wynik.getSecond());
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return pochodneOsobniki;
     }
 }

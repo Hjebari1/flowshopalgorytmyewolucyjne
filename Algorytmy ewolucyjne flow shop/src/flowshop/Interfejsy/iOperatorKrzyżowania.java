@@ -6,6 +6,7 @@
 package flowshop.Interfejsy;
 
 import flowshop.populacja;
+import java.util.Random;
 
 /**
  *
@@ -22,5 +23,5 @@ public abstract class iOperatorKrzyżowania
     public void usunOsobnika(iOsobnik o) {
         zbiorOsobnikow.usunOsobnika(o);
     }
-    abstract public void wykonaj() throws Exception;
+    abstract public populacja wykonaj();
 }
