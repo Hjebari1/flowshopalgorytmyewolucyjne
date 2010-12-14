@@ -73,7 +73,10 @@ public class operatorOXTest {
         while(dzieci.rozmiarPopulacji() > 0) {
             testOs = dzieci.usunOsobnika(0);
             for (int j = 1; j <= 9; j++) {
-                if (testOs.znajdzPozGenu(0, 9, j) == 9) fail("Nie znaleziono prawidlowego genu");
+                if (testOs.znajdzPozGenu(0, 9, j) == 9) {
+                    System.out.println(testOs);
+                    fail("Nie znaleziono prawidlowego genu");
+                }
             }
         }
         assertEquals(dzieci.rozmiarPopulacji(), 0);
