@@ -70,4 +70,31 @@ public class operatorCXTest {
         System.out.print(result);
         assertEquals(expResult, result);
     }
+    @Test
+    public void testWykonaj() {
+        System.out.println("wykonaj");
+        populacja testRodzice = new populacja();
+        int[] genom1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] genom2 = {3, 2, 6, 7, 1, 5, 9, 4, 8};
+        int[] genom3 = {4, 5, 6, 7, 1, 9, 8, 2, 3};
+        int[] genom4 = {7, 1, 3, 4, 5, 8, 9, 2, 6};
+        testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom1));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom2));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom3));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom4));
+        operatorCX instance = new operatorCX(testRodzice);
+        populacja dzieci = instance.wykonaj();
+        assertEquals(dzieci.rozmiarPopulacji(), 2);
+        iOsobnik testOs = null;
+        while(dzieci.rozmiarPopulacji() > 0) {
+            testOs = dzieci.usunOsobnika(0);
+            for (int j = 1; j <= 9; j++) {
+                if (testOs.znajdzPozGenu(0, 9, j) == 9) {
+                    System.out.println(testOs);
+                    fail("Nie znaleziono prawidlowego genu");
+                }
+            }
+        }
+        assertEquals(dzieci.rozmiarPopulacji(), 0);
+    }
 }
