@@ -45,6 +45,7 @@ public class operatorPMX extends iOperatorKrzyżowania {
         }
         //sprawdzenie, czy nie przenosimy powtarzajacych sie genów
         for (int i = poz1; i < poz2; i++) {
+            if (o1.wartoscOsobnika(i) == o2.wartoscOsobnika(i)) continue;
             if (!genyDoZmiany.containsKey(o1.wartoscOsobnika(i))) {
                 if (!genyDoZmiany.containsKey(o2.wartoscOsobnika(i))) {
                     genyDoZmiany.put(o1.wartoscOsobnika(i), o2.wartoscOsobnika(i));
