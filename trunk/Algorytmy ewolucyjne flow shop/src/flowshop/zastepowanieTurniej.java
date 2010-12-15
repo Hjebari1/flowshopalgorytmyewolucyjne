@@ -37,7 +37,7 @@ public class zastepowanieTurniej implements iZastepowanie
         p1.polaczPopulacje(p2);
         Random r = new Random();
         populacja wynik = new populacja();
-        while (p1.rozmiarPopulacji()>iloscKoncowa)
+        while (wynik.rozmiarPopulacji()<iloscKoncowa)
         {
             o1 = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
             o2 = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
