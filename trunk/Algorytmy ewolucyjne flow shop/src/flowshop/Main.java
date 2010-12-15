@@ -24,15 +24,16 @@ public class Main {
     {
         // TODO code application logic here
 
-        Algorytm1 a = new Algorytm1(20,5);
+        Algorytm1 a = new Algorytm1(1000,20);
 
-        for (int i=0;i<100;i++)
+        for (int i=0;i<1000;i++)
         {
             a.wybor();
             a.krzyzowanie();
             a.zastepowanie();
             System.out.println(a.toString());
         }
+
 
     }
 
