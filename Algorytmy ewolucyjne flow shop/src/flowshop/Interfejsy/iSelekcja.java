@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface iSelekcja 
 {
-    List<iOsobnik> wybranaPopulacja(populacja p);
+    public List<iOsobnik> wybranaPopulacja(populacja p);
 }
