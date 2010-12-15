@@ -51,4 +51,5 @@ public class populacja {
     protected ListIterator<iOsobnik> popIterator() {
         return osobniki.listIterator();
     }
+
 }
