@@ -6,6 +6,7 @@
 package flowshop;
 
 import flowshop.Interfejsy.iAlgorytm;
+import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.ListIterator;
@@ -21,7 +22,7 @@ public class Algorytm1 implements iAlgorytm
     populacja p;
     populacja ps;
     populacja pc;
-    Dane1 dane;
+    iDane dane;
     selekcjaRuletka sr;
     iOperatorKrzyżowania oper;
     zastepowanieTurniej zt;
@@ -33,7 +34,7 @@ public class Algorytm1 implements iAlgorytm
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow=iloscOsobnikow;
         p = new populacja();
-        dane = new Dane1();
+        dane = new Dane2();
         zt = new zastepowanieTurniej(dane,f,iloscOsobnikow);
         for(int i=0;i<iloscOsobnikow;i++)
         {
