@@ -5,9 +5,12 @@
 
 package flowshop;
 
+import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.osobnikFlowShop;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ListIterator;
 
 
@@ -20,11 +23,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws FileNotFoundException, IOException
     {
         // TODO code application logic here
 
-        Algorytm1 a = new Algorytm1(1000,20);
+        Algorytm1 a = new Algorytm1(50,new Dane3("MyFile2.txt"));
 
         for (int i=0;i<1000;i++)
         {
@@ -33,7 +36,7 @@ public class Main {
             a.zastepowanie();
             System.out.println(a.toString());
         }
-
+    System.out.println(a.toString());
 
     }
 
