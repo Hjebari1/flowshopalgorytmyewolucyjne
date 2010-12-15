@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package flowshop;
 
 import flowshop.Interfejsy.iOsobnik;
@@ -57,14 +53,14 @@ public class osobnikFlowShop extends iOsobnik {
     }
 
     public void modyfikujGen(int pozycja, Object wartosc) {
-        int wartInt = (wartosc == iOsobnik.pusto) ? 0 : (Integer) (wartosc);
+        int wartInt = (wartosc == iOsobnik.pusto) ? -1 : (Integer) (wartosc);
         if (pozycja < this.dlugoscPermutacji) {
             this.permutacja[pozycja] = wartInt;
         }
     }
 
     public Object wartoscOsobnika(int pozycja) {
-        return (this.permutacja[pozycja] == 0) ? iOsobnik.pusto : this.permutacja[pozycja];
+        return (this.permutacja[pozycja] == -1) ? iOsobnik.pusto : this.permutacja[pozycja];
     }
 
     public int dlugoscGenomu() {
