@@ -13,23 +13,25 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 
+ * Klasa implementująca metodę ruletki na populacji.
+ * Oblicza współczynniki przystosowania osobników, sortuje je, a potem losuje wartość
+ * z przedziału [0,1]
+ * Przeglądając osobniki sumujemy wpółczynniki przystosowania.
+ * Jeśli suma przekroczy wysolowaną wartość dodajemy osobnika,
+ * które współczynnik dodaliśmy ostatni.
  * @author Jakub Banaszewski
  */
 public class selekcjaRuletka implements iSelekcja {
 
     private static int zakresLosowania;
-    List<Object> wartosciOsobnikow;
     iDane dane;
 
     public selekcjaRuletka(iDane dane) {
-        wartosciOsobnikow = new LinkedList<Object>();
         this.dane = dane;
         zakresLosowania = 1000;
     }
 
     public selekcjaRuletka(iDane dane, int zakresLos) {
-        wartosciOsobnikow = new LinkedList<Object>();
         this.dane = dane;
         zakresLosowania = zakresLos;
     }
@@ -68,10 +70,18 @@ public class selekcjaRuletka implements iSelekcja {
         }
         return wybrPop;
     }
-
+    /**
+     * Funkcja prywatna, która wylicza współczynniki przystosownia osobników
+     * Współczynnik jest kluczem do listy iOsobników, których przystosowanie odpowiada kluczowi.
+     * Funkcja może być przekokszona (nadmiar użytych struktur).
+     * @param daneWejsciowe populacja wejsciowa
+     * @return współczynniki przystosowania jako klucze wraz z odpowiednio przyporządkowanymi im iOsobnikami
+     */
     private HashMap wyliczWsp(populacja daneWejsciowe) {
-        iFunkcjaCelu f = new funkcjaCeluFlowShop();
-        double min = 10000, tmp, sum = 0; // ustawić stałą w funkcjaCeluFlowShop, która jest duża
+        iFunkcjaCelu f = new funkcjaCeluFlowShop(); //funkcja celu nie powinna być parametrem ?
+        LinkedList<Double> wartosciOsobnikow= new LinkedList<Double>();
+        double min = 10000, tmp, sum = 0; // ustawić stałą w funkcjaCeluFlowShop, która jest duża, żeby można było wyznaczyć jakieś sensowne min!
+        // wyliczanie sumy, znajdywanie minumum, obliczanie wartości funkcji celu
         for (Iterator popIter = daneWejsciowe.popIterator(); popIter.hasNext();) {
             tmp = f.wartoscFunkcji((iOsobnik) popIter.next(), dane);
             wartosciOsobnikow.add(tmp);
@@ -80,13 +90,17 @@ public class selekcjaRuletka implements iSelekcja {
             }
             sum += tmp;
         }
+        // noralizacja współczynnika
         sum -= min * daneWejsciowe.rozmiarPopulacji();
+
         HashMap<Double, List> wsp = new HashMap<Double, List>();
-        int i = 0;
         double wspPr;
+        // iterator przewijający osobniki równolegle do przewijanych współczynników
         Iterator popIter = daneWejsciowe.popIterator();
+
         for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
             wspPr = ((Double) wartIter.next() - min) / sum;
+            // sprawdzenie, czy lista na osobniki istnieje, jeśli nie tworzę nową
             if (!wsp.get(wspPr).isEmpty()) {
                 wsp.get(wspPr).add(popIter.next());
             } else {
