@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowshop;
 
+import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author bejnan
+ * @author Jakub Banaszewski
  */
 public class selekcjaRuletkaTest {
 
@@ -49,6 +45,21 @@ public class selekcjaRuletkaTest {
         selekcjaRuletka instance = null;
         List expResult = null;
         List result = instance.wybranaPopulacja(p, rozmiar);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of wyliczWsp method, of class selekcjaRuletka.
+     */
+    @Test
+    public void testWyliczWsp() {
+        System.out.println("wyliczWsp");
+        populacja daneWejsciowe = null;
+        selekcjaRuletka instance = null;
+        HashMap expResult = null;
+        HashMap result = instance.wyliczWsp(daneWejsciowe);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

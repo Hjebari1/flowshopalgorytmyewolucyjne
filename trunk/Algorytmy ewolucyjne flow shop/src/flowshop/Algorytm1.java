@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowshop;
 
 import flowshop.Interfejsy.iAlgorytm;
@@ -18,8 +13,7 @@ import java.util.Random;
  *
  * @author Łukasz Synówka
  */
-public class Algorytm1 implements iAlgorytm
-{
+public class Algorytm1 implements iAlgorytm {
 
     populacja p;
     populacja ps;
@@ -31,61 +25,52 @@ public class Algorytm1 implements iAlgorytm
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
-    public Algorytm1(int iloscOsobnikow,iDane d) throws FileNotFoundException, IOException
-    {
+    public Algorytm1(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
-        this.iloscOsobnikow=iloscOsobnikow;
+        this.iloscOsobnikow = iloscOsobnikow;
         p = new populacja();
-        zt = new zastepowanieTurniej(dane,f,iloscOsobnikow);
-        for(int i=0;i<iloscOsobnikow;i++)
-        {
+        zt = new zastepowanieTurniej(dane, f, iloscOsobnikow);
+        for (int i = 0; i < iloscOsobnikow; i++) {
             p.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }
     }
 
-
-    public void wybor()
-    {
+    public void wybor() {
         sr = new selekcjaRuletka(dane);
     }
 
-    public void krzyzowanie()
-    {
+    public void krzyzowanie() {
         Random r = new Random();
-        if (r.nextBoolean())
+        if (r.nextBoolean()) {
             oper = new operatorOX(p);
-        else
+        } else {
             oper = new operatorCX(p);
+        }
         pc = oper.wykonaj();
-        
+
     }
 
-    public void zastepowanie()
-    {
-        p=zt.wykonaj(p, pc);
+    public void zastepowanie() {
+        p = zt.wykonaj(p, pc);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         String wynik = "";
         ListIterator<iOsobnik> iter = p.popIterator();
 
-        double min=Double.MAX_VALUE;
+        double min = Double.MAX_VALUE;
 
         osobnikFlowShop o;
-        while(iter.hasNext())
-        {
-            o=(osobnikFlowShop) iter.next();
-            min=Math.min(f.wartoscFunkcji(o, dane),min);
+        while (iter.hasNext()) {
+            o = (osobnikFlowShop) iter.next();
+            min = Math.min(f.wartoscFunkcji(o, dane), min);
             //wynik=wynik.concat(f.wartoscFunkcji(o, dane)+" ");
         }
-        wynik=wynik.concat(min+"\n");
+        wynik = wynik.concat(min + "\n");
 
         return wynik;
 
     }
-
-
 }
