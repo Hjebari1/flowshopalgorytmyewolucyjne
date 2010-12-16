@@ -9,6 +9,7 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iZastepowanie;
+import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -37,6 +38,39 @@ public class zastepowanieTurniej implements iZastepowanie
         p1.polaczPopulacje(p2);
         Random r = new Random();
         populacja wynik = new populacja();
+        ListIterator<iOsobnik> li = p1.popIterator();
+        int lm = Math.round((float) Math.log(iloscKoncowa));
+        iOsobnik[] max = new osobnikFlowShop[Math.round((float) Math.log(iloscKoncowa))];
+        for (int i=0;i<lm;i++) max[i]=li.next();
+        for (int i=0;i<lm;i++)
+            for (int j=i;j<lm;j++)
+            {
+                if (funkcja.wartoscFunkcji(max[i], dane)<funkcja.wartoscFunkcji(max[j], dane))
+                {
+                    o1=max[i];
+                    max[i]=max[j];
+                    max[j]=o1;
+                }
+            }
+        while(li.hasNext())
+        {
+            o2=li.next();
+            if (funkcja.wartoscFunkcji(max[0], dane)>funkcja.wartoscFunkcji(o2, dane))
+            {
+                max[0]=o2;
+                for (int j=0;j<lm;j++)
+                {
+                    if (funkcja.wartoscFunkcji(max[0], dane)<funkcja.wartoscFunkcji(max[j], dane))
+                    {
+                        o1=max[0];
+                        max[0]=max[j];
+                        max[j]=o1;
+                    }
+                }
+            }
+
+        }
+        for (int i=0;i<lm;i++) wynik.dodajOsobnika(max[i]);
         while (wynik.rozmiarPopulacji()<iloscKoncowa)
         {
             o1 = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
