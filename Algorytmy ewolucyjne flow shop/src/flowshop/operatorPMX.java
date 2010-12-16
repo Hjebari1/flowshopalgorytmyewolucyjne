@@ -110,25 +110,6 @@ public class operatorPMX extends iOperatorKrzyżowania {
                 Para<iOsobnik, iOsobnik> wynik = krzyzuj(o1, o2, poz1, poz2);
                 pochodneOsobniki.dodajOsobnika(wynik.getFirst());
                 pochodneOsobniki.dodajOsobnika(wynik.getSecond());
-                for (int j = 1; j
-                        <= 9; j++) {
-                    if (wynik.getFirst().znajdzPozGenu(0, 9, j) == 9) {
-                        System.out.println(wynik.getFirst());
-                        System.out.println(wynik.getSecond());
-                        System.out.println(o1);
-                        System.out.println(o2);
-                        System.out.println(poz1);
-                        System.out.println(poz2);
-                    }
-                    if (wynik.getSecond().znajdzPozGenu(0, 9, j) == 9) {
-                        System.out.println(wynik.getSecond());
-                        System.out.println(o1);
-                        System.out.println(o2);
-                        System.out.println(poz1);
-                        System.out.println(poz2);
-                    }
-
-                }
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {

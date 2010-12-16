@@ -85,10 +85,10 @@ public class selekcjaRuletka implements iSelekcja {
      * @param daneWejsciowe populacja wejsciowa
      * @return współczynniki przystosowania jako klucze wraz z odpowiednio przyporządkowanymi im iOsobnikami
      */
-    private HashMap wyliczWsp(populacja daneWejsciowe) {
+    protected HashMap wyliczWsp(populacja daneWejsciowe) { // docelowo private, do testów protected
         iFunkcjaCelu f = new funkcjaCeluFlowShop(); //funkcja celu nie powinna być parametrem ?
         LinkedList<Double> wartosciOsobnikow = new LinkedList<Double>();
-        double min = 10000, tmp, sum = 0; // ustawić stałą w funkcjaCeluFlowShop, która jest duża, żeby można było wyznaczyć jakieś sensowne min!
+        double min = Double.MAX_VALUE, tmp, sum = 0;
         // wyliczanie sumy, znajdywanie minumum, obliczanie wartości funkcji celu
         for (Iterator popIter = daneWejsciowe.popIterator(); popIter.hasNext();) {
             tmp = f.wartoscFunkcji((iOsobnik) popIter.next(), dane);
