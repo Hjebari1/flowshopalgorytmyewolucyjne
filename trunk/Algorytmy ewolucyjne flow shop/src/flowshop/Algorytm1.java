@@ -47,7 +47,7 @@ public class Algorytm1 implements iAlgorytm
 
     public void wybor()
     {
-        sr = new selekcjaRuletka(p,dane);
+        sr = new selekcjaRuletka(dane);
     }
 
     public void krzyzowanie()
