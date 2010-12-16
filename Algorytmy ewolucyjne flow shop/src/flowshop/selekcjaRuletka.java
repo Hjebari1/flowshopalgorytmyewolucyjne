@@ -50,26 +50,34 @@ public class selekcjaRuletka implements iSelekcja {
             sum = 0;
             prwd = los.nextDouble();
             for (Iterator kluczIter = klucze.iterator(); kluczIter.hasNext();) {
-                if (odpSize >= rozmiar) break;
+                if (odpSize >= rozmiar) {
+                    break;
+                }
                 wspPr = (Double) kluczIter.next();
                 List wspList = wspTab.get(wspPr);
                 if (wspPr * wspList.size() + sum > prwd) {
                     int poz = (int) Math.round(Math.ceil((prwd - sum) / wspPr)); //long to int!!
-                    odpSize ++;
+                    odpSize++;
                     wybrPop.add((iOsobnik) wspList.get(poz));
                     while (wspPr * (wspList.size() - poz - 1) > prwd) {
-                        if (odpSize >= rozmiar) break;
+                        if (odpSize >= rozmiar) {
+                            break;
+                        }
                         poz += (int) Math.round(Math.ceil((prwd / wspPr))); //long to int!!
                         if (poz < wspList.size()) {
                             odpSize++;
                             wybrPop.add((iOsobnik) wspList.get(poz));
                         }
                     }
+                    sum = (wspList.size() > poz ) ? ((wspList.size() - poz)*wspPr) : 0;
+                } else {
+                    sum += wspPr * wspList.size();
                 }
             }
         }
         return wybrPop;
     }
+
     /**
      * Funkcja prywatna, która wylicza współczynniki przystosownia osobników
      * Współczynnik jest kluczem do listy iOsobników, których przystosowanie odpowiada kluczowi.
@@ -79,7 +87,7 @@ public class selekcjaRuletka implements iSelekcja {
      */
     private HashMap wyliczWsp(populacja daneWejsciowe) {
         iFunkcjaCelu f = new funkcjaCeluFlowShop(); //funkcja celu nie powinna być parametrem ?
-        LinkedList<Double> wartosciOsobnikow= new LinkedList<Double>();
+        LinkedList<Double> wartosciOsobnikow = new LinkedList<Double>();
         double min = 10000, tmp, sum = 0; // ustawić stałą w funkcjaCeluFlowShop, która jest duża, żeby można było wyznaczyć jakieś sensowne min!
         // wyliczanie sumy, znajdywanie minumum, obliczanie wartości funkcji celu
         for (Iterator popIter = daneWejsciowe.popIterator(); popIter.hasNext();) {
