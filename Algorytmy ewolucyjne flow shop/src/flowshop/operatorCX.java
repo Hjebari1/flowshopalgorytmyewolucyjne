@@ -13,8 +13,7 @@ import java.util.logging.Logger;
  */
 public class operatorCX extends iOperatorKrzyżowania {
 
-    public operatorCX(populacja daneWejsciowe) {
-        zbiorOsobnikow = daneWejsciowe;
+    public operatorCX() {
     }
 
     public iOsobnik krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
@@ -41,7 +40,7 @@ public class operatorCX extends iOperatorKrzyżowania {
         return wyn;
     }
 
-    public populacja wykonaj() {
+    public populacja wykonaj(populacja zbiorOsobnikow) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
         populacja rodzice = new populacja();

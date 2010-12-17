@@ -45,7 +45,7 @@ public class operatorOXTest {
         int[] genom4 = {7, 1, 3, 4, 5, 8, 9, 2, 6};
         iOsobnik o1 = new osobnikFlowShop(9, genom1);
         iOsobnik o2 = new osobnikFlowShop(9, genom2);
-        operatorOX instance = new operatorOX(null);
+        operatorOX instance = new operatorOX();
         iOsobnik wyn1 = new osobnikFlowShop(9, genom3);
         iOsobnik wyn2 = new osobnikFlowShop(9, genom4);
         Para expResult = new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
@@ -66,8 +66,8 @@ public class operatorOXTest {
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom2));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom3));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom4));
-        operatorOX instance = new operatorOX(testRodzice);
-        populacja dzieci = instance.wykonaj();
+        operatorOX instance = new operatorOX();
+        populacja dzieci = instance.wykonaj(testRodzice);
         assertEquals(dzieci.rozmiarPopulacji(), 4);
         iOsobnik testOs = null;
         while(dzieci.rozmiarPopulacji() > 0) {

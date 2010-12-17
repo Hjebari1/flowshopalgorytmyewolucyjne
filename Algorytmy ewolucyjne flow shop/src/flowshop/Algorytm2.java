@@ -59,8 +59,8 @@ public class Algorytm2 implements iAlgorytm
     public void krzyzowanie()
     {
         Random r = new Random();
-        oper = new multiOperator(p);
-        pc = oper.wykonaj();
+        oper = new multiOperator();
+        pc = oper.wykonaj(p);
         if (r.nextInt(2)==0) m.wynonaj(pc);
         if (r.nextInt(2)==0) m.wynonaj(p);
 

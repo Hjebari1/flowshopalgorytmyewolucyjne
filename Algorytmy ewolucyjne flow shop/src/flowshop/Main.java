@@ -24,6 +24,7 @@ public class Main {
             listaAlgorytmow.add(new Algorytm1(0, null));
             listaAlgorytmow.add(new Algorytm2(0, null));
             listaAlgorytmow.add(new Algorytm2K(0, null));
+            listaAlgorytmow.add(new Algorytm3(0, null));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -53,6 +54,7 @@ public class Main {
                 wykonajAlg = listaAlgorytmow.get(ktory_alg - 1);
                 int ile_osob = Integer.parseInt(args[2].trim());
                 wykonajAlg = wykonajAlg.createAlg(ile_osob, new Dane3(args[3].trim()));
+                if (wykonajAlg == null) System.out.println("Dupa!");
             }
             if (wykonajAlg != null) {
                 for (int i = 0; i < 1000; i++) {

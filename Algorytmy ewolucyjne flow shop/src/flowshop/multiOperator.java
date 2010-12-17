@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowshop;
 
 import flowshop.Interfejsy.iOperatorKrzyżowania;
@@ -20,22 +15,21 @@ public class multiOperator extends iOperatorKrzyżowania
     operatorCX cx;
     operatorOX ox;
     operatorPMX pmx;
-    populacja po;
-    public multiOperator(populacja p)
+    populacja popOsobnikow;
+    public multiOperator()
     {
-        po=p;
-        cx= new operatorCX(p);
-        ox= new operatorOX(p);
-        pmx= new operatorPMX(p);
+        cx= new operatorCX();
+        ox= new operatorOX();
+        pmx= new operatorPMX();
     }
 
     @Override
-    public populacja wykonaj()
+    public populacja wykonaj(populacja popOsobnikow)
     {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
         populacja rodzice = new populacja();
-        rodzice.polaczPopulacje(po);
+        rodzice.polaczPopulacje(popOsobnikow);
 
         while (rodzice.rozmiarPopulacji() > 1) {
             try {
@@ -58,8 +52,6 @@ public class multiOperator extends iOperatorKrzyżowania
             }
         }
         return pochodneOsobniki;
-
-
 }
 
     private Object krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception
