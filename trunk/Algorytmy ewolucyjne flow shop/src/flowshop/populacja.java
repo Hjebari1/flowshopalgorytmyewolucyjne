@@ -51,5 +51,10 @@ public class populacja {
     protected ListIterator<iOsobnik> popIterator() {
         return osobniki.listIterator();
     }
+    @Override
+    public String toString() {
+        return osobniki.toString();
+    }
+
 
 }

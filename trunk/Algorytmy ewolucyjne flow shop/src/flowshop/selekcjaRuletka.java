@@ -49,6 +49,7 @@ public class selekcjaRuletka implements iSelekcja {
                 sum += tmp.getFirst();
             }
             wybrPop.dodajOsobnika(tmp.getSecond());
+            odpSize++;
         }
         return wybrPop;
     }
