@@ -23,6 +23,7 @@ public class selekcjaRuletka implements iSelekcja {
 
     iDane dane;
     iFunkcjaCelu fCel;
+
     public selekcjaRuletka(iDane dane, iFunkcjaCelu fCel) {
         this.dane = dane;
         this.fCel = fCel;
@@ -40,11 +41,11 @@ public class selekcjaRuletka implements iSelekcja {
         int odpSize = 0;
         double sum = 0;
         double prwd = 1.0;
-        Para<Double,iOsobnik> tmp = null;
+        Para<Double, iOsobnik> tmp = null;
         while (odpSize < rozmiar) {
             sum = 0;
             prwd = los.nextDouble();
-            for (Iterator<Para<Double,iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
+            for (Iterator<Para<Double, iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
                 tmp = i.next();
                 sum += tmp.getFirst();
             }
@@ -59,7 +60,7 @@ public class selekcjaRuletka implements iSelekcja {
      * @param daneWejsciowe populacja wejsciowa
      * @return Para współczynnik, osobnik
      */
-    protected List<Para<Double, iOsobnik>> wyliczWsp(populacja daneWejsciowe,iFunkcjaCelu fCelu) { // docelowo private, do testów protected
+    protected List<Para<Double, iOsobnik>> wyliczWsp(populacja daneWejsciowe, iFunkcjaCelu fCelu) { // docelowo private, do testów protected
         LinkedList<Double> wartosciOsobnikow = new LinkedList<Double>();
         double max = 0, tmp, sum = 0;
         // wyliczanie sumy, znajdywanie minumum, obliczanie wartości funkcji celu
@@ -74,16 +75,21 @@ public class selekcjaRuletka implements iSelekcja {
 
         // noralizacja współczynnika
         sum = max * daneWejsciowe.rozmiarPopulacji() - sum;
-
         ArrayList<Para<Double, iOsobnik>> wyliczoneWsp = new ArrayList<Para<Double, iOsobnik>>();
 
         double wspPr;
         // iterator przewijający osobniki równolegle do przewijanych współczynników
         Iterator popIter = daneWejsciowe.popIterator();
-
-        for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
-            wspPr = (max - (Double) wartIter.next()) / sum;
-            wyliczoneWsp.add(new Para(wspPr, popIter.next()));
+        if (sum == 0) {                                                 //wszystkie osobniki zwracają równy wynik
+            for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
+                wspPr = 1.0 / daneWejsciowe.rozmiarPopulacji();
+                wyliczoneWsp.add(new Para(wspPr, popIter.next()));
+            }
+        } else {
+            for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
+                wspPr = (max - (Double) wartIter.next()) / sum;
+                wyliczoneWsp.add(new Para(wspPr, popIter.next()));
+            }
         }
         return wyliczoneWsp;
     }
