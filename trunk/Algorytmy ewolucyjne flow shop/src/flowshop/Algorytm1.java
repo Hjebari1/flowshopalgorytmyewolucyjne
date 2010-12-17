@@ -46,11 +46,11 @@ public class Algorytm1 implements iAlgorytm {
     public void krzyzowanie() {
         Random r = new Random();
         if (r.nextBoolean()) {
-            oper = new operatorOX(p);
+            oper = new operatorOX();
         } else {
-            oper = new operatorCX(p);
+            oper = new operatorCX();
         }
-        pc = oper.wykonaj();
+        pc = oper.wykonaj(p);
 
     }
 

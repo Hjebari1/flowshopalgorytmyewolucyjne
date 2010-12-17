@@ -50,7 +50,7 @@ public class operatorCXTest {
         int[] genomwyn = { 1, 2, 3, 7, 5, 6, 9, 4, 8};
         iOsobnik o1 = new osobnikFlowShop(9, genom1);
         iOsobnik o2 = new osobnikFlowShop(9, genom2);
-        operatorCX instance = new operatorCX(null);
+        operatorCX instance = new operatorCX();
         iOsobnik expResult = new osobnikFlowShop(9,genomwyn);
         iOsobnik result = instance.krzyzuj(o1, o2);
         System.out.print(result);
@@ -64,7 +64,7 @@ public class operatorCXTest {
         int[] genomwyn = {4,5,3,7,1,8,9,2,6};
         iOsobnik o1 = new osobnikFlowShop(9, genom1);
         iOsobnik o2 = new osobnikFlowShop(9, genom2);
-        operatorCX instance = new operatorCX(null);
+        operatorCX instance = new operatorCX();
         iOsobnik expResult = new osobnikFlowShop(9,genomwyn);
         iOsobnik result = instance.krzyzuj(o1, o2);
         System.out.print(result);
@@ -82,8 +82,8 @@ public class operatorCXTest {
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom2));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom3));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom4));
-        operatorCX instance = new operatorCX(testRodzice);
-        populacja dzieci = instance.wykonaj();
+        operatorCX instance = new operatorCX();
+        populacja dzieci = instance.wykonaj(testRodzice);
         assertEquals(dzieci.rozmiarPopulacji(), 2);
         iOsobnik testOs = null;
         while(dzieci.rozmiarPopulacji() > 0) {

@@ -14,8 +14,7 @@ import java.util.logging.Logger;
  */
 public class operatorOX extends iOperatorKrzyżowania {
 
-    public operatorOX(populacja daneWejsciowe) {
-        zbiorOsobnikow = daneWejsciowe;
+    public operatorOX() {
     }
     public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
@@ -125,7 +124,7 @@ public class operatorOX extends iOperatorKrzyżowania {
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
 
-    public populacja wykonaj() {
+    public populacja wykonaj(populacja zbiorOsobnikow) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
         populacja rodzice = new populacja();

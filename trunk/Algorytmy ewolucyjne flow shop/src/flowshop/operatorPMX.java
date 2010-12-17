@@ -16,8 +16,7 @@ import java.util.logging.Logger;
  */
 public class operatorPMX extends iOperatorKrzyżowania {
 
-    public operatorPMX(populacja daneWejsciowe) {
-        zbiorOsobnikow = daneWejsciowe;
+    public operatorPMX() {
     }
 
     public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
@@ -91,7 +90,7 @@ public class operatorPMX extends iOperatorKrzyżowania {
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
 
-    public populacja wykonaj() {
+    public populacja wykonaj(populacja zbiorOsobnikow) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
         populacja rodzice = new populacja();

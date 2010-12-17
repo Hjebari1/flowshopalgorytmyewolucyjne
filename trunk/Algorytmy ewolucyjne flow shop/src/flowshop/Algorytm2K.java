@@ -38,16 +38,17 @@ public class Algorytm2K implements iAlgorytm {
 
     public void wybor() {
         sr = new selekcjaRuletka(dane,f);
+        ps = sr.wybranaPopulacja(p);
     }
 
     public void krzyzowanie() {
         Random r = new Random();
         if (r.nextBoolean()) {
-            oper = new operatorOX(sr.wybranaPopulacja(sr.wybranaPopulacja(p)));
+            oper = new operatorOX();
         } else {
-            oper = new operatorPMX(sr.wybranaPopulacja(sr.wybranaPopulacja(p)));
+            oper = new operatorPMX();
         }
-        pc = oper.wykonaj();
+        pc = oper.wykonaj(ps);
 
     }
 

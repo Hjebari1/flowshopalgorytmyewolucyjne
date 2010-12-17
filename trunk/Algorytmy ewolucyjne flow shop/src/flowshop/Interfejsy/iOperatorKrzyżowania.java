@@ -23,5 +23,5 @@ public abstract class iOperatorKrzyżowania
     public void usunOsobnika(iOsobnik o) {
         zbiorOsobnikow.usunOsobnika(o);
     }
-    abstract public populacja wykonaj();
+    abstract public populacja wykonaj(populacja p);
 }

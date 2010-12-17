@@ -45,7 +45,7 @@ public class operatorPMXTest {
         int[] genom4 = {6, 2, 3, 4, 5, 1, 9, 7, 8};
         iOsobnik o1 = new osobnikFlowShop(9, genom1);
         iOsobnik o2 = new osobnikFlowShop(9, genom2);
-        operatorPMX instance = new operatorPMX(null);
+        operatorPMX instance = new operatorPMX();
         iOsobnik wyn1 = new osobnikFlowShop(9, genom3);
         iOsobnik wyn2 = new osobnikFlowShop(9, genom4);
         Para expResult = new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
@@ -66,7 +66,7 @@ public class operatorPMXTest {
         int[] genom4 = {1, 2, 3, 7, 6, 5, 9, 4, 8};
         iOsobnik o1 = new osobnikFlowShop(9, genom1);
         iOsobnik o2 = new osobnikFlowShop(9, genom2);
-        operatorPMX instance = new operatorPMX(null);
+        operatorPMX instance = new operatorPMX();
         iOsobnik wyn1 = new osobnikFlowShop(9, genom3);
         iOsobnik wyn2 = new osobnikFlowShop(9, genom4);
         Para expResult = new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
@@ -87,8 +87,8 @@ public class operatorPMXTest {
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom2));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom3));
         testRodzice.dodajOsobnika(new osobnikFlowShop(9, genom4));
-        operatorPMX instance = new operatorPMX(testRodzice);
-        populacja dzieci = instance.wykonaj();
+        operatorPMX instance = new operatorPMX();
+        populacja dzieci = instance.wykonaj(testRodzice);
         assertEquals(dzieci.rozmiarPopulacji(), 4);
         iOsobnik testOs = null;
         while (dzieci.rozmiarPopulacji() > 0) {
