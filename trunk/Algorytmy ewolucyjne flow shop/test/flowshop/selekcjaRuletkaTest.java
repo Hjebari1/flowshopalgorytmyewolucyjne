@@ -44,8 +44,8 @@ public class selekcjaRuletkaTest {
         populacja p = new populacja();
         int rozmiar = 0;
         selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
-        List expResult = new LinkedList();
-        List result = instance.wybranaPopulacja(p, rozmiar);
+        populacja expResult = new populacja();
+        populacja result = instance.wybranaPopulacja(p, rozmiar);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -77,8 +77,8 @@ public class selekcjaRuletkaTest {
             p.dodajOsobnika(new osobnikFlowShop(5));
         selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
 
-        List expResult = null;
-        List result = instance.wybranaPopulacja(p);
+        populacja expResult = null;
+        populacja result = instance.wybranaPopulacja(p);
         System.out.println(result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
