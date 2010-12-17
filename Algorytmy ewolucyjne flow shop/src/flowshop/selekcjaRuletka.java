@@ -6,6 +6,7 @@ import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iSelekcja;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -25,7 +26,6 @@ public class selekcjaRuletka implements iSelekcja {
 
     private static int zakresLosowania;
     iDane dane;
-
     public selekcjaRuletka(iDane dane) {
         this.dane = dane;
         zakresLosowania = 1000;
@@ -41,14 +41,23 @@ public class selekcjaRuletka implements iSelekcja {
         Random los = new Random();
         HashMap<Double, List> wspTab = wyliczWsp(p);
         ArrayList klucze = new ArrayList(wspTab.keySet());
-        Collections.sort(klucze);
+        Collections.sort(klucze,new Comparator<Double>() {
+
+            public int compare(Double o1, Double o2) {
+               if (o1 > o2) return -1;
+               else
+                   if (o1 < o2) return 1;
+                   else
+                       return 0;
+            }
+        });
         double wspPr;
         int odpSize = 0;
         double sum = 0;
         double prwd;
         while (odpSize < rozmiar) {
             sum = 0;
-            prwd = los.nextDouble();
+            prwd = los.nextDouble(); // to tutaj , czy przed while'm ?
             for (Iterator kluczIter = klucze.iterator(); kluczIter.hasNext();) {
                 if (odpSize >= rozmiar) {
                     break;
@@ -64,7 +73,7 @@ public class selekcjaRuletka implements iSelekcja {
                             break;
                         }
                         poz += (int) Math.round(Math.ceil((prwd / wspPr))); //long to int!!
-                        if (poz < wspList.size()) {
+                        if (poz <= wspList.size()) {
                             odpSize++;
                             wybrPop.add((iOsobnik) wspList.get(poz-1));
                         }
