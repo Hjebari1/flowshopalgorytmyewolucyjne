@@ -4,6 +4,8 @@
  */
 package flowshop;
 
+import flowshop.Interfejsy.iDane;
+import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +53,19 @@ public class populacja {
     protected ListIterator<iOsobnik> popIterator() {
         return osobniki.listIterator();
     }
+
+    public iOsobnik min(iFunkcjaCelu f,iDane d)
+    {
+        iOsobnik min = this.osobniki.get(0);
+
+        for(int i=0;i<this.iloscOsobnikow;i++)
+        {
+            if (f.wartoscFunkcji(this.osobniki.get(i), d)<f.wartoscFunkcji(min, d))
+                min = this.osobniki.get(i);
+        }
+        return min;
+    }
+
     @Override
     public String toString() {
         return osobniki.toString();
