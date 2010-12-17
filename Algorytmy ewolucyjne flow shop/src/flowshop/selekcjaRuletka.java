@@ -33,8 +33,8 @@ public class selekcjaRuletka implements iSelekcja {
         this.dane = dane;
     }
 
-    public List<iOsobnik> wybranaPopulacja(populacja p, int rozmiar) {
-        List<iOsobnik> wybrPop = new LinkedList<iOsobnik>();
+    public populacja wybranaPopulacja(populacja p, int rozmiar) {
+        populacja wybrPop = new populacja();
         Random los = new Random();
         HashMap<Double, List> wspTab = wyliczWsp(p);
         ArrayList klucze = new ArrayList(wspTab.keySet());
@@ -53,7 +53,7 @@ public class selekcjaRuletka implements iSelekcja {
         double sum = 0;
         double prwd;
         while (odpSize < rozmiar) {
-            sum = 0;
+            //sum = 0; //!! Linijka kołowości
             prwd = los.nextDouble(); // to tutaj , czy przed while'm ?
             for (Iterator kluczIter = klucze.iterator(); kluczIter.hasNext();) {
                 if (odpSize >= rozmiar) {
@@ -64,7 +64,7 @@ public class selekcjaRuletka implements iSelekcja {
                 if (wspPr * wspList.size() + sum > prwd) {
                     int poz = (int) Math.round(Math.ceil((prwd - sum) / wspPr)); //long to int!!
                     odpSize++;
-                    wybrPop.add((iOsobnik) wspList.get(poz-1));
+                    wybrPop.dodajOsobnika((iOsobnik) wspList.get(poz-1));
                     while (wspPr * (wspList.size() - poz) > prwd) { // ?
                         if (odpSize >= rozmiar) {
                             break;
@@ -72,7 +72,7 @@ public class selekcjaRuletka implements iSelekcja {
                         poz += (int) Math.round(Math.ceil((prwd / wspPr))); //long to int!!
                         if (poz <= wspList.size()) {
                             odpSize++;
-                            wybrPop.add((iOsobnik) wspList.get(poz-1));
+                            wybrPop.dodajOsobnika((iOsobnik) wspList.get(poz-1));
                         }
                     }
                     sum = (wspList.size() > poz ) ? ((wspList.size() - poz)*wspPr) : 0;
@@ -126,7 +126,7 @@ public class selekcjaRuletka implements iSelekcja {
         return wsp;
     }
 
-    public List<iOsobnik> wybranaPopulacja(populacja p) {
+    public populacja wybranaPopulacja(populacja p) {
         return wybranaPopulacja(p, p.rozmiarPopulacji());
     }
 }

@@ -6,7 +6,6 @@
 package flowshop.Interfejsy;
 
 import flowshop.*;
-import java.util.List;
 
 /**
  *
@@ -14,5 +13,5 @@ import java.util.List;
  */
 public interface iSelekcja 
 {
-    public List<iOsobnik> wybranaPopulacja(populacja p);
+    public populacja wybranaPopulacja(populacja p);
 }
