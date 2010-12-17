@@ -1,7 +1,7 @@
 package flowshop;
 
-import java.util.LinkedList;
-import java.util.HashMap;
+import flowshop.Interfejsy.iOsobnik;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -59,8 +59,8 @@ public class selekcjaRuletkaTest {
         System.out.println("wyliczWsp");
         populacja daneWejsciowe = new populacja();
         selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
-        HashMap expResult = new HashMap();
-        HashMap result = instance.wyliczWsp(daneWejsciowe);
+        List expResult = new ArrayList();
+        List<Para<Double, iOsobnik>> result = instance.wyliczWsp(daneWejsciowe);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
