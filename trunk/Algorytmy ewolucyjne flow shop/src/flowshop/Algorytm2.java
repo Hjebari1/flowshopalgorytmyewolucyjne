@@ -36,7 +36,7 @@ public class Algorytm2 implements iAlgorytm
         this.iloscOsobnikow=iloscOsobnikow;
         p = new populacja();
         zt = new zastepowanieTurniej(dane,f,iloscOsobnikow);
-        sr = new selekcjaRuletka(dane,iloscOsobnikow/2);
+        sr = new selekcjaRuletka(dane,f);
         for(int i=0;i<iloscOsobnikow;i++)
         {
             p.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
@@ -90,6 +90,14 @@ public class Algorytm2 implements iAlgorytm
 
         return wynik;
 
+    }
+
+    public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+        return new Algorytm2(iloscOsobnikow, d);
+    }
+
+    public String nazwaAlg() {
+        return "Algorytm2 - multiOperator, zastępowanieTurniejowe";
     }
 
 

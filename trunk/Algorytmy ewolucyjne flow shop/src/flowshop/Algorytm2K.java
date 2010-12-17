@@ -37,7 +37,7 @@ public class Algorytm2K implements iAlgorytm {
     }
 
     public void wybor() {
-        sr = new selekcjaRuletka(dane);
+        sr = new selekcjaRuletka(dane,f);
     }
 
     public void krzyzowanie() {
@@ -72,5 +72,13 @@ public class Algorytm2K implements iAlgorytm {
 
         return wynik;
 
+    }
+
+    public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+        return new Algorytm2K(iloscOsobnikow, d);
+    }
+
+    public String nazwaAlg() {
+        return "Algorytm 2K - tak jak Algorytm2, ale jeszcze z selekcją ruletkową";
     }
 }

@@ -50,7 +50,7 @@ public class selekcjaRuletkaTest {
         System.out.println("wybranaPopulacja");
         populacja p = new populacja();
         int rozmiar = 0;
-        selekcjaRuletka instance = new selekcjaRuletka(daneWsp);
+        selekcjaRuletka instance = new selekcjaRuletka(daneWsp,new funkcjaCeluFlowShop());
         populacja expResult = new populacja();
         populacja result = instance.wybranaPopulacja(p, rozmiar);
         //assertEquals(expResult, result);
@@ -64,9 +64,9 @@ public class selekcjaRuletkaTest {
     @Test
     public void testWyliczWsp() {
         System.out.println("wyliczWsp");
-        selekcjaRuletka instance = new selekcjaRuletka(daneWsp);
+        selekcjaRuletka instance = new selekcjaRuletka(daneWsp,new funkcjaCeluFlowShop());
         List expResult = new ArrayList();
-        List<Para<Double, iOsobnik>> result = instance.wyliczWsp(daneWejsciowe);
+        List<Para<Double, iOsobnik>> result = instance.wyliczWsp(daneWejsciowe,new funkcjaCeluFlowShop());
         System.out.println(result);
         iOsobnik badany=null;
         Para<Double,iOsobnik> badana=null;
@@ -92,8 +92,8 @@ public class selekcjaRuletkaTest {
     @Test
     public void testWybranaPopulacja_populacja() {
         System.out.println("wybranaPopulacja");
-        selekcjaRuletka instance = new selekcjaRuletka(daneWsp);
-        System.out.println(instance.wyliczWsp(daneWejsciowe));
+        selekcjaRuletka instance = new selekcjaRuletka(daneWsp,new funkcjaCeluFlowShop());
+        System.out.println(instance.wyliczWsp(daneWejsciowe,new funkcjaCeluFlowShop()));
         //populacja expResult = null;
         populacja result = instance.wybranaPopulacja(daneWejsciowe);
         System.out.println(result);
