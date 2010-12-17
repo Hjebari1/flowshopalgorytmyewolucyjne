@@ -37,7 +37,7 @@ public class multiOperator extends iOperatorKrzyżowania
         populacja rodzice = new populacja();
         rodzice.polaczPopulacje(po);
 
-        while (rodzice.rozmiarPopulacji() > 0) {
+        while (rodzice.rozmiarPopulacji() > 1) {
             try {
                 iOsobnik o1 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
                 iOsobnik o2 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
