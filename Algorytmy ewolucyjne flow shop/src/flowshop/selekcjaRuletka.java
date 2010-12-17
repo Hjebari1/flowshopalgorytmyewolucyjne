@@ -24,16 +24,13 @@ import java.util.Random;
  */
 public class selekcjaRuletka implements iSelekcja {
 
-    private static int zakresLosowania;
     iDane dane;
     public selekcjaRuletka(iDane dane) {
         this.dane = dane;
-        zakresLosowania = 1000;
     }
 
     public selekcjaRuletka(iDane dane, int zakresLos) {
         this.dane = dane;
-        zakresLosowania = zakresLos;
     }
 
     public List<iOsobnik> wybranaPopulacja(populacja p, int rozmiar) {

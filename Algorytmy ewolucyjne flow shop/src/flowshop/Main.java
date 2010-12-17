@@ -5,13 +5,8 @@
 
 package flowshop;
 
-import flowshop.Interfejsy.iDane;
-import flowshop.Interfejsy.iFunkcjaCelu;
-import flowshop.Interfejsy.iOsobnik;
-import flowshop.osobnikFlowShop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ListIterator;
 
 
 /**
