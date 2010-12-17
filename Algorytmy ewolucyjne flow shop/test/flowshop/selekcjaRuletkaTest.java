@@ -1,5 +1,6 @@
 package flowshop;
 
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
@@ -40,14 +41,14 @@ public class selekcjaRuletkaTest {
     @Test
     public void testWybranaPopulacja_populacja_int() {
         System.out.println("wybranaPopulacja");
-        populacja p = null;
+        populacja p = new populacja();
         int rozmiar = 0;
-        selekcjaRuletka instance = null;
-        List expResult = null;
+        selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
+        List expResult = new LinkedList();
         List result = instance.wybranaPopulacja(p, rozmiar);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -56,13 +57,13 @@ public class selekcjaRuletkaTest {
     @Test
     public void testWyliczWsp() {
         System.out.println("wyliczWsp");
-        populacja daneWejsciowe = null;
-        selekcjaRuletka instance = null;
-        HashMap expResult = null;
+        populacja daneWejsciowe = new populacja();
+        selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
+        HashMap expResult = new HashMap();
         HashMap result = instance.wyliczWsp(daneWejsciowe);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -71,13 +72,16 @@ public class selekcjaRuletkaTest {
     @Test
     public void testWybranaPopulacja_populacja() {
         System.out.println("wybranaPopulacja");
-        populacja p = null;
-        selekcjaRuletka instance = null;
+        populacja p = new populacja();
+        for (int i = 0;i<5; i++)
+            p.dodajOsobnika(new osobnikFlowShop(5));
+        selekcjaRuletka instance = new selekcjaRuletka(new Dane1());
+
         List expResult = null;
         List result = instance.wybranaPopulacja(p);
-        assertEquals(expResult, result);
+        System.out.println(result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
 }

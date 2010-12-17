@@ -58,15 +58,15 @@ public class selekcjaRuletka implements iSelekcja {
                 if (wspPr * wspList.size() + sum > prwd) {
                     int poz = (int) Math.round(Math.ceil((prwd - sum) / wspPr)); //long to int!!
                     odpSize++;
-                    wybrPop.add((iOsobnik) wspList.get(poz));
-                    while (wspPr * (wspList.size() - poz - 1) > prwd) {
+                    wybrPop.add((iOsobnik) wspList.get(poz-1));
+                    while (wspPr * (wspList.size() - poz) > prwd) { // ?
                         if (odpSize >= rozmiar) {
                             break;
                         }
                         poz += (int) Math.round(Math.ceil((prwd / wspPr))); //long to int!!
                         if (poz < wspList.size()) {
                             odpSize++;
-                            wybrPop.add((iOsobnik) wspList.get(poz));
+                            wybrPop.add((iOsobnik) wspList.get(poz-1));
                         }
                     }
                     sum = (wspList.size() > poz ) ? ((wspList.size() - poz)*wspPr) : 0;
@@ -109,7 +109,7 @@ public class selekcjaRuletka implements iSelekcja {
         for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
             wspPr = ((Double) wartIter.next() - min) / sum;
             // sprawdzenie, czy lista na osobniki istnieje, jeśli nie tworzę nową
-            if (!wsp.get(wspPr).isEmpty()) {
+            if (wsp.get(wspPr) != null) { //wyjatek dla listy pustej?
                 wsp.get(wspPr).add(popIter.next());
             } else {
                 List list = new ArrayList<iOsobnik>();
