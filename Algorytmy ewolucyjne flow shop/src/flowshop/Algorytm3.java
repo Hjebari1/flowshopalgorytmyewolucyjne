@@ -2,6 +2,7 @@ package flowshop;
 
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
+import flowshop.Interfejsy.iMutacja;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,9 +16,11 @@ public class Algorytm3 implements iAlgorytm {
     populacja pop;
     populacja popSelect;
     populacja popOper;
+    populacja popMut;
     iDane dane;
     selekcjaRuletka sr;
     iOperatorKrzyżowania oper;
+    iMutacja mut;
     zastepowanieMaksymalne zm;
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
@@ -28,6 +31,7 @@ public class Algorytm3 implements iAlgorytm {
         this.iloscOsobnikow = iloscOsobnikow;
         pop = new populacja();
         zm = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
+        mut = new MutacjaK();
         for (int i = 0; i < iloscOsobnikow; i++) {
             pop.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }
@@ -49,6 +53,7 @@ public class Algorytm3 implements iAlgorytm {
     public void krzyzowanie() {
         oper = new operatorOX();
         popOper = oper.wykonaj(popSelect);
+        mut.wynonaj(popOper);
     }
 
     public void zastepowanie() {
