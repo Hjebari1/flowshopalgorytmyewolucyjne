@@ -25,6 +25,10 @@ public class Algorytm1 implements iAlgorytm {
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
+    public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException
+    {
+        return new Algorytm1(iloscOsobnikow,d);
+    }
     public Algorytm1(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
@@ -37,7 +41,6 @@ public class Algorytm1 implements iAlgorytm {
     }
 
     public void wybor() {
-        sr = new selekcjaRuletka(dane);
     }
 
     public void krzyzowanie() {
@@ -72,5 +75,9 @@ public class Algorytm1 implements iAlgorytm {
 
         return wynik;
 
+    }
+
+    public String nazwaAlg() {
+        return "Algorytm1 - podstawowy algorytm";
     }
 }
