@@ -81,7 +81,7 @@ public class selekcjaRuletka implements iSelekcja {
         // iterator przewijający osobniki równolegle do przewijanych współczynników
         Iterator popIter = daneWejsciowe.popIterator();
         if (sum == 0) {                                                 //wszystkie osobniki zwracają równy wynik
-            for (Iterator wartIter = wartosciOsobnikow.iterator(); wartIter.hasNext();) {
+            for (; popIter.hasNext();) {
                 wspPr = 1.0 / daneWejsciowe.rozmiarPopulacji();
                 wyliczoneWsp.add(new Para(wspPr, popIter.next()));
             }
