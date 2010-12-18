@@ -80,4 +80,15 @@ public class Algorytm1 implements iAlgorytm {
     public String nazwaAlg() {
         return "Algorytm1 - podstawowy algorytm";
     }
+    public double getMin()
+    {
+        ListIterator<iOsobnik> iter = p.popIterator();
+        osobnikFlowShop o;
+        double min = Double.MAX_VALUE;
+        while (iter.hasNext()) {
+            o = (osobnikFlowShop) iter.next();
+            min = Math.min(f.wartoscFunkcji(o, dane), min);
+        }
+        return min;
+    }
 }

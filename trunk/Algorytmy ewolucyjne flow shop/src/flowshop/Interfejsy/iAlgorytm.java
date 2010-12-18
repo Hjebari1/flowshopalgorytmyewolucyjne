@@ -16,6 +16,7 @@ public interface iAlgorytm
 {
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException;
     public String nazwaAlg();
+    public double getMin();
     void wybor();
     void krzyzowanie();
     void zastepowanie();
