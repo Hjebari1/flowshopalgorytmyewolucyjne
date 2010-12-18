@@ -80,7 +80,7 @@ public class multiOperator extends iOperatorKrzyżowania
             poz1 = poz2;
             poz2 = tmp;
         }
-        return ox.krzyzuj(o1, o2,poz1,poz2);
+        return pmx.krzyzuj(o1, o2,poz1,poz2);
 
     }
 }
