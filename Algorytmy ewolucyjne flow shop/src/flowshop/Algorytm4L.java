@@ -58,8 +58,8 @@ public class Algorytm4L implements iAlgorytm
     public void krzyzowanie()
     {
         Random r = new Random();
-        oper = new multiOperator(ps);
-        pc = oper.wykonaj();
+        oper = new multiOperator();
+        pc = oper.wykonaj(p);
         for(int i=0;i<iloscOsobnikow/100;i++)
         {
             m.wynonaj(pc);
@@ -100,6 +100,10 @@ public class Algorytm4L implements iAlgorytm
 
     public String nazwaAlg() {
         return "Algorytm2 - multiOperator, zastępowanieTurniejowe";
+    }
+
+    public double getMin() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 
