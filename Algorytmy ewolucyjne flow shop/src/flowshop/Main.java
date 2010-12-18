@@ -17,7 +17,7 @@ public class Main {
     static int stopIter = 1000;
     static public String powitanie = "Lista komend : \n"
             + "lista - wypisuje mozliwe algorytmy\n"
-            + "wykonaj <numer_algorytmu> <ilosc_osobnikow> <sciezka danych> <ilosc iteracji> <kiedy stop>\n";
+            + "wykonaj <numer_algorytmu> <ilosc_osobnikow> <sciezka danych> <ilosc iteracji> <kiedy stop> <kiedy wynik>\n";
     static LinkedList<iAlgorytm> listaAlgorytmow = new LinkedList<iAlgorytm>();
 
     static {
@@ -27,6 +27,8 @@ public class Main {
             listaAlgorytmow.add(new Algorytm2K(0, null));
             listaAlgorytmow.add(new Algorytm3(0, null));
             listaAlgorytmow.add(new Algorytm4(0, null));
+            listaAlgorytmow.add(new Algorytm5(0, null));
+            listaAlgorytmow.add(new Algorytm6(0, null));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
