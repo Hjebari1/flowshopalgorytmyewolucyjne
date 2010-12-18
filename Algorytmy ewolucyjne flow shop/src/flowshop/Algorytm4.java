@@ -5,6 +5,7 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iMutacja;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
+import flowshop.Interfejsy.iZastepowanie;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
@@ -13,7 +14,7 @@ import java.util.ListIterator;
  *
  * @author Jakub Banaszewski
  */
-public class Algorytm3 implements iAlgorytm {
+public class Algorytm4 implements iAlgorytm {
 
     populacja pop;
     populacja popSelect;
@@ -23,16 +24,16 @@ public class Algorytm3 implements iAlgorytm {
     selekcjaRuletka sr;
     iOperatorKrzyżowania oper;
     iMutacja mut;
-    zastepowanieMaksymalne zm;
+    iZastepowanie zast;
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
-    public Algorytm3(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+    public Algorytm4(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         pop = new populacja();
-        zm = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
+        zast = new zastepowanieTurniej(dane, f, iloscOsobnikow);
         mut = new MutacjaK();
         for (int i = 0; i < iloscOsobnikow; i++) {
             pop.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
@@ -44,7 +45,7 @@ public class Algorytm3 implements iAlgorytm {
     }
 
     public String nazwaAlg() {
-        return "Algorytm3 - operator OX, selekcja + zastępowanieMaksymalne";
+        return "Algorytm4 - operator PMX + mocna mutacja, selekcja + zastępowanieTurniej";
     }
 
     public void wybor() {
@@ -53,13 +54,13 @@ public class Algorytm3 implements iAlgorytm {
     }
 
     public void krzyzowanie() {
-        oper = new operatorOX();
+        oper = new operatorPMX();
         popOper = oper.wykonaj(popSelect);
         mut.wynonaj(popOper);
     }
 
     public void zastepowanie() {
-        pop = zm.wykonaj(pop, popOper);
+        pop = zast.wykonaj(pop, popOper);
     }
 
     public double getMin()

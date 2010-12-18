@@ -82,4 +82,15 @@ public class Algorytm2K implements iAlgorytm {
     public String nazwaAlg() {
         return "Algorytm 2K - tak jak Algorytm2, ale jeszcze z selekcją ruletkową";
     }
+    public double getMin()
+    {
+        ListIterator<iOsobnik> iter = p.popIterator();
+        osobnikFlowShop o;
+        double min = Double.MAX_VALUE;
+        while (iter.hasNext()) {
+            o = (osobnikFlowShop) iter.next();
+            min = Math.min(f.wartoscFunkcji(o, dane), min);
+        }
+        return min;
+    }
 }
