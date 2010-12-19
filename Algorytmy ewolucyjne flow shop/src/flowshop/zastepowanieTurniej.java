@@ -13,7 +13,8 @@ import java.util.ListIterator;
 import java.util.Random;
 
 /**
- *
+ * Zastępowanie truniejowe służy do scalenia populacji bierzącej z populacją
+ * wygenerowaną przez krzyżowanie.
  * @author Łukasz Synówka
  */
 public class zastepowanieTurniej implements iZastepowanie
@@ -21,6 +22,7 @@ public class zastepowanieTurniej implements iZastepowanie
 
     iDane dane;
     iFunkcjaCelu funkcja;
+    // ilosc końcowa określa ile osobników ma pozostac
     int iloscKoncowa;
 
     public zastepowanieTurniej(iDane dane, iFunkcjaCelu funkcja, int iloscKoncowa)
@@ -30,6 +32,8 @@ public class zastepowanieTurniej implements iZastepowanie
         this.iloscKoncowa = iloscKoncowa;
     }
 
+    // główna metoda klasy parametrami są odpowiednio
+    // populacja populacja obecna i populacja po krzyżowaniu
     public populacja wykonaj(populacja p1, populacja p2)
     {
         iOsobnik o1;

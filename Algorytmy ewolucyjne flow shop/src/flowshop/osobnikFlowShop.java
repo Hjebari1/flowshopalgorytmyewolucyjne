@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
+ * obiekty tej klasy służą do przechowywania informacji o osobnikach
+ * w konstruktorze należy podać długość wektora genów.
  * @author Łukasz Synówka
  */
 public class osobnikFlowShop extends iOsobnik {
@@ -114,6 +115,8 @@ public class osobnikFlowShop extends iOsobnik {
         return hash;
     }
 
+
+    // meto da zwraca String z listą wartości kolejnych genów
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

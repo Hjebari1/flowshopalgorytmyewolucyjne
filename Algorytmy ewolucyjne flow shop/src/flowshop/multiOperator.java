@@ -56,19 +56,6 @@ public class multiOperator extends iOperatorKrzyżowania
 
     private Object krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception
     {
-        /*for (int j = 0; j < o1.dlugoscGenomu(); j++) {
-                if (o1.znajdzPozGenu(0, o1.dlugoscGenomu(), j) == o1.dlugoscGenomu()) {
-                    System.out.println(o1);
-                    throw new Exception("Nie znaleziono prawidlowego genu " + j + "  " + o1.toString());
-                }
-            }
-        for (int j = 0; j < o2.dlugoscGenomu(); j++) {
-                if (o2.znajdzPozGenu(0, o2.dlugoscGenomu(), j) == o2.dlugoscGenomu()) {
-                    System.out.println(o2);
-                    throw new Exception("Nie znaleziono prawidlowego genu "+ j + "  " +o2.toString());
-                }
-            }
-        */
         Random r = new Random();
         int a=r.nextInt(3);
         if (a==0)

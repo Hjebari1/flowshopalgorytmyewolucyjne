@@ -10,7 +10,7 @@ import flowshop.Interfejsy.iZastepowanie;
 import java.util.Random;
 
 /**
- *
+ *Funkcja się nie sprawdziła może będzie rozwijana później
  * @author Łukasz Synówka
  */
 public class zastepowanieMaksymalne implements iZastepowanie
