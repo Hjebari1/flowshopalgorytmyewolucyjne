@@ -16,7 +16,7 @@ public class operatorOX extends iOperatorKrzyżowania {
 
     public operatorOX() {
     }
-    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
+    public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception {
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
             throw new Exception("Nierówne genomy do krzyżowania!");
         }

@@ -1,13 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowshop.Interfejsy;
 
 import flowshop.populacja;
-import java.util.Random;
-
 /**
  *
  * @author Łukasz Synówka
@@ -15,7 +8,6 @@ import java.util.Random;
 public abstract class iOperatorKrzyżowania
 {
     protected populacja zbiorOsobnikow = null;
-
     public void dodajOsobnika(iOsobnik o) throws Exception {
         zbiorOsobnikow.dodajOsobnika(o);
     }

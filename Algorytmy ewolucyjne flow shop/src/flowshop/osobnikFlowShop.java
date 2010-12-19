@@ -116,7 +116,9 @@ public class osobnikFlowShop extends iOsobnik {
     }
 
 
-    // meto da zwraca String z listą wartości kolejnych genów
+    /**
+     *  metoda zwraca String z listą wartości kolejnych genów
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
