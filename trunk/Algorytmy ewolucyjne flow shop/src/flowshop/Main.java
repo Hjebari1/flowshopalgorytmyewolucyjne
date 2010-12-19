@@ -9,15 +9,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Klasa główna, która uruchamia zadane algorytmy. Uruchomienie odpowiedniej
+ * metody zadane jest przy pomocy parametrów.
  * @author Łukasz Synówka
+ * @author Jakub Banaszewski
  */
 public class Main {
+
     static int ileIteracji = 1000;
     static int stopIter = 1000;
     static public String powitanie = "Lista komend : \n"
             + "lista - wypisuje mozliwe algorytmy\n"
-            + "wykonaj <numer_algorytmu> <ilosc_osobnikow> <sciezka danych> <ilosc iteracji> <kiedy stop> <kiedy wynik>\n";
+            + "wykonaj <numer_algorytmu> <ilosc_osobnikow> <sciezka danych> <ilosc iteracji> <kiedy stop>\n";
     static LinkedList<iAlgorytm> listaAlgorytmow = new LinkedList<iAlgorytm>();
 
     static {
@@ -30,6 +33,12 @@ public class Main {
             listaAlgorytmow.add(new Algorytm5(0, null));
             listaAlgorytmow.add(new Algorytm6(0, null));
             listaAlgorytmow.add(new Algorytm7(0, null));
+            listaAlgorytmow.add(new Algorytm3L(0, null));
+            listaAlgorytmow.add(new Algorytm4L(0, null));
+            listaAlgorytmow.add(new Algorytm5L(0, null));
+            listaAlgorytmow.add(new Algorytm6L(0, null));
+            listaAlgorytmow.add(new Algorytm7L(0, null));
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -39,8 +48,12 @@ public class Main {
     }
 
     /**
-     * @param args the command line arguments
-     * Dopisać parametryzacje
+     * @param Lista parametrów uruchomienia programu.
+     * Pierwszy parametr to komenda.
+     * Dostępne są dwie : lista i wykonaj.
+     * Następne parametry są dostępne w przypadku komendy wykonaj i są
+     * opisane w przypadku uruchomienia programu bez żadnych parametrów.
+     * 
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -59,11 +72,15 @@ public class Main {
                 wykonajAlg = listaAlgorytmow.get(ktory_alg - 1);
                 int ile_osob = Integer.parseInt(args[2].trim());
                 wykonajAlg = wykonajAlg.createAlg(ile_osob, new Dane3(args[3].trim()));
-                if (args.length > 4)
+                if (args.length > 4) {
                     ileIteracji = Integer.parseInt(args[4].trim());
-                if (args.length > 5)
+                }
+                if (args.length > 5) {
                     stopIter = Integer.parseInt(args[5].trim());
-                if (wykonajAlg == null) System.out.println("Dupa!");
+                }
+                if (wykonajAlg == null) {
+                    System.out.println("Dupa!");
+                }
             }
             if (wykonajAlg != null) {
                 double min = Double.MAX_VALUE;
@@ -72,13 +89,19 @@ public class Main {
                     wykonajAlg.krzyzowanie();
                     wykonajAlg.zastepowanie();
                     System.out.println(wykonajAlg.toString());
-                    if (i % stopIter == 0)
-                        if (min == wykonajAlg.getMin()) break;
-                        else
+                    if (i % stopIter == 0) {
+                        if (min == wykonajAlg.getMin()) {
+                            break;
+                        } else {
                             min = wykonajAlg.getMin();
+                        }
+                    }
                 }
                 System.out.println(wykonajAlg.toString());
+            } else {
+                System.out.println(powitanie);
             }
+
         } else {
             System.out.println(powitanie);
         }
