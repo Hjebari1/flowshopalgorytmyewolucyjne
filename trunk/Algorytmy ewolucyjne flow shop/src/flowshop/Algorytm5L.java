@@ -82,7 +82,6 @@ public class Algorytm5L implements iAlgorytm
         {
             o=(osobnikFlowShop) iter.next();
             min=Math.min(f.wartoscFunkcji(o, dane),min);
-            //wynik=wynik.concat(f.wartoscFunkcji(o, dane)+" ");
         }
         wynik=wynik.concat(min+"\n");
 
