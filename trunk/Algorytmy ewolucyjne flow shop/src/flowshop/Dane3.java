@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
+ * Dzieki obiektom tej kalsy mozna wyciągać dane z pliów tekstowych
+ * W pierwszej linijce pliku powinna się znajdować informacjia o rozmiarze danych
+ * a w kolejnyc czas oddzielone pojedynczymi odstępami
+ * każdy wiersz odpowiada jednej maszynie.
  *
  * @author Łukasz Synówka
  */
