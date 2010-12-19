@@ -29,6 +29,7 @@ public class Main {
             listaAlgorytmow.add(new Algorytm4(0, null));
             listaAlgorytmow.add(new Algorytm5(0, null));
             listaAlgorytmow.add(new Algorytm6(0, null));
+            listaAlgorytmow.add(new Algorytm7(0, null));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

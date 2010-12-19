@@ -41,7 +41,7 @@ public class Algorytm4 implements iAlgorytm {
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm1(iloscOsobnikow, d);
+        return new Algorytm4(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {

@@ -81,4 +81,36 @@ public class operatorOXTest {
         }
         assertEquals(dzieci.rozmiarPopulacji(), 0);
     }
+    @Test
+    public void testWykonaj3() {
+        System.out.println("wykonaj3");
+        populacja testRodzice = new populacja();
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        testRodzice.dodajOsobnika(new osobnikFlowShop(20));
+        operatorOX instance = new operatorOX();
+        populacja dzieci = null;
+        for (int i = 0; i < 1000; i ++)
+        {
+            dzieci = instance.wykonaj(testRodzice);
+            testRodzice = dzieci;
+        }
+        assertEquals(dzieci.rozmiarPopulacji(), 8);
+        iOsobnik testOs = null;
+        while (dzieci.rozmiarPopulacji() > 0) {
+            testOs = dzieci.usunOsobnika(0);
+            for (int j = 0; j < 20; j++) {
+                if (testOs.znajdzPozGenu(0, 20, j) == 20) {
+                    System.out.println(testOs);
+                    fail("Nie znaleziono prawidlowego genu");
+                }
+            }
+        }
+        assertEquals(dzieci.rozmiarPopulacji(), 0);
+    }
 }

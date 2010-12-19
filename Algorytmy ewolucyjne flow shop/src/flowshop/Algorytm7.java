@@ -9,12 +9,13 @@ import flowshop.Interfejsy.iZastepowanie;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
+import java.util.Random;
 
 /**
  *
  * @author Jakub Banaszewski
  */
-public class Algorytm6 implements iAlgorytm {
+public class Algorytm7 implements iAlgorytm {
 
     populacja pop;
     populacja popSelect;
@@ -29,31 +30,29 @@ public class Algorytm6 implements iAlgorytm {
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
-    public Algorytm6(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+    public Algorytm7(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         pop = new populacja();
-        zast = new zastepowanieTurniej(dane, f, iloscOsobnikow);
-        mut = new MutacjaShift((float) 0.25);
+        zast = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
+        mut = new MutacjaShift((float) 0.1);
         for (int i = 0; i < iloscOsobnikow; i++) {
             pop.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm6(iloscOsobnikow, d);
+        return new Algorytm7(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {
-        return "Algorytm6 - operator multi + mutacja shift,  multiselekcja selekcja + zastępowanieTurniej";
+        return "Algorytm7 - operator multi + mutacja shift (0.1),  multiselekcja selekcja + zastępowanieTurniej + ocalali";
     }
 
     public void wybor() {
         sr = new selekcjaRuletka(dane,f);
-        sr2 = new SelekcjaRand();
         popSelect = sr.wybranaPopulacja(pop,pop.rozmiarPopulacji() / 2);
-        popSelect.polaczPopulacje(sr2.wybranaPopulacja(pop, (pop.rozmiarPopulacji()/2)));
     }
 
     public void krzyzowanie() {
@@ -63,7 +62,17 @@ public class Algorytm6 implements iAlgorytm {
     }
 
     public void zastepowanie() {
+        Random r = new Random();
+        int ileOsob = 0;
+        populacja ocalali = new populacja();
+        int limit = pop.rozmiarPopulacji()/10;
+        while (ileOsob < limit) {
+            if (pop.rozmiarPopulacji() == 0) break;
+            ocalali.dodajOsobnika(pop.usunOsobnika(r.nextInt(pop.rozmiarPopulacji())));
+            ileOsob++;
+        }
         pop = zast.wykonaj(pop, popOper);
+        pop.polaczPopulacje(ocalali);
     }
 
     public double getMin()
