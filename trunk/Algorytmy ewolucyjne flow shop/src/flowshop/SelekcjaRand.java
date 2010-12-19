@@ -14,7 +14,7 @@ import java.util.Random;
 public class SelekcjaRand implements iSelekcja {
 
     public populacja wybranaPopulacja(populacja p) {
-        return wybranaPopulacja(p, p.rozmiarPopulacji());
+        return p;
     }
 
     public populacja wybranaPopulacja(populacja p, int rozmiar) {
@@ -23,6 +23,7 @@ public class SelekcjaRand implements iSelekcja {
         int ileOsob = 0;
         while (ileOsob < rozmiar) {
             wyn.dodajOsobnika(p.usunOsobnika(r.nextInt(p.rozmiarPopulacji())));
+            ileOsob++;
         }
         p.polaczPopulacje(wyn);
         return wyn;

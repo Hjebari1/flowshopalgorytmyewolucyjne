@@ -18,6 +18,7 @@ public class operatorCX extends iOperatorKrzyżowania {
 
     public iOsobnik krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception { //domyślnie private, dla testów public
         // mozna dodac losowanie pozycji startowej do szukania cyklu
+        Random r = new Random();
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
             throw new Exception("Nierówne genomy do krzyżowania!");
         }
@@ -26,13 +27,19 @@ public class operatorCX extends iOperatorKrzyżowania {
             throw new Exception("Pusty genom do krzyżowania!");
         }
         iOsobnik wyn = o1.makeCopy();
-        int i = 0;
+        int i = 0; int start = r.nextInt(size);
         LinkedList<Integer> listaCyklu = new LinkedList<Integer>();
-        listaCyklu.add(0);
+        if (o1.equals(o2)) return o1;
+        else
+            while (o1.wartoscOsobnika(start) == o2.wartoscOsobnika(start))
+                start = r.nextInt(size);
+        listaCyklu.add(start);
+        i = start;
         do {
             i = o1.znajdzPozGenu(0, size, o2.wartoscOsobnika(i));
+            if (i == o1.dlugoscGenomu()) throw new Exception("Nie znaleziono genu!!" + o1.toString());
             listaCyklu.add(new Integer(i));
-        } while (i != 0);
+        } while (i != start);
 
         for (int j = 0; j < size; j++) {
             wyn.modyfikujGen(j, listaCyklu.contains(j) ? o1.wartoscOsobnika(j) : o2.wartoscOsobnika(j));
