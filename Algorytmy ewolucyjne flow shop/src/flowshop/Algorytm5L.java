@@ -7,7 +7,9 @@ import java.util.ListIterator;
 import java.util.Random;
 
 /**
- *
+ * kolejne algorytmy z literą L na końcu różnią się między sobą
+ * parametrami takimi jak ilość mutacji czy ilość osobników
+ * do krzyżowania
  * @author Łukasz Synówka
  */
 public class Algorytm5L implements iAlgorytm
