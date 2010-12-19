@@ -95,17 +95,24 @@ public class Algorytm4L implements iAlgorytm
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm2(iloscOsobnikow, d);
+        return new Algorytm4L(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {
-        return "Algorytm2 - multiOperator, zastępowanieTurniejowe";
+        return "Algorytm4L";
     }
 
-    public double getMin() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public double getMin()
+    {
+        ListIterator<iOsobnik> iter = p.popIterator();
+        osobnikFlowShop o;
+        double min = Double.MAX_VALUE;
+        while (iter.hasNext()) {
+            o = (osobnikFlowShop) iter.next();
+            min = Math.min(f.wartoscFunkcji(o, dane), min);
+        }
+        return min;
     }
-
 
 }
 
