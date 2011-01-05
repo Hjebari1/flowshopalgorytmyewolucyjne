@@ -9,7 +9,7 @@ import flowshop.Interfejsy.iOsobnik;
 import java.util.Random;
 
 /**
- *
+ * (Do wywalenia)
  * @author Jakub Banaszewski
  */
 public class MutacjaK implements iMutacja {

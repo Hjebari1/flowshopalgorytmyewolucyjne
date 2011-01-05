@@ -8,9 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Jakub Banaszewski
  * Operator krzyżowania osobników OX (Order Crossover)
+ * Pierwsza jego faza wygląda analogicznie do operatora PMX.
+ * @see operatorPMX
+ * Później następuje faza przywracania kolejności genomu.
  */
 public class operatorOX extends iOperatorKrzyżowania {
 

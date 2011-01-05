@@ -8,15 +8,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Operator krzyżowania osobników PMX (Order Crossover).
+ * Dobierany jest przedział, w którym następuje wymiana genów między
+ * osobnikami potomnymi.
+ * Następnie powstarzające geny w genomie są uzupełniane
+ * ich odpowiednikami w drugim genomie.
  * @author Jakub Banaszewski
- * Operator krzyżowania osobników PMX (Order Crossover)
  */
 public class operatorPMX extends iOperatorKrzyżowania {
 
     public operatorPMX() {
     }
 
+    /**
+     * Funkcja generująca parę potomną na podstawie dwóch osobników rodzicielskich.
+     * @param o1 pierwszy rodzic
+     * @param o2 drugi rodzic
+     * @param poz1 początek przedziału wymiany
+     * @param poz2 koniec przedziału wymiany
+     * @return Para osobników potomnych
+     * @throws CloneNotSupportedException
+     * @throws Exception
+     */
     public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception {
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
             throw new Exception("Nierówne genomy do krzyżowania!");

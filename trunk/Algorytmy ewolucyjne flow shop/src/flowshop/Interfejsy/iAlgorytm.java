@@ -19,7 +19,7 @@ public interface iAlgorytm
      */
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException;
     /**
-     * Metoda "przedstawiająca algorytm na liście możliwych wyborów metody
+     * Metoda "przedstawiająca" algorytm na liście możliwych wyborów metody
      * @return String krótko opisujący metodę
      */
     public String nazwaAlg();
