@@ -5,12 +5,18 @@ import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 
 /**
- *
+ * Klasa obliczająca wartość funkcji celu zadanej w problemie
  * @author Łukasz Synówka
  */
 public class funkcjaCeluFlowShop implements iFunkcjaCelu
 {
-
+    /**
+     * Funkcja, która dla konkretnego osobnika i zestawu danych oblicza
+     * jego funcję celu, którą implementuje klasa.
+     * @param osobnik Badany element
+     * @param dane Zestaw danych na postawie którego wyliczany jest wyniki
+     * @return wartość liczbowa będąca wynikiem funkcji celu
+     */
     public double wartoscFunkcji(iOsobnik osobnik, iDane dane)
     {
         int index = 0;

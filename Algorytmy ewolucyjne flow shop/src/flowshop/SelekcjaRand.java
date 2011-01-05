@@ -4,8 +4,8 @@ import flowshop.Interfejsy.iSelekcja;
 import java.util.Random;
 
 /**
- *
- * @author bejnan
+ * Seleckja elementów w populacji w sposób losowy.
+ * @author Jakub Banaszewski
  */
 public class SelekcjaRand implements iSelekcja {
 

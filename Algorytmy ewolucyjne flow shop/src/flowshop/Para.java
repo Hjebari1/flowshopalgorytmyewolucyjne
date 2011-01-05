@@ -1,7 +1,7 @@
 package flowshop;
 
 /**
- *
+ * Klasa trzymająca parę obiektów dowolnego typu
  * @author Jakub Banaszewski
  */
 public class Para<A, B> {

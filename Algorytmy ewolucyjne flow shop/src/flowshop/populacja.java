@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- *
+ * Zbiór osobników oparty na liście, który reprezentuje populacje.
  * @author Łukasz Synówka
  */
 public class populacja {

@@ -8,7 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Operator krzyżowania CX. Krzyżowanie polegające na znadywaniu cyklu w jednym genomie
+ * i przepisywaniu pozostałych pozycji z drugiego genomu.
  * @author Jakub Banaszewski
  */
 public class operatorCX extends iOperatorKrzyżowania {
