@@ -1,9 +1,16 @@
-package flowshop;
+package algorytmy;
 
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
+import flowshop.funkcjaCeluFlowShop;
+import flowshop.operatorCX;
+import flowshop.operatorOX;
+import flowshop.osobnikFlowShop;
+import flowshop.populacja;
+import flowshop.selekcjaRuletka;
+import flowshop.zastepowanieTurniej;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
@@ -13,7 +20,7 @@ import java.util.Random;
  *
  * @author Łukasz Synówka
  */
-public class Algorytm2K implements iAlgorytm {
+public class Algorytm1 implements iAlgorytm {
 
     populacja p;
     populacja ps;
@@ -25,7 +32,11 @@ public class Algorytm2K implements iAlgorytm {
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
-    public Algorytm2K(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+    public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException
+    {
+        return new Algorytm1(iloscOsobnikow,d);
+    }
+    public Algorytm1(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
@@ -37,8 +48,6 @@ public class Algorytm2K implements iAlgorytm {
     }
 
     public void wybor() {
-        sr = new selekcjaRuletka(dane,f);
-        ps = sr.wybranaPopulacja(p);
     }
 
     public void krzyzowanie() {
@@ -46,9 +55,9 @@ public class Algorytm2K implements iAlgorytm {
         if (r.nextBoolean()) {
             oper = new operatorOX();
         } else {
-            oper = new operatorPMX();
+            oper = new operatorCX();
         }
-        pc = oper.wykonaj(ps);
+        pc = oper.wykonaj(p);
 
     }
 
@@ -75,12 +84,8 @@ public class Algorytm2K implements iAlgorytm {
 
     }
 
-    public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm2K(iloscOsobnikow, d);
-    }
-
     public String nazwaAlg() {
-        return "Algorytm 2K - tak jak Algorytm2, ale jeszcze z selekcją ruletkową";
+        return "Algorytm1 - podstawowy algorytm";
     }
     public double getMin()
     {

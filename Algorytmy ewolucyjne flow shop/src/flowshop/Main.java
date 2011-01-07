@@ -1,5 +1,19 @@
 package flowshop;
 
+import dane.Dane3;
+import algorytmy.Algorytm7L;
+import algorytmy.Algorytm3L;
+import algorytmy.Algorytm4L;
+import algorytmy.Algorytm6;
+import algorytmy.Algorytm2;
+import algorytmy.Algorytm6L;
+import algorytmy.Algorytm1;
+import algorytmy.Algorytm5;
+import algorytmy.Algorytm2K;
+import algorytmy.Algorytm5L;
+import algorytmy.Algorytm4;
+import algorytmy.Algorytm3;
+import algorytmy.Algorytm7;
 import flowshop.Interfejsy.iAlgorytm;
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package flowshop;
+package algorytmy;
 
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
@@ -6,6 +6,13 @@ import flowshop.Interfejsy.iMutacja;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iZastepowanie;
+import flowshop.MutacjaK;
+import flowshop.funkcjaCeluFlowShop;
+import flowshop.operatorPMX;
+import flowshop.osobnikFlowShop;
+import flowshop.populacja;
+import flowshop.selekcjaRuletka;
+import flowshop.zastepowanieTurniej;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
@@ -14,7 +21,7 @@ import java.util.ListIterator;
  *
  * @author Jakub Banaszewski
  */
-public class Algorytm5 implements iAlgorytm {
+public class Algorytm4 implements iAlgorytm {
 
     populacja pop;
     populacja popSelect;
@@ -28,7 +35,7 @@ public class Algorytm5 implements iAlgorytm {
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
 
-    public Algorytm5(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
+    public Algorytm4(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
@@ -41,11 +48,11 @@ public class Algorytm5 implements iAlgorytm {
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm5(iloscOsobnikow, d);
+        return new Algorytm4(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {
-        return "Algorytm5 - operator CX + mocna mutacja, selekcja + zastępowanieTurniej";
+        return "Algorytm4 - operator PMX + mocna mutacja, selekcja + zastępowanieTurniej";
     }
 
     public void wybor() {
@@ -54,7 +61,7 @@ public class Algorytm5 implements iAlgorytm {
     }
 
     public void krzyzowanie() {
-        oper = new operatorCX();
+        oper = new operatorPMX();
         popOper = oper.wykonaj(popSelect);
         mut.wynonaj(popOper);
     }
