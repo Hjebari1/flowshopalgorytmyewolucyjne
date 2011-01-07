@@ -1,9 +1,9 @@
 package flowshop;
 
 import flowshop.Interfejsy.iDane;
+import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
-import flowshop.Interfejsy.iSelekcja;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,7 +19,7 @@ import java.util.Random;
  * które współczynnik dodaliśmy ostatni.
  * @author Jakub Banaszewski
  */
-public class selekcjaRuletka implements iSelekcja {
+public class selekcjaRuletka implements iFPopulacjiRozmiar {
 
     iDane dane;
     iFunkcjaCelu fCel;
@@ -33,7 +33,7 @@ public class selekcjaRuletka implements iSelekcja {
         this.dane = dane;
     }
 
-    public populacja wybranaPopulacja(populacja p, int rozmiar) {
+    public populacja wykonaj(populacja p, int rozmiar) {
         populacja wybrPop = new populacja();
         Random los = new Random();
         List<Para<Double, iOsobnik>> wspTab = wyliczWsp(p, fCel);
@@ -94,7 +94,7 @@ public class selekcjaRuletka implements iSelekcja {
         return wyliczoneWsp;
     }
 
-    public populacja wybranaPopulacja(populacja p) {
-        return wybranaPopulacja(p, p.rozmiarPopulacji());
+    public populacja wykonaj(populacja p) {
+        return wykonaj(p, p.rozmiarPopulacji());
     }
 }

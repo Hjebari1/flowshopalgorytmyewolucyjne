@@ -5,7 +5,7 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iMutacja;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
-import flowshop.MutacjaK;
+import flowshop.MutacjaZamiana;
 import flowshop.funkcjaCeluFlowShop;
 import flowshop.operatorOX;
 import flowshop.osobnikFlowShop;
@@ -40,7 +40,7 @@ public class Algorytm3 implements iAlgorytm {
         this.iloscOsobnikow = iloscOsobnikow;
         pop = new populacja();
         zm = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
-        mut = new MutacjaK();
+        mut = new MutacjaZamiana();
         for (int i = 0; i < iloscOsobnikow; i++) {
             pop.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }

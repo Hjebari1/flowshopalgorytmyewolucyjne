@@ -1,6 +1,6 @@
 package flowshop;
 
-import flowshop.Interfejsy.iOperatorKrzyżowania;
+import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.HashMap;
 import java.util.Random;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @see operatorPMX
  * Później następuje faza przywracania kolejności genomu.
  */
-public class operatorOX extends iOperatorKrzyżowania {
+public class operatorOX implements iFunkcjaPopulacji {
 
     public operatorOX() {
     }

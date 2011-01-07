@@ -1,6 +1,7 @@
 package flowshop;
 
-import flowshop.Interfejsy.iOperatorKrzyżowania;
+import flowshop.Interfejsy.iFunkcjaPopulacji;
+
 import flowshop.Interfejsy.iOsobnik;
 import java.util.LinkedList;
 import java.util.Random;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  * i przepisywaniu pozostałych pozycji z drugiego genomu.
  * @author Jakub Banaszewski
  */
-public class operatorCX extends iOperatorKrzyżowania {
+public class operatorCX implements iFunkcjaPopulacji {
 
     public operatorCX() {
     }
