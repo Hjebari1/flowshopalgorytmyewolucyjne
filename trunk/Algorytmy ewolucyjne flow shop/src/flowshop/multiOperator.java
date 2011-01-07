@@ -1,6 +1,6 @@
 package flowshop;
 
-import flowshop.Interfejsy.iOperatorKrzyżowania;
+import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.Random;
 import java.util.logging.Level;
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author Łukasz Synówka
  */
-public class multiOperator extends iOperatorKrzyżowania
+public class multiOperator implements iFunkcjaPopulacji
 {
     operatorCX cx;
     operatorOX ox;

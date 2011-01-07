@@ -24,9 +24,13 @@ public class populacja {
     public int rozmiarPopulacji() {
         return osobniki.size();
     }
-
+    /**
+     * Funkcja dodaje <b>kopie<\b> osobnika do listy.
+     * Ważne w przypadku późniejszych zmianach na tych osobnikach.
+     * @param osobnik
+     */
     public void dodajOsobnika(iOsobnik osobnik) {
-        this.osobniki.add(osobnik);
+        this.osobniki.add(osobnik.makeCopy());
         this.iloscOsobnikow++;
     }
 
@@ -61,7 +65,8 @@ public class populacja {
         }
         return min;
     }
-
+    //TODO kopiowanie populacji do operatorów ??
+     
     @Override
     public String toString() {
         return osobniki.toString();

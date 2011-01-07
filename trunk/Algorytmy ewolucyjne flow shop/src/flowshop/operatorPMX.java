@@ -1,6 +1,6 @@
 package flowshop;
 
-import flowshop.Interfejsy.iOperatorKrzyżowania;
+import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.HashMap;
 import java.util.Random;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * ich odpowiednikami w drugim genomie.
  * @author Jakub Banaszewski
  */
-public class operatorPMX extends iOperatorKrzyżowania {
+public class operatorPMX implements iFunkcjaPopulacji {
 
     public operatorPMX() {
     }

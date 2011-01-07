@@ -64,8 +64,8 @@ public class MutacjaShiftTest {
         p.dodajOsobnika(new osobnikFlowShop(20));
         p.dodajOsobnika(new osobnikFlowShop(20));
         p.dodajOsobnika(new osobnikFlowShop(20));
-        MutacjaShift instance = new MutacjaShift((float) 0.5);
-        instance.wynonaj(p);
+        MutacjaPrzesuniecie instance = new MutacjaPrzesuniecie((float) 0.5);
+        instance.wykonaj(p);
         iOsobnik testOs = null;
         while (p.rozmiarPopulacji() > 0) {
             testOs = p.usunOsobnika(0);
