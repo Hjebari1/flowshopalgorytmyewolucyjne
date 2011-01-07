@@ -46,7 +46,7 @@ public class populacja {
         return this.osobniki.remove(o);
     }
 
-    protected ListIterator<iOsobnik> popIterator() {
+    public ListIterator<iOsobnik> popIterator() {
         return osobniki.listIterator();
     }
 

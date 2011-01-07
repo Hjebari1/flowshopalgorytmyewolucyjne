@@ -1,20 +1,30 @@
-package flowshop;
+package algorytmy;
 
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iMutacja;
 import flowshop.Interfejsy.iOperatorKrzyżowania;
 import flowshop.Interfejsy.iOsobnik;
+import flowshop.Mutacja1;
+import flowshop.funkcjaCeluFlowShop;
+import flowshop.multiOperator;
+import flowshop.osobnikFlowShop;
+import flowshop.populacja;
+import flowshop.selekcjaRuletka;
+import flowshop.zastepowanieTurniej;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Random;
 
 /**
+ * kolejne algorytmy z literą L na końcu różnią się między sobą 
+ * parametrami takimi jak ilość mutacji czy ilość osobników 
+ * do krzyżowania
  *
  * @author Łukasz Synówka
  */
-public class Algorytm7L implements iAlgorytm
+public class Algorytm4L implements iAlgorytm
 {
 
     populacja p;
@@ -28,7 +38,7 @@ public class Algorytm7L implements iAlgorytm
     funkcjaCeluFlowShop f;
     iMutacja m;
 
-    public Algorytm7L(int iloscOsobnikow,iDane d) throws FileNotFoundException
+    public Algorytm4L(int iloscOsobnikow,iDane d) throws FileNotFoundException
     {
         dane = d;
         f = new funkcjaCeluFlowShop();
@@ -54,8 +64,8 @@ public class Algorytm7L implements iAlgorytm
     {
         Random r = new Random();
         oper = new multiOperator();
-        pc = oper.wykonaj(ps);
-        for(int i=0;i<iloscOsobnikow/10;i++)
+        pc = oper.wykonaj(p);
+        for(int i=0;i<iloscOsobnikow/100;i++)
         {
             m.wynonaj(pc);
             m.wynonaj(p);
@@ -90,11 +100,11 @@ public class Algorytm7L implements iAlgorytm
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm7L(iloscOsobnikow, d);
+        return new Algorytm4L(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {
-        return "Algorytm7L";
+        return "Algorytm4L";
     }
 
     public double getMin()

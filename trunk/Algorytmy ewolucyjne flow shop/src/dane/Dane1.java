@@ -1,4 +1,4 @@
-package flowshop;
+package dane;
 
 import flowshop.Interfejsy.iDane;
 import java.util.Random;

@@ -1,5 +1,6 @@
 package flowshop;
 
+import dane.Dane1;
 import flowshop.Interfejsy.iDane;
 import java.util.Iterator;
 import flowshop.Interfejsy.iOsobnik;

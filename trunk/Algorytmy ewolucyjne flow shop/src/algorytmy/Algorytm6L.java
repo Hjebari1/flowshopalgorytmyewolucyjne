@@ -1,6 +1,13 @@
-package flowshop;
+package algorytmy;
 
 import flowshop.Interfejsy.*;
+import flowshop.Mutacja1;
+import flowshop.funkcjaCeluFlowShop;
+import flowshop.multiOperator;
+import flowshop.osobnikFlowShop;
+import flowshop.populacja;
+import flowshop.selekcjaRuletka;
+import flowshop.zastepowanieTurniej;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
