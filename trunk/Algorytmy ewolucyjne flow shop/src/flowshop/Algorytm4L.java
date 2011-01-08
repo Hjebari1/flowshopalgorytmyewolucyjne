@@ -1,25 +1,24 @@
-package algorytmy;
+package flowshop;
 
-import flowshop.Interfejsy.*;
-import flowshop.Mutacja1;
-import flowshop.funkcjaCeluFlowShop;
-import flowshop.multiOperator;
-import flowshop.osobnikFlowShop;
-import flowshop.populacja;
-import flowshop.selekcjaRuletka;
-import flowshop.zastepowanieTurniej;
+import flowshop.Interfejsy.iAlgorytm;
+import flowshop.Interfejsy.iDane;
+import flowshop.Interfejsy.iFunkcjaPopulacji;
+import flowshop.Interfejsy.iOsobnik;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Random;
 
 /**
- * kolejne algorytmy z literą L na końcu różnią się między sobą
- * parametrami takimi jak ilość mutacji czy ilość osobników
+ * Klasa zostawiona jako przykład i pomost między starym a nowym porządkiem
+ * programu.
+ * kolejne algorytmy z literą L na końcu różnią się między sobą 
+ * parametrami takimi jak ilość mutacji czy ilość osobników 
  * do krzyżowania
+ *
  * @author Łukasz Synówka
  */
-public class Algorytm5L implements iAlgorytm
+public class Algorytm4L implements iAlgorytm
 {
 
     populacja p;
@@ -27,13 +26,13 @@ public class Algorytm5L implements iAlgorytm
     populacja pc;
     iDane dane;
     selekcjaRuletka sr;
-    iOperatorKrzyżowania oper;
+    iFunkcjaPopulacji oper;
     zastepowanieTurniej zt;
     int iloscOsobnikow;
     funkcjaCeluFlowShop f;
-    iMutacja m;
+    iFunkcjaPopulacji m;
 
-    public Algorytm5L(int iloscOsobnikow,iDane d) throws FileNotFoundException
+    public Algorytm4L(int iloscOsobnikow,iDane d) throws FileNotFoundException
     {
         dane = d;
         f = new funkcjaCeluFlowShop();
@@ -45,13 +44,13 @@ public class Algorytm5L implements iAlgorytm
         {
             p.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }
-        m= new Mutacja1();
+        m= new MutacjaZamiana(0.2);
     }
 
 
     public void wybor()
     {
-        ps = sr.wybranaPopulacja(p, iloscOsobnikow/2);
+        ps = sr.wykonaj(p, iloscOsobnikow/2);
         ps.dodajOsobnika(ps.min(f, dane));
     }
 
@@ -59,11 +58,11 @@ public class Algorytm5L implements iAlgorytm
     {
         Random r = new Random();
         oper = new multiOperator();
-        pc = oper.wykonaj(ps);
-        for (int i=0;i<iloscOsobnikow/50;i++)
+        pc = oper.wykonaj(p);
+        for(int i=0;i<iloscOsobnikow/100;i++)
         {
-            m.wynonaj(pc);
-            m.wynonaj(p);
+            m.wykonaj(pc);
+            m.wykonaj(p);
         }
 
     }
@@ -86,6 +85,7 @@ public class Algorytm5L implements iAlgorytm
         {
             o=(osobnikFlowShop) iter.next();
             min=Math.min(f.wartoscFunkcji(o, dane),min);
+            //wynik=wynik.concat(f.wartoscFunkcji(o, dane)+" ");
         }
         wynik=wynik.concat(min+"\n");
 
@@ -94,11 +94,11 @@ public class Algorytm5L implements iAlgorytm
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm5L(iloscOsobnikow, d);
+        return new Algorytm4L(iloscOsobnikow, d);
     }
 
     public String nazwaAlg() {
-            return "Algorytm5L";
+        return "Algorytm4L";
     }
 
     public double getMin()
@@ -114,3 +114,4 @@ public class Algorytm5L implements iAlgorytm
     }
 
 }
+
