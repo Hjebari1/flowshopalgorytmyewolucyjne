@@ -53,7 +53,7 @@ public class selekcjaRuletkaTest {
         int rozmiar = 0;
         selekcjaRuletka instance = new selekcjaRuletka(daneWsp,new funkcjaCeluFlowShop());
         populacja expResult = new populacja();
-        populacja result = instance.wybranaPopulacja(p, rozmiar);
+        populacja result = instance.wykonaj(p, rozmiar);
         //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -96,7 +96,7 @@ public class selekcjaRuletkaTest {
         selekcjaRuletka instance = new selekcjaRuletka(daneWsp,new funkcjaCeluFlowShop());
         System.out.println(instance.wyliczWsp(daneWejsciowe,new funkcjaCeluFlowShop()));
         //populacja expResult = null;
-        populacja result = instance.wybranaPopulacja(daneWejsciowe);
+        populacja result = instance.wykonaj(daneWejsciowe);
         System.out.println(result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

@@ -49,7 +49,7 @@ public class SelekcjaRandTest {
         populacja p = null;
         SelekcjaRand instance = new SelekcjaRand();
         populacja expResult = null;
-        populacja result = instance.wybranaPopulacja(p);
+        populacja result = instance.wykonaj(p);
         assertEquals(expResult, result);
     }
 
@@ -61,7 +61,7 @@ public class SelekcjaRandTest {
         System.out.println("wybranaPopulacja");
         int rozmiar = daneWejsciowe.rozmiarPopulacji()/2;
         SelekcjaRand instance = new SelekcjaRand();
-        populacja result = instance.wybranaPopulacja(daneWejsciowe, rozmiar);
+        populacja result = instance.wykonaj(daneWejsciowe, rozmiar);
         System.out.println(result);
     }
 
