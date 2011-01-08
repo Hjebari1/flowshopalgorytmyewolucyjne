@@ -12,13 +12,13 @@ import java.util.ListIterator;
  */
 public abstract class VAlgorytm {
 
-    private iFunkcjaPopulacji mutacja = identycznosc.getInstance();
-    private iFunkcjaPopulacji operatorKrzyżowania = identycznosc.getInstance();
-    private iFunkcjaPopulacji selekcja = identycznosc.getInstance();
-    private iZastepowanie zastepowanie = null;
-    private iFunkcjaCelu f = null;
-    private iDane dane = null;
-    private populacja zbiorOsobnikow = null;
+    protected iFunkcjaPopulacji mutacja = identycznosc.getInstance();
+    protected iFunkcjaPopulacji operatorKrzyżowania = identycznosc.getInstance();
+    protected iFunkcjaPopulacji selekcja = identycznosc.getInstance();
+    protected iZastepowanie zastepowanie = null;
+    protected iFunkcjaCelu f = null;
+    protected iDane dane = null;
+    protected populacja zbiorOsobnikow = null;
 
     /**
      * Metoda zwracająca wartość minimalną populacji
