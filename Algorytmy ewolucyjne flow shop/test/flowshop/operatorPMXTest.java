@@ -1,5 +1,6 @@
 package flowshop;
 
+import operatory.operatorPMX;
 import flowshop.Interfejsy.iOsobnik;
 import org.junit.After;
 import org.junit.AfterClass;

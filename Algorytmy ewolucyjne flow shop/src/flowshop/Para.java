@@ -9,7 +9,7 @@ public class Para<A, B> {
     private A pierwszy;
     private B drugi;
 
-    Para(A y, B x) {
+    public Para(A y, B x) {
         pierwszy = y;
         drugi = x;
     }

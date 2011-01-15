@@ -5,6 +5,7 @@
 
 package flowshop;
 
+import operatory.operatorCX;
 import flowshop.Interfejsy.iOsobnik;
 import org.junit.After;
 import org.junit.AfterClass;
