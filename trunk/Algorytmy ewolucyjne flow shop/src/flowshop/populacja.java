@@ -3,6 +3,7 @@ package flowshop;
 import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -33,7 +34,11 @@ public class populacja {
         this.osobniki.add(osobnik.makeCopy());
         this.iloscOsobnikow++;
     }
-
+    public void dodajOsobniki(Collection<iOsobnik> osobniki)
+    {
+        this.osobniki.addAll(osobniki);
+        this.iloscOsobnikow = this.osobniki.size();
+    }
     public iOsobnik usunOsobnika(int pozycja) {
         this.iloscOsobnikow--;
         return this.osobniki.remove(pozycja);

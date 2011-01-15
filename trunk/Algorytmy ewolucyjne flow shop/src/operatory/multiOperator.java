@@ -1,7 +1,9 @@
-package flowshop;
+package operatory;
 
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
+import flowshop.Para;
+import flowshop.populacja;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;

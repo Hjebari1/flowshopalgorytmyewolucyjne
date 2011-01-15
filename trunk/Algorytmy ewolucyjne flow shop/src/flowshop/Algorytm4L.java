@@ -1,5 +1,6 @@
 package flowshop;
 
+import operatory.multiOperator;
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaPopulacji;

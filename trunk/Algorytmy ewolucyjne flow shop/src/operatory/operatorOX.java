@@ -1,35 +1,25 @@
-package flowshop;
+package operatory;
 
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
+import flowshop.Para;
+import flowshop.populacja;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Operator krzyżowania osobników PMX (Order Crossover).
- * Dobierany jest przedział, w którym następuje wymiana genów między
- * osobnikami potomnymi.
- * Następnie powstarzające geny w genomie są uzupełniane
- * ich odpowiednikami w drugim genomie.
  * @author Jakub Banaszewski
+ * Operator krzyżowania osobników OX (Order Crossover)
+ * Pierwsza jego faza wygląda analogicznie do operatora PMX.
+ * @see operatorPMX
+ * Później następuje faza przywracania kolejności genomu.
  */
-public class operatorPMX implements iFunkcjaPopulacji {
+public class operatorOX implements iFunkcjaPopulacji {
 
-    public operatorPMX() {
+    public operatorOX() {
     }
-
-    /**
-     * Funkcja generująca parę potomną na podstawie dwóch osobników rodzicielskich.
-     * @param o1 pierwszy rodzic
-     * @param o2 drugi rodzic
-     * @param poz1 początek przedziału wymiany
-     * @param poz2 koniec przedziału wymiany
-     * @return Para osobników potomnych
-     * @throws CloneNotSupportedException
-     * @throws Exception
-     */
     public Para<iOsobnik, iOsobnik> krzyzuj(iOsobnik o1, iOsobnik o2, int poz1, int poz2) throws CloneNotSupportedException, Exception {
         if (o1.dlugoscGenomu() != o2.dlugoscGenomu()) {
             throw new Exception("Nierówne genomy do krzyżowania!");
@@ -38,14 +28,19 @@ public class operatorPMX implements iFunkcjaPopulacji {
         if (size == 0) {
             throw new Exception("Pusty genom do krzyżowania!");
         }
+
         iOsobnik wyn1 = o1.makeCopy();
         iOsobnik wyn2 = o2.makeCopy();
 
+        if (poz1 == poz2) {
+            return new Para<iOsobnik, iOsobnik>(o1, o2);
+        }
         if (poz1 > poz2) {
             int tmp = poz1;
             poz1 = poz2;
             poz2 = tmp;
         }
+        // poz1 w przedziale, poz2 poza przedzialem!
         HashMap genyDoZmiany = new HashMap();
         Object tmp, tmp2;
         // poz1 w przedziale, poz2 poza przedzialem!
@@ -98,6 +93,38 @@ public class operatorPMX implements iFunkcjaPopulacji {
                 wyn2.modyfikujGen(pozZmian, genyDoZmiany.get(zmGen));
             }
         }
+        //faza OX
+        iOsobnik wyn4 = wyn1.makeCopy(); //trudna numeracja, nieintuicjyjna (jeśli jakaś intuicyjna istnieje)
+        iOsobnik wyn3 = wyn2.makeCopy();
+
+        for (int i = 0; i < size; i++) {
+            pozZmian = wyn2.znajdzPozGenu(0, size, wyn4.wartoscOsobnika(i));
+            if (poz1 <= pozZmian && pozZmian < poz2) {
+                wyn4.modyfikujGen(i, iOsobnik.pusto);
+            }
+            pozZmian = wyn1.znajdzPozGenu(0, size, wyn3.wartoscOsobnika(i));
+            if (poz1 <= pozZmian && pozZmian < poz2) {
+                wyn3.modyfikujGen(i, iOsobnik.pusto);
+            }
+        }
+        int j = poz2;
+        for (int i = 0; i < size; i++) {
+            if (wyn4.wartoscOsobnika((i + poz2) % size) == iOsobnik.pusto) {
+                continue;
+            } else {
+                wyn2.modyfikujGen(j % size, wyn4.wartoscOsobnika((i + poz2) % size));
+                j++;
+            }
+        }
+        j = poz2;
+        for (int i = 0; i < size; i++) {
+            if (wyn3.wartoscOsobnika((i + poz2) % size) == iOsobnik.pusto) {
+                continue;
+            } else {
+                wyn1.modyfikujGen(j % size, wyn3.wartoscOsobnika((i + poz2) % size));
+                j++;
+            }
+        }
         return new Para<iOsobnik, iOsobnik>(wyn1, wyn2);
     }
 
@@ -106,12 +133,13 @@ public class operatorPMX implements iFunkcjaPopulacji {
         populacja pochodneOsobniki = new populacja();
         populacja rodzice = new populacja();
         rodzice.polaczPopulacje(zbiorOsobnikow);
+
         while (rodzice.rozmiarPopulacji() > 0) {
             try {
                 iOsobnik o1 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
                 iOsobnik o2 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
                 int poz1 = losPoz.nextInt(o1.dlugoscGenomu());
-                int poz2 = losPoz.nextInt(o2.dlugoscGenomu()); //!!kontrola pozycji ?
+                int poz2 = losPoz.nextInt(o2.dlugoscGenomu());
                 if (poz1 > poz2) {
                     int tmp = poz1;
                     poz1 = poz2;
@@ -127,6 +155,5 @@ public class operatorPMX implements iFunkcjaPopulacji {
             }
         }
         return pochodneOsobniki;
-
     }
 }
