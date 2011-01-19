@@ -44,7 +44,10 @@ public class wagiPar
         if (f.wartoscFunkcji(o1,d)<f.wartoscFunkcji(o2, d))
             mnoznik=-1;
         else
-            mnoznik=1;
+            if (f.wartoscFunkcji(o1,d)==f.wartoscFunkcji(o2, d))
+                mnoznik=0;
+            else
+                mnoznik=1;
 
         int tab[][] = new int[n1][n2];
         for (int i=0;i<n1;i++)
@@ -73,7 +76,7 @@ public class wagiPar
             {
                 if (tab[i][j]==2)
                 {
-                    w[i][j]=w[i][j]+mnoznik*w[i][j]/10;
+                    w[i][j]=w[i][j]+mnoznik*w[i][j]/100;
                     if (w[i][j]>1) w[i][j]=1;
                     if (w[i][j]<0) w[i][j]=0;
                 }
@@ -97,6 +100,11 @@ public class wagiPar
             result +="\n";
         }
         return result;
+    }
+
+    public double wartosc(int i,int j)
+    {
+        return w[i][j];
     }
     
 }
