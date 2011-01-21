@@ -2,7 +2,6 @@ package flowshop;
 
 import flowshop.Interfejsy.iDane;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -86,7 +85,7 @@ public class NehAlgorytm {
         }
         return q[daneWejsciowe.iloscMaszyn()-1][kolejnosc.size()-1];
     }
-    public Collection<Integer> wyliczPorzadek() {
+    public List<Integer> wyliczPorzadek() {
         double wynik;
         for (int i = 0; i < daneWejsciowe.iloscZadan(); i++) {
             wynik = 0.0;
