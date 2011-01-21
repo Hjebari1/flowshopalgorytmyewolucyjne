@@ -25,6 +25,12 @@ public class populacja {
     public int rozmiarPopulacji() {
         return osobniki.size();
     }
+    public int rozmiarOsobnika() {
+        if (iloscOsobnikow > 0)
+            return osobniki.get(0).dlugoscGenomu();
+        else
+            return 0;
+    }
     /**
      * Funkcja dodaje <b>kopie<\b> osobnika do listy.
      * Ważne w przypadku późniejszych zmianach na tych osobnikach.
