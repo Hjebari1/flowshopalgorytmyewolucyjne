@@ -26,6 +26,10 @@ public class funkcjaCeluFlowShop implements iFunkcjaCelu
         index = (Integer)osobnik.wartoscOsobnika(0);
         q[0][0] = dane.czasZadania(0,index);
 
+        for (int i=1;i<dane.iloscMaszyn();i++)
+            q[i][0] = dane.czasZadania(i,index)+q[i-1][0];
+
+        
         for (int i=1;i<dane.iloscZadan();i++)
         {
 
