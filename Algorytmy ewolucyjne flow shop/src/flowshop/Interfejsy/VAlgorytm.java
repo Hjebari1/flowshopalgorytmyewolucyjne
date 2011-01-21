@@ -54,25 +54,16 @@ public abstract class VAlgorytm {
         }
         return med;
     }
-    public double[] wykonajIteracje() {
+    public void wykonajIteracje() {
         wykonajIteracje(1);
-        double[] wyn = new double[3];
-        wyn[0] = getMax();
-        wyn[1] = getMed();
-        wyn[2] = getMin();
-        return wyn;
     }
-    public double[] wykonajIteracje(int iloscIteracji) {
+    public void wykonajIteracje(int iloscIteracji) {
         populacja nowaPopulacja = new populacja();
         for (int i=0; i < iloscIteracji; i++)
         {
             nowaPopulacja = operatorKrzyżowania.wykonaj(selekcja.wykonaj(zbiorOsobnikow));
+            nowaPopulacja = mutacja.wykonaj(nowaPopulacja);
             zbiorOsobnikow = zastepowanie.wykonaj(zbiorOsobnikow, nowaPopulacja);
         }
-        double[] wyn = new double[3];
-        wyn[0] = getMax();
-        wyn[1] = getMed();
-        wyn[2] = getMin();
-        return wyn;
     }
 }
