@@ -34,6 +34,8 @@ public class MutacjaZamianaWaga implements iFunkcjaPopulacji
         Integer a2;
         Integer b1;
         Integer b2;
+        double suma;
+        int mult;
         for (Iterator i = p.popIterator(); i.hasNext();) {
             iOsobnik o = (iOsobnik) i.next();
             oc = (osobnikFlowShop) o.makeCopy();
@@ -46,7 +48,29 @@ public class MutacjaZamianaWaga implements iFunkcjaPopulacji
                     b2 = (Integer) o.wartoscOsobnika(a2);
                     d = r.nextDouble();
                     d = d - d.intValue();
-                } while ((wg.wartosc(a1,b2)>d) && (wg.wartosc(a2,b1)>d));
+                    suma=0;
+                    mult=0;
+                    if ( a2 > 0 )
+                    {
+                        suma = wg.wartosc(a2-1,a2);
+                        mult++;
+                    }
+                    if (a2 < o.dlugoscGenomu()-1)
+                    {
+                        suma = wg.wartosc(a2,a2+1);
+                        mult++;
+                    }
+                    if ( a1 > 0 )
+                    {
+                        suma = wg.wartosc(a1-1,a1);
+                        mult++;
+                    }
+                    if (a1 < o.dlugoscGenomu()-1)
+                    {
+                        suma = wg.wartosc(a1,a1+1);
+                        mult++;
+                    }
+                } while (suma>(d*mult));
                 o.modyfikujGen(a1, b2);
                 o.modyfikujGen(a2, b1);
             }
