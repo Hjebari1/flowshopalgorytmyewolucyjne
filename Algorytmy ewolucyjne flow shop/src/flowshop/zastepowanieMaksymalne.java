@@ -4,6 +4,7 @@ import flowshop.Interfejsy.*;
 import flowshop.Interfejsy.iZastepowanie;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -30,19 +31,11 @@ public class zastepowanieMaksymalne implements iZastepowanie
         iOsobnik o;
         Random r = new Random();
         List<iOsobnik> osobniki = p1.osobnikiPop();
-        Collections.sort(osobniki)
-        iOsobnik mediana = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
-        while((p1.rozmiarPopulacji()>0)&&(p.rozmiarPopulacji()<iloscKoncowa))
+        Collections.sort(osobniki,funkcja.porownaj(dane));
+        ListIterator<iOsobnik> li = osobniki.listIterator();
+        while(li.hasNext()&&(p.rozmiarPopulacji()<iloscKoncowa))
         {
-            o=p1.usunOsobnika(p1.rozmiarPopulacji()-1);
-            if(funkcja.wartoscFunkcji(mediana, dane)>=funkcja.wartoscFunkcji(o, dane))
-                p.dodajOsobnika(o);
-            else
-                p2.dodajOsobnika(o);
-        }
-        while(p.rozmiarPopulacji()<iloscKoncowa)
-        {
-            p.dodajOsobnika(p2.usunOsobnika(p2.rozmiarPopulacji()-1));
+                p.dodajOsobnika(li.next());
         }
         return p;
     }

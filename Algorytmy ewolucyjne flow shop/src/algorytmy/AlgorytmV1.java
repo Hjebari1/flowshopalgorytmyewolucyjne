@@ -37,8 +37,8 @@ public class AlgorytmV1 extends VAlgorytm {
         this.iloscOsobnikow = iloscOsobnikow;
         zbiorOsobnikow = new populacja();
         zastepowanie = new zastepowanieTurniej(dane, f, iloscOsobnikow);
-        mutacja = new MutacjaPrzesuniecie(0.02);
-        oczyszczacz = new Kataklizm(200, iloscOsobnikow);
+        mutacja = new MutacjaPrzesuniecie(0.05);
+        oczyszczacz = new Kataklizm(5000,iloscOsobnikow, (int) (iloscOsobnikow * (2.0 / 5.0)),iloscOsobnikow/5,new MutacjaPrzesuniecie(0.1));
         selekcja = new selekcjaRuletka(dane, f);
         operatorKrzyżowania = new multiOperator();
         NehAlgorytm nehAlg = new NehAlgorytm(d);

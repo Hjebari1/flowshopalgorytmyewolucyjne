@@ -1,5 +1,6 @@
 package operatory;
 
+import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.Para;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  * @see operatorPMX
  * Później następuje faza przywracania kolejności genomu.
  */
-public class operatorOX implements iFunkcjaPopulacji {
+public class operatorOX implements iFPopulacjiRozmiar {
 
     public operatorOX() {
     }
@@ -129,15 +130,18 @@ public class operatorOX implements iFunkcjaPopulacji {
     }
 
     public populacja wykonaj(populacja zbiorOsobnikow) {
+        return wykonaj(zbiorOsobnikow, zbiorOsobnikow.rozmiarPopulacji());
+    }
+
+    public populacja wykonaj(populacja p, int rozmiar) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
-        populacja rodzice = new populacja();
-        rodzice.polaczPopulacje(zbiorOsobnikow);
-
-        while (rodzice.rozmiarPopulacji() > 0) {
+        iOsobnik[] osobniki = (iOsobnik[]) p.osobniki().keySet().toArray();
+        int size = p.osobniki().size();
+        while (pochodneOsobniki.rozmiarPopulacji() < rozmiar) {
             try {
-                iOsobnik o1 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
-                iOsobnik o2 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
+                iOsobnik o1 = osobniki[losPoz.nextInt(size)];
+                iOsobnik o2 = osobniki[losPoz.nextInt(size)];
                 int poz1 = losPoz.nextInt(o1.dlugoscGenomu());
                 int poz2 = losPoz.nextInt(o2.dlugoscGenomu());
                 if (poz1 > poz2) {

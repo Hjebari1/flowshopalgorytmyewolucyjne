@@ -1,9 +1,11 @@
 package operatory;
 
+import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.Para;
 import flowshop.populacja;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,12 +14,11 @@ import java.util.logging.Logger;
  *
  * @author Łukasz Synówka
  */
-public class multiOperator implements iFunkcjaPopulacji
+public class multiOperator implements iFPopulacjiRozmiar
 {
     operatorCX cx;
     operatorOX ox;
     operatorPMX pmx;
-    populacja popOsobnikow;
     public multiOperator()
     {
         cx= new operatorCX();
@@ -26,35 +27,9 @@ public class multiOperator implements iFunkcjaPopulacji
     }
 
     @Override
-    public populacja wykonaj(populacja popOsobnikow)
-    {
-        Random losPoz = new Random();
-        populacja pochodneOsobniki = new populacja();
-        populacja rodzice = new populacja();
-        rodzice.polaczPopulacje(popOsobnikow);
-
-        while (rodzice.rozmiarPopulacji() > 1) {
-            try {
-                iOsobnik o1 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
-                iOsobnik o2 = rodzice.usunOsobnika(losPoz.nextInt(rodzice.rozmiarPopulacji()));
-                Object wynik = krzyzuj(o1, o2);
-                if ( wynik instanceof Para)
-                {
-
-                    pochodneOsobniki.dodajOsobnika((iOsobnik)((Para)wynik).getFirst());
-                    pochodneOsobniki.dodajOsobnika((iOsobnik)((Para)wynik).getSecond());
-                }
-                else
-                    pochodneOsobniki.dodajOsobnika((iOsobnik)wynik);
-            } catch (CloneNotSupportedException ex)
-            {
-                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return pochodneOsobniki;
-}
+    public populacja wykonaj(populacja popOsobnikow) {
+        return wykonaj(popOsobnikow, popOsobnikow.rozmiarPopulacji());
+    }
 
     private Object krzyzuj(iOsobnik o1, iOsobnik o2) throws CloneNotSupportedException, Exception
     {
@@ -84,5 +59,31 @@ public class multiOperator implements iFunkcjaPopulacji
         }
         return pmx.krzyzuj(o1, o2,poz1,poz2);
 
+    }
+
+    public populacja wykonaj(populacja p, int rozmiar) {
+        Random losPoz = new Random();
+        populacja pochodneOsobniki = new populacja();
+        Object[] osobniki = p.osobniki().keySet().toArray();
+        int size = p.osobniki().size();
+        while (pochodneOsobniki.rozmiarPopulacji() < rozmiar) {
+            try {
+                iOsobnik o1 = (iOsobnik) osobniki[losPoz.nextInt(size)];
+                iOsobnik o2 = (iOsobnik) osobniki[losPoz.nextInt(size)];
+                Object wynik = krzyzuj(o1, o2);
+                if (wynik instanceof Para) {
+
+                    pochodneOsobniki.dodajOsobnika((iOsobnik) ((Para) wynik).getFirst());
+                    pochodneOsobniki.dodajOsobnika((iOsobnik) ((Para) wynik).getSecond());
+                } else {
+                    pochodneOsobniki.dodajOsobnika((iOsobnik) wynik);
+                }
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(operatorOX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return pochodneOsobniki;
     }
 }

@@ -6,7 +6,6 @@ import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iZastepowanie;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -75,8 +74,8 @@ public class zastepowanieTurniej implements iZastepowanie
         for (int i=0;i<lm;i++) wynik.dodajOsobnika(max[i]);
         while (wynik.rozmiarPopulacji()<iloscKoncowa)
         {
-            o1 = osobniki.remove(r.nextInt(p1.rozmiarPopulacji()));
-            o2 = osobniki.remove(r.nextInt(p1.rozmiarPopulacji()));
+            o1 = osobniki.get(r.nextInt(osobniki.size())); //FE!
+            o2 = osobniki.get(r.nextInt(osobniki.size()));
             if (funkcja.wartoscFunkcji(o1,dane)<funkcja.wartoscFunkcji(o2,dane))
             {
                 wynik.dodajOsobnika(o1);
