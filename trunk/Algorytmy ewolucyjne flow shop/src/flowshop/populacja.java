@@ -3,10 +3,15 @@ package flowshop;
 import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 /**
  * Zbiór osobników oparty na liście, który reprezentuje populacje.
@@ -15,73 +20,101 @@ import java.util.ListIterator;
 public class populacja {
 
     private int iloscOsobnikow;
-    private List<iOsobnik> osobniki;
+    private HashMap<iOsobnik, Integer> osobniki;
 
     public populacja() {
         this.iloscOsobnikow = 0;
-        this.osobniki = new LinkedList<iOsobnik>();
+        this.osobniki = new HashMap<iOsobnik, Integer>();
+    }
+
+    public int szerokoscPopulacji() {
+        return osobniki.size();
     }
 
     public int rozmiarPopulacji() {
-        return osobniki.size();
+        return iloscOsobnikow;
     }
+
     public int rozmiarOsobnika() {
-        if (iloscOsobnikow > 0)
-            return osobniki.get(0).dlugoscGenomu();
-        else
-            return 0;
+        return 0;
     }
+    public HashMap<iOsobnik,Integer> osobniki()
+    {
+        return osobniki;
+    }
+
     /**
      * Funkcja dodaje <b>kopie<\b> osobnika do listy.
      * Ważne w przypadku późniejszych zmianach na tych osobnikach.
      * @param osobnik
      */
     public void dodajOsobnika(iOsobnik osobnik) {
-        this.osobniki.add(osobnik.makeCopy());
+        int val = 0;
+        if (this.osobniki.containsKey(osobnik)) {
+            val = this.osobniki.get(osobnik);
+        }
+        this.osobniki.put(osobnik.makeCopy(), val + 1);
         this.iloscOsobnikow++;
     }
-    public void dodajOsobniki(Collection<iOsobnik> osobniki)
-    {
-        this.osobniki.addAll(osobniki);
-        this.iloscOsobnikow = this.osobniki.size();
-    }
-    public iOsobnik usunOsobnika(int pozycja) {
-        this.iloscOsobnikow--;
-        return this.osobniki.remove(pozycja);
+
+    public void dodajOsobniki(populacja popOsob) {
+        this.osobniki.putAll(popOsob.osobniki);
+        this.iloscOsobnikow += popOsob.rozmiarPopulacji();
     }
 
     public void polaczPopulacje(populacja p2) {
         this.iloscOsobnikow += p2.iloscOsobnikow;
-        this.osobniki.addAll(p2.osobniki);
+        this.osobniki.putAll(p2.osobniki());
     }
 
-    public boolean usunOsobnika(iOsobnik o) {
-        // usuwa tylko jednego osobnika
+    public boolean usunOsobnika(iOsobnik osobnik) {
+        int val = 0;
+        if (this.osobniki.containsKey(osobnik)) {
+            val = this.osobniki.get(osobnik);
+        }
+        if (val > 1) {
+            val--;
+            osobniki.put(osobnik, val);
+        }
+        else
+            return (null != osobniki.remove(osobnik));
         this.iloscOsobnikow--;
-        return this.osobniki.remove(o);
+        return true;
     }
 
-    public ListIterator<iOsobnik> popIterator() {
-        return osobniki.listIterator();
+    public Iterator<iOsobnik> popIterator() {
+        return osobniki.keySet().iterator();
     }
 
-    public iOsobnik min(iFunkcjaCelu f,iDane d)
-    {
-        iOsobnik min = this.osobniki.get(0);
-
-        for(int i=0;i<this.iloscOsobnikow;i++)
-        {
-            if (f.wartoscFunkcji(this.osobniki.get(i), d)<f.wartoscFunkcji(min, d))
-                min = this.osobniki.get(i);
+    public iOsobnik min(iFunkcjaCelu f, iDane d) {
+        iOsobnik min = null;
+        iOsobnik o = null;
+        for (Iterator<iOsobnik> i = popIterator(); i.hasNext();) {
+            o = i.next();
+            if (min == null)
+                min = o;
+            else if (f.wartoscFunkcji(o, d) < f.wartoscFunkcji(min, d)) {
+                min = o;
+            }
         }
         return min;
     }
+    public List<iOsobnik> osobnikiPop()
+    {
+        iOsobnik o=null;
+        ArrayList<iOsobnik> wyn = new ArrayList<iOsobnik>();
+        for (Iterator<iOsobnik> i = popIterator(); i.hasNext();)
+        {
+            o = i.next();
+            for (int j = osobniki.get(o);j>0;j--)
+                wyn.add(o);
+       }
+        return wyn;
+    }
     //TODO kopiowanie populacji do operatorów ??
-     
+
     @Override
     public String toString() {
         return osobniki.toString();
     }
-
-
 }

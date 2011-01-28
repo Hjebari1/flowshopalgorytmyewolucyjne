@@ -2,6 +2,8 @@ package flowshop;
 
 import flowshop.Interfejsy.*;
 import flowshop.Interfejsy.iZastepowanie;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -27,6 +29,8 @@ public class zastepowanieMaksymalne implements iZastepowanie
         populacja p = new populacja();
         iOsobnik o;
         Random r = new Random();
+        List<iOsobnik> osobniki = p1.osobnikiPop();
+        Collections.sort(osobniki)
         iOsobnik mediana = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
         while((p1.rozmiarPopulacji()>0)&&(p.rozmiarPopulacji()<iloscKoncowa))
         {

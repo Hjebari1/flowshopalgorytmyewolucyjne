@@ -3,6 +3,7 @@ package flowshop.Interfejsy;
 import flowshop.identycznosc;
 import flowshop.osobnikFlowShop;
 import flowshop.populacja;
+import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
@@ -25,7 +26,7 @@ public abstract class VAlgorytm {
      * @return Wartość minimalna populacji
      */
     public double getMin() {
-        ListIterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
+        Iterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
         osobnikFlowShop o;
         double min = Double.MAX_VALUE;
         while (iter.hasNext()) {
@@ -35,7 +36,7 @@ public abstract class VAlgorytm {
         return min;
     }
     public double getMax() {
-        ListIterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
+        Iterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
         osobnikFlowShop o;
         double max = 0;
         while (iter.hasNext()) {
@@ -45,7 +46,7 @@ public abstract class VAlgorytm {
         return max;
     }
     public double getMed() {
-        ListIterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
+        Iterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
         osobnikFlowShop o;
         double med = 0;
         while (iter.hasNext()) {
