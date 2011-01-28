@@ -4,6 +4,8 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iZastepowanie;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -37,7 +39,7 @@ public class zastepowanieTurniej implements iZastepowanie
         p1.polaczPopulacje(p2);
         Random r = new Random();
         populacja wynik = new populacja();
-        ListIterator<iOsobnik> li = p1.popIterator();
+        Iterator<iOsobnik> li = p1.popIterator();
         int lm = Math.round((float) Math.log(iloscKoncowa));
         iOsobnik[] max = new osobnikFlowShop[Math.round((float) Math.log(iloscKoncowa))];
         for (int i=0;i<lm;i++) max[i]=li.next();
@@ -69,11 +71,12 @@ public class zastepowanieTurniej implements iZastepowanie
             }
 
         }
+        ArrayList<iOsobnik> osobniki = new ArrayList(p1.osobnikiPop());
         for (int i=0;i<lm;i++) wynik.dodajOsobnika(max[i]);
         while (wynik.rozmiarPopulacji()<iloscKoncowa)
         {
-            o1 = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
-            o2 = p1.usunOsobnika(r.nextInt(p1.rozmiarPopulacji()));
+            o1 = osobniki.remove(r.nextInt(p1.rozmiarPopulacji()));
+            o2 = osobniki.remove(r.nextInt(p1.rozmiarPopulacji()));
             if (funkcja.wartoscFunkcji(o1,dane)<funkcja.wartoscFunkcji(o2,dane))
             {
                 wynik.dodajOsobnika(o1);

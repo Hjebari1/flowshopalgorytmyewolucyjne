@@ -7,6 +7,7 @@ import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -77,7 +78,7 @@ public class Algorytm4L implements iAlgorytm
     public String toString()
     {
         String wynik = "";
-        ListIterator<iOsobnik> iter = p.popIterator();
+        Iterator<iOsobnik> iter = p.popIterator();
 
         double min=Double.MAX_VALUE;
 
@@ -104,7 +105,7 @@ public class Algorytm4L implements iAlgorytm
 
     public double getMin()
     {
-        ListIterator<iOsobnik> iter = p.popIterator();
+        Iterator<iOsobnik> iter = p.popIterator();
         osobnikFlowShop o;
         double min = Double.MAX_VALUE;
         while (iter.hasNext()) {

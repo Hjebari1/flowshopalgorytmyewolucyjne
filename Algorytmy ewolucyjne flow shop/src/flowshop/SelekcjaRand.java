@@ -1,6 +1,9 @@
 package flowshop;
 
 import flowshop.Interfejsy.iFPopulacjiRozmiar;
+import flowshop.Interfejsy.iOsobnik;
+import flowshop.Interfejsy.iOsobnik;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -18,8 +21,9 @@ public class SelekcjaRand implements iFPopulacjiRozmiar {
         populacja wyn = new populacja();
         Random r = new Random();
         int ileOsob = 0;
+        List<iOsobnik> osobniki = wyn.osobnikiPop();
         while (ileOsob < rozmiar) {
-            wyn.dodajOsobnika(p.usunOsobnika(r.nextInt(p.rozmiarPopulacji())));
+            wyn.dodajOsobnika(osobniki.remove(r.nextInt(osobniki.size())));
             ileOsob++;
         }
         p.polaczPopulacje(wyn);

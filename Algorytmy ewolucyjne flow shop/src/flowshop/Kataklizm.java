@@ -3,7 +3,6 @@ package flowshop;
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.HashSet;
-import java.util.Iterator;
 
 /**
  * Klasa reprezentująca funcję znajdującą unikalne osobniki i zwracającą ich zbiór.

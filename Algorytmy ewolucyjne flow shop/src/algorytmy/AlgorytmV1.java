@@ -10,8 +10,10 @@ import flowshop.osobnikFlowShop;
 import flowshop.populacja;
 import flowshop.selekcjaRuletka;
 import flowshop.zastepowanieMaksymalne;
+import flowshop.zastepowanieTurniej;
 import java.util.Iterator;
 import java.util.List;
+import operatory.multiOperator;
 
 /**
  *
@@ -34,10 +36,11 @@ public class AlgorytmV1 extends VAlgorytm {
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         zbiorOsobnikow = new populacja();
-        zastepowanie = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
-        mutacja = new MutacjaPrzesuniecie((float) 0.1);
-        oczyszczacz = new Kataklizm(500, iloscOsobnikow);
+        zastepowanie = new zastepowanieTurniej(dane, f, iloscOsobnikow);
+        mutacja = new MutacjaPrzesuniecie(0.02);
+        oczyszczacz = new Kataklizm(200, iloscOsobnikow);
         selekcja = new selekcjaRuletka(dane, f);
+        operatorKrzyżowania = new multiOperator();
         NehAlgorytm nehAlg = new NehAlgorytm(d);
         List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
         int[] genom = new int[d.iloscZadan()];
@@ -52,10 +55,11 @@ public class AlgorytmV1 extends VAlgorytm {
     }
 
     @Override
-    public double[] wykonajIteracje(int iloscIteracji) {
+    public void wykonajIteracje(int iloscIteracji) {
         populacja nowaPopulacja = new populacja();
         for (int i = 0; i < iloscIteracji; i++) {
             nowaPopulacja = operatorKrzyżowania.wykonaj(selekcja.wykonaj(zbiorOsobnikow));
+            nowaPopulacja = mutacja.wykonaj(nowaPopulacja);
             zbiorOsobnikow = zastepowanie.wykonaj(zbiorOsobnikow, nowaPopulacja);
             if (getMin() < min) {
                 min = getMin();
@@ -64,17 +68,14 @@ public class AlgorytmV1 extends VAlgorytm {
                 oczyszczacz.wykonaj(zbiorOsobnikow);
             }
         }
-        double[] wyn = new double[3]; //TODO przepisac to do toString'a;
-        wyn[0] = getMax();
-        wyn[1] = getMed();
-        wyn[2] = getMin();
-        return wyn;
     }
 
     @Override
     public String toString() {
         StringBuilder wynik = new StringBuilder("");
-        wynik = wynik.append(getMin()).append("\n"); // mam nadzieję, że to jest to samo co było
+        wynik = wynik.append(getMin()).append(" ").
+                append(getMed()).append(" ").
+                append(getMax()).append("\n"); // mam nadzieję, że to jest to samo co było
         return wynik.toString();
     }
 }
