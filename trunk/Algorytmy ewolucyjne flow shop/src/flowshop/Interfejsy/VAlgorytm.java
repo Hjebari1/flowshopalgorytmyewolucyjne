@@ -51,7 +51,7 @@ public abstract class VAlgorytm {
         double med = 0;
         while (iter.hasNext()) {
             o = (osobnikFlowShop) iter.next();
-            med += f.wartoscFunkcji(o, dane) / ((double) zbiorOsobnikow.rozmiarPopulacji());
+            med += f.wartoscFunkcji(o, dane) / ((double) zbiorOsobnikow.szerokoscPopulacji());
         }
         return med;
     }

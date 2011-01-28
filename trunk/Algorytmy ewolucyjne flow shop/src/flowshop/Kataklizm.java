@@ -1,8 +1,10 @@
 package flowshop;
 
+import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Klasa reprezentująca funcję znajdującą unikalne osobniki i zwracającą ich zbiór.
@@ -13,15 +15,21 @@ public class Kataklizm implements iFunkcjaPopulacji {
     int iloscIteracji;
     int ileJeszcze;
     int orgRozPopulacji;
+    int ileZostaje;
+    int ileMutuje;
+    iFPopulacjiRozmiar mutacja;
 
     /**
      * Konstruntor z parametrem co ile iteracji nastąpi przerzedzenie populacji
      * @param ileIter Co ile iteracji uruchamiamy funcje wykonaj
      */
-    public Kataklizm(int ileIter,int rozmiarP) {
+    public Kataklizm(int ileIter,int rozmiarP,int ilezostaje,int ilemutuje, iFPopulacjiRozmiar jakMutowac) {
         iloscIteracji = ileIter;
         ileJeszcze = ileIter;
         orgRozPopulacji = rozmiarP;
+        ileZostaje = ilezostaje;
+        ileMutuje = ilemutuje;
+        mutacja = jakMutowac;
     }
 
     private boolean czyTeraz() {
@@ -45,17 +53,25 @@ public class Kataklizm implements iFunkcjaPopulacji {
      */
     public populacja wykonaj(populacja p) {
         if (czyTeraz()) {
-            iOsobnik o;
-            HashSet<iOsobnik> zbior = new HashSet<iOsobnik>();
-            while (p.rozmiarPopulacji() > 0) { //Trochę to metodą hałupniczą,ale trudno
-                o = p.usunOsobnika(0);
-                zbior.add(o);
-                p.usunOsobnika(o);
+            populacja wynik = new populacja();
+            Set<iOsobnik> zbior = p.osobniki().keySet();
+            Iterator<iOsobnik> iter = zbior.iterator();
+            int limit = ileZostaje;
+            if (ileZostaje > zbior.size())
+            {
+                limit = zbior.size();
             }
-            p.dodajOsobniki(zbior);
+            while (limit > 0)
+            {
+                wynik.dodajOsobnika(iter.next());
+                limit --;
+            }
+            populacja mutanty = mutacja.wykonaj(wynik, ileMutuje);
+            wynik.polaczPopulacje(mutanty);
+            for (int i = wynik.rozmiarPopulacji(); i < orgRozPopulacji; i ++)
+                wynik.dodajOsobnika(new osobnikFlowShop(wynik.rozmiarOsobnika()));
+            return wynik;
         }
-        for (int i = p.rozmiarPopulacji(); i < orgRozPopulacji; i ++)
-            p.dodajOsobnika(new osobnikFlowShop(p.rozmiarOsobnika()));
         return p;
     }
 }

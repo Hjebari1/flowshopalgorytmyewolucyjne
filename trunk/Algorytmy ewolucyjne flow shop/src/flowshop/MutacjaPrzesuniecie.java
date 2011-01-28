@@ -1,6 +1,6 @@
 package flowshop;
 
-import flowshop.Interfejsy.iFunkcjaPopulacji;
+import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.Iterator;
 import java.util.Random;
@@ -11,7 +11,7 @@ import java.util.Random;
  * w konstruktorze klasy.
  * @author Jakub Banaszewski
  */
-public class MutacjaPrzesuniecie implements iFunkcjaPopulacji {
+public class MutacjaPrzesuniecie implements iFPopulacjiRozmiar {
 
     double wsp;
 
@@ -30,8 +30,8 @@ public class MutacjaPrzesuniecie implements iFunkcjaPopulacji {
      */
     public populacja wykonaj(populacja p) {
         Random r = new Random();
-        for (Iterator j = p.popIterator(); j.hasNext();) {
-            iOsobnik o = (iOsobnik) j.next();
+        for (Iterator<iOsobnik> j = p.popIterator(); j.hasNext();) {
+            iOsobnik o = j.next();
             if (r.nextDouble() > wsp) {
                 Integer start = r.nextInt(o.dlugoscGenomu());
                 Integer meta = r.nextInt(o.dlugoscGenomu());
@@ -49,5 +49,32 @@ public class MutacjaPrzesuniecie implements iFunkcjaPopulacji {
             }
         }
         return p;
+    }
+
+    public populacja wykonaj(populacja p, int rozmiar) {
+        populacja wynik = new populacja();
+        Random r = new Random();
+        while (wynik.rozmiarPopulacji() < rozmiar) {
+            for (Iterator<iOsobnik> j = p.popIterator(); j.hasNext() && wynik.rozmiarPopulacji() < rozmiar;) {
+                iOsobnik o = j.next().makeCopy();
+                if (r.nextDouble() > wsp) {
+                    Integer start = r.nextInt(o.dlugoscGenomu());
+                    Integer meta = r.nextInt(o.dlugoscGenomu());
+                    int tmp;
+                    if (start > meta) {
+                        tmp = start;
+                        start = meta;
+                        meta = tmp;
+                    }
+                    Object wart = o.wartoscOsobnika(start);
+                    for (int i = start; i < meta; i++) {
+                        o.modyfikujGen(i, o.wartoscOsobnika(i + 1));
+                    }
+                    o.modyfikujGen(meta, wart);
+                }
+                wynik.dodajOsobnika(o);
+            }
+        }
+        return wynik;
     }
 }

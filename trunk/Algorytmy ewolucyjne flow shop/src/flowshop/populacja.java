@@ -4,14 +4,9 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Interfejsy.iFunkcjaCelu;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 /**
  * Zbiór osobników oparty na liście, który reprezentuje populacje.
