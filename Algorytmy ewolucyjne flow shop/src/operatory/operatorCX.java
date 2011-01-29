@@ -63,12 +63,12 @@ public class operatorCX implements iFPopulacjiRozmiar {
     public populacja wykonaj(populacja p, int rozmiar) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
-        iOsobnik[] osobniki = (iOsobnik[]) p.osobniki().keySet().toArray();
+        Object[] osobniki = (iOsobnik[]) p.osobniki().keySet().toArray();
         int size = p.osobniki().size();
         while (pochodneOsobniki.rozmiarPopulacji() < rozmiar) {
             try {
-                iOsobnik o1 = osobniki[losPoz.nextInt(size)];
-                iOsobnik o2 = osobniki[losPoz.nextInt(size)];
+                iOsobnik o1 = (iOsobnik) osobniki[losPoz.nextInt(size)];
+                iOsobnik o2 = (iOsobnik) osobniki[losPoz.nextInt(size)];
                 iOsobnik wynik = krzyzuj(o1, o2);
                 pochodneOsobniki.dodajOsobnika(wynik);
             } catch (CloneNotSupportedException ex) {

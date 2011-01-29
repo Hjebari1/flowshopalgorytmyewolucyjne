@@ -28,8 +28,10 @@ public class zastepowanieTurniej implements iZastepowanie
         this.iloscKoncowa = iloscKoncowa;
     }
 
-    // główna metoda klasy parametrami są odpowiednio
-    // populacja populacja obecna i populacja po krzyżowaniu
+    /**
+     * Główna metoda klasy. Parametrami są odpowiednio
+     * populacja obecna i populacja po krzyżowaniu
+     * */
     public populacja wykonaj(populacja p1, populacja p2)
     {
         iOsobnik o1;
@@ -38,7 +40,7 @@ public class zastepowanieTurniej implements iZastepowanie
         p1.polaczPopulacje(p2);
         Random r = new Random();
         populacja wynik = new populacja();
-        Iterator<iOsobnik> li = p1.popIterator();
+        Iterator<iOsobnik> li = p1.osobnikiPop().iterator();
         int lm = Math.round((float) Math.log(iloscKoncowa));
         iOsobnik[] max = new osobnikFlowShop[Math.round((float) Math.log(iloscKoncowa))];
         for (int i=0;i<lm;i++) max[i]=li.next();

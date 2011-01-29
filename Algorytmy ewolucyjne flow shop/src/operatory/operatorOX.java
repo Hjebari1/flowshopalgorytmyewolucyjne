@@ -136,12 +136,12 @@ public class operatorOX implements iFPopulacjiRozmiar {
     public populacja wykonaj(populacja p, int rozmiar) {
         Random losPoz = new Random();
         populacja pochodneOsobniki = new populacja();
-        iOsobnik[] osobniki = (iOsobnik[]) p.osobniki().keySet().toArray();
+        Object[] osobniki = (iOsobnik[]) p.osobniki().keySet().toArray();
         int size = p.osobniki().size();
         while (pochodneOsobniki.rozmiarPopulacji() < rozmiar) {
             try {
-                iOsobnik o1 = osobniki[losPoz.nextInt(size)];
-                iOsobnik o2 = osobniki[losPoz.nextInt(size)];
+                iOsobnik o1 = (iOsobnik) osobniki[losPoz.nextInt(size)];
+                iOsobnik o2 = (iOsobnik) osobniki[losPoz.nextInt(size)];
                 int poz1 = losPoz.nextInt(o1.dlugoscGenomu());
                 int poz2 = losPoz.nextInt(o2.dlugoscGenomu());
                 if (poz1 > poz2) {

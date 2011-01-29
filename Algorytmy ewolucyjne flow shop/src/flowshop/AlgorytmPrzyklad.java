@@ -28,7 +28,7 @@ public class AlgorytmPrzyklad extends VAlgorytm {
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         zbiorOsobnikow = new populacja();
-        zastepowanie = new zastepowanieMaksymalne(dane, f, iloscOsobnikow);
+        zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow);
         mutacja = new MutacjaPrzesuniecie((float) 0.1);
         for (int i = 0; i < iloscOsobnikow; i++) {
             zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
