@@ -29,26 +29,7 @@ public class MutacjaPrzesuniecie implements iFPopulacjiRozmiar {
      * @param p zadana populacja
      */
     public populacja wykonaj(populacja p) {
-        Random r = new Random();
-        for (Iterator<iOsobnik> j = p.popIterator(); j.hasNext();) {
-            iOsobnik o = j.next();
-            if (r.nextDouble() > wsp) {
-                Integer start = r.nextInt(o.dlugoscGenomu());
-                Integer meta = r.nextInt(o.dlugoscGenomu());
-                int tmp;
-                if (start > meta) {
-                    tmp = start;
-                    start = meta;
-                    meta = tmp;
-                }
-                Object wart = o.wartoscOsobnika(start);
-                for (int i = start; i < meta; i++) {
-                    o.modyfikujGen(i, o.wartoscOsobnika(i + 1));
-                }
-                o.modyfikujGen(meta, wart);
-            }
-        }
-        return p;
+        return wykonaj(p, p.rozmiarPopulacji());
     }
 
     public populacja wykonaj(populacja p, int rozmiar) {

@@ -22,10 +22,18 @@ public class populacja {
         this.osobniki = new HashMap<iOsobnik, Integer>();
     }
 
+    /**
+     * Ilość różnych osobników populacji
+     * @return
+     */
     public int szerokoscPopulacji() {
         return osobniki.size();
     }
 
+    /**
+     * Ilość wszystkich osobników populacji
+     * @return
+     */
     public int rozmiarPopulacji() {
         return iloscOsobnikow;
     }
@@ -76,7 +84,10 @@ public class populacja {
         this.iloscOsobnikow--;
         return true;
     }
-
+    /**
+     * Iterator po różnorodnych osobnikach populacji
+     * @return
+     */
     public Iterator<iOsobnik> popIterator() {
         return osobniki.keySet().iterator();
     }
@@ -94,6 +105,11 @@ public class populacja {
         }
         return min;
     }
+    /**
+     * Funkcja, która przetwarza formę słownikowego trzymania populacji
+     * w formę listową. Listę odpowiadającą stanowi populacji zwraca w wyniki.
+     * @return Stan populacji w formie listy.
+     */
     public List<iOsobnik> osobnikiPop()
     {
         iOsobnik o=null;
