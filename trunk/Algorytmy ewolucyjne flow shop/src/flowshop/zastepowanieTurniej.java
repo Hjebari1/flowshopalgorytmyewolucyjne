@@ -42,38 +42,38 @@ public class zastepowanieTurniej implements iZastepowanie
         populacja wynik = new populacja();
         Iterator<iOsobnik> li = p1.osobnikiPop().iterator();
         int lm = Math.round((float) Math.log(iloscKoncowa));
-        iOsobnik[] max = new osobnikFlowShop[Math.round((float) Math.log(iloscKoncowa))];
-        for (int i=0;i<lm;i++) max[i]=li.next();
+        iOsobnik[] min = new osobnikFlowShop[Math.round((float) Math.log(iloscKoncowa))];
+        for (int i=0;i<lm;i++) min[i]=li.next();
         for (int i=0;i<lm;i++)
             for (int j=i;j<lm;j++)
             {
-                if (funkcja.wartoscFunkcji(max[i], dane)<funkcja.wartoscFunkcji(max[j], dane))
+                if (funkcja.wartoscFunkcji(min[i], dane)<funkcja.wartoscFunkcji(min[j], dane))
                 {
-                    o1=max[i];
-                    max[i]=max[j];
-                    max[j]=o1;
+                    o1=min[i];
+                    min[i]=min[j];
+                    min[j]=o1;
                 }
             }
         while(li.hasNext())
         {
             o2=li.next();
-            if (funkcja.wartoscFunkcji(max[0], dane)>funkcja.wartoscFunkcji(o2, dane))
+            if (funkcja.wartoscFunkcji(min[0], dane)>funkcja.wartoscFunkcji(o2, dane))
             {
-                max[0]=o2;
+                min[0]=o2;
                 for (int j=0;j<lm;j++)
                 {
-                    if (funkcja.wartoscFunkcji(max[0], dane)<funkcja.wartoscFunkcji(max[j], dane))
+                    if (funkcja.wartoscFunkcji(min[0], dane)<funkcja.wartoscFunkcji(min[j], dane))
                     {
-                        o1=max[0];
-                        max[0]=max[j];
-                        max[j]=o1;
+                        o1=min[0];
+                        min[0]=min[j];
+                        min[j]=o1;
                     }
                 }
             }
 
         }
         ArrayList<iOsobnik> osobniki = new ArrayList(p1.osobnikiPop());
-        for (int i=0;i<lm;i++) wynik.dodajOsobnika(max[i]);
+        for (int i=0;i<lm;i++) wynik.dodajOsobnika(min[i]);
         while (wynik.rozmiarPopulacji()<iloscKoncowa)
         {
             o1 = osobniki.get(r.nextInt(osobniki.size())); //FE!

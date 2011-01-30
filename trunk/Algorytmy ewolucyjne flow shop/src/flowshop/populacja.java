@@ -41,6 +41,7 @@ public class populacja {
     public int rozmiarOsobnika() {
         return 0;
     }
+    
     public HashMap<iOsobnik,Integer> osobniki()
     {
         return osobniki;

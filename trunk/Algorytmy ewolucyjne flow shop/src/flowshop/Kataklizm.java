@@ -48,11 +48,11 @@ public class Kataklizm implements iFunkcjaPopulacji {
     /**
      * Właściwa funkcja klasy.
      * @param p Populacja wejsciowa
-     * @return Zbior unikalnych elementow wejsciowej populacji
-     * TODO? Uzupełnienie populacji świerzymy osobnikami
+     * @return Zbior unikalnych elementow wejsciowej populacji.
      */
     public populacja wykonaj(populacja p) {
         if (czyTeraz()) {
+            System.out.println("# Idzie kataklizm!");
             populacja wynik = new populacja();
             Set<iOsobnik> zbior = p.osobniki().keySet();
             Iterator<iOsobnik> iter = zbior.iterator();
