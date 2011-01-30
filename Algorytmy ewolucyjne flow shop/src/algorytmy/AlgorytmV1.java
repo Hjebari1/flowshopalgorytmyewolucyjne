@@ -5,15 +5,17 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Kataklizm;
 import flowshop.MutacjaPrzesuniecie;
 import flowshop.NehAlgorytm;
+import flowshop.SelekcjaSort;
 import flowshop.funkcjaCeluFlowShop;
 import flowshop.osobnikFlowShop;
 import flowshop.populacja;
 import flowshop.selekcjaRuletka;
-import flowshop.zastepowanieMaksymalne;
+import flowshop.zastepowanieMinimalne;
 import flowshop.zastepowanieTurniej;
 import java.util.Iterator;
 import java.util.List;
 import operatory.multiOperator;
+import operatory.operatorPMX;
 
 /**
  *
@@ -36,10 +38,10 @@ public class AlgorytmV1 extends VAlgorytm {
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         zbiorOsobnikow = new populacja();
-        zastepowanie = new zastepowanieTurniej(dane, f, iloscOsobnikow);
-        mutacja = new MutacjaPrzesuniecie(0.05);
-        oczyszczacz = new Kataklizm(5000,iloscOsobnikow, (int) (iloscOsobnikow * (2.0 / 5.0)),iloscOsobnikow/5,new MutacjaPrzesuniecie(0.1));
-        selekcja = new selekcjaRuletka(dane, f);
+        zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow,0.1);
+        mutacja = new MutacjaPrzesuniecie(0.02);
+        oczyszczacz = new Kataklizm(2000,iloscOsobnikow, iloscOsobnikow/10,iloscOsobnikow/5,new MutacjaPrzesuniecie(0.1));
+        selekcja = new SelekcjaSort(dane, f);
         operatorKrzyżowania = new multiOperator();
         NehAlgorytm nehAlg = new NehAlgorytm(d);
         List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
