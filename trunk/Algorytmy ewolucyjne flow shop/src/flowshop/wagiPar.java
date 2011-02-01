@@ -86,6 +86,9 @@ public class wagiPar
             }
         }
 
+        System.out.println(this.toString());
+        System.out.println("---------------------");
+
     }
 
     @Override
