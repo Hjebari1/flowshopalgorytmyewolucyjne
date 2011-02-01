@@ -52,22 +52,22 @@ public class MutacjaZamianaWaga implements iFunkcjaPopulacji
                     mult=0;
                     if ( a2 > 0 )
                     {
-                        suma = wg.wartosc(a2-1,a2);
+                        suma = wg.wartosc( (Integer) o.wartoscOsobnika(a2-1),b2);
                         mult++;
                     }
                     if (a2 < o.dlugoscGenomu()-1)
                     {
-                        suma = wg.wartosc(a2,a2+1);
+                        suma = wg.wartosc(b2,(Integer)o.wartoscOsobnika(a2+1));
                         mult++;
                     }
                     if ( a1 > 0 )
                     {
-                        suma = wg.wartosc(a1-1,a1);
+                        suma = wg.wartosc((Integer)o.wartoscOsobnika(a1-1),b1);
                         mult++;
                     }
                     if (a1 < o.dlugoscGenomu()-1)
                     {
-                        suma = wg.wartosc(a1,a1+1);
+                        suma = wg.wartosc(b1,(Integer) o.wartoscOsobnika(a1+1));
                         mult++;
                     }
                 } while (suma>(d*mult));

@@ -19,8 +19,11 @@ public class wagiPar
     funkcjaCeluFlowShop f;
     iDane d;
     int n;
-    public wagiPar(funkcjaCeluFlowShop f,iDane d)
+    double wsp;
+
+    public wagiPar(funkcjaCeluFlowShop f,iDane d,double wsp)
     {
+        this.wsp = wsp;
         this.f = f;
         this.d = d;
         n=d.iloscZadan();
@@ -76,7 +79,7 @@ public class wagiPar
             {
                 if (tab[i][j]==2)
                 {
-                    w[i][j]=w[i][j]+mnoznik*w[i][j]/100;
+                    w[i][j]=w[i][j]+mnoznik*w[i][j]*wsp;
                     if (w[i][j]>1) w[i][j]=1;
                     if (w[i][j]<0) w[i][j]=0;
                 }
