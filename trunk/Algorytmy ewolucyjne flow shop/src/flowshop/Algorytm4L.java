@@ -1,5 +1,7 @@
 package flowshop;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import operatory.multiOperator;
 import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
@@ -34,7 +36,7 @@ public class Algorytm4L implements iAlgorytm
     funkcjaCeluFlowShop f;
     iFunkcjaPopulacji m;
 
-    public Algorytm4L(int iloscOsobnikow,iDane d) throws FileNotFoundException
+    public Algorytm4L(int iloscOsobnikow,iDane d) throws FileNotFoundException, Exception
     {
         dane = d;
         f = new funkcjaCeluFlowShop();
@@ -52,8 +54,12 @@ public class Algorytm4L implements iAlgorytm
 
     public void wybor()
     {
-        ps = sr.wykonaj(p, iloscOsobnikow/2);
-        ps.dodajOsobnika(ps.min(f, dane));
+        try {
+            ps = sr.wykonaj(p, iloscOsobnikow / 2);
+            ps.dodajOsobnika(ps.min(f, dane));
+        } catch (Exception ex) {
+            Logger.getLogger(Algorytm4L.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void krzyzowanie()
@@ -96,7 +102,12 @@ public class Algorytm4L implements iAlgorytm
     }
 
     public iAlgorytm createAlg(int iloscOsobnikow, iDane d) throws FileNotFoundException, IOException {
-        return new Algorytm4L(iloscOsobnikow, d);
+        try {
+            return new Algorytm4L(iloscOsobnikow, d);
+        } catch (Exception ex) {
+            Logger.getLogger(Algorytm4L.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public String nazwaAlg() {

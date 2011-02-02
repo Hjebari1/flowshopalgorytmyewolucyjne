@@ -15,6 +15,7 @@ import java.util.List;
 public class populacja {
 
     private int iloscOsobnikow;
+    private int rozmiarOsobnika;
     private HashMap<iOsobnik, Integer> osobniki;
 
     public populacja() {
@@ -39,7 +40,7 @@ public class populacja {
     }
 
     public int rozmiarOsobnika() {
-        return 0;
+        return rozmiarOsobnika;
     }
     
     public HashMap<iOsobnik,Integer> osobniki()
@@ -52,8 +53,12 @@ public class populacja {
      * Ważne w przypadku późniejszych zmianach na tych osobnikach.
      * @param osobnik
      */
-    public void dodajOsobnika(iOsobnik osobnik) {
+    public void dodajOsobnika(iOsobnik osobnik) throws Exception {
         int val = 0;
+        if (rozmiarOsobnika == 0)
+            rozmiarOsobnika = osobnik.dlugoscGenomu();
+        if (osobnik.dlugoscGenomu() != rozmiarOsobnika)
+            throw new Exception("Różne długości osobników");
         if (this.osobniki.containsKey(osobnik)) {
             val = this.osobniki.get(osobnik);
         }
@@ -61,7 +66,11 @@ public class populacja {
         this.iloscOsobnikow++;
     }
 
-    public void dodajOsobniki(populacja popOsob) {
+    public void dodajOsobniki(populacja popOsob) throws Exception {
+        if (rozmiarOsobnika == 0)
+            rozmiarOsobnika = popOsob.rozmiarOsobnika();
+        if (popOsob.rozmiarOsobnika() != rozmiarOsobnika)
+            throw new Exception("Różne długości osobników");
         this.osobniki.putAll(popOsob.osobniki);
         this.iloscOsobnikow += popOsob.rozmiarPopulacji();
     }

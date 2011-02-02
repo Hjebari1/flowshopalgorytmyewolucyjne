@@ -5,6 +5,8 @@ import flowshop.Interfejsy.iFunkcjaPopulacji;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Klasa reprezentująca funcję znajdującą unikalne osobniki i zwracającą ich zbiór.
@@ -52,25 +54,28 @@ public class Kataklizm implements iFunkcjaPopulacji {
      */
     public populacja wykonaj(populacja p) {
         if (czyTeraz()) {
-            System.out.println("# Idzie kataklizm!");
-            populacja wynik = new populacja();
-            Set<iOsobnik> zbior = p.osobniki().keySet();
-            Iterator<iOsobnik> iter = zbior.iterator();
-            int limit = ileZostaje;
-            if (ileZostaje > zbior.size())
-            {
-                limit = zbior.size();
+            try {
+                System.out.println("# Idzie kataklizm!");
+                populacja wynik = new populacja();
+                Set<iOsobnik> zbior = p.osobniki().keySet();
+                Iterator<iOsobnik> iter = zbior.iterator();
+                int limit = ileZostaje;
+                if (ileZostaje > zbior.size()) {
+                    limit = zbior.size();
+                }
+                while (limit > 0) {
+                    wynik.dodajOsobnika(iter.next());
+                    limit--;
+                }
+                populacja mutanty = mutacja.wykonaj(wynik, ileMutuje);
+                wynik.polaczPopulacje(mutanty);
+                for (int i = wynik.rozmiarPopulacji(); i < orgRozPopulacji; i++) {
+                    wynik.dodajOsobnika(new osobnikFlowShop(wynik.rozmiarOsobnika()));
+                }
+                return wynik;
+            } catch (Exception ex) {
+                Logger.getLogger(Kataklizm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            while (limit > 0)
-            {
-                wynik.dodajOsobnika(iter.next());
-                limit --;
-            }
-            populacja mutanty = mutacja.wykonaj(wynik, ileMutuje);
-            wynik.polaczPopulacje(mutanty);
-            for (int i = wynik.rozmiarPopulacji(); i < orgRozPopulacji; i ++)
-                wynik.dodajOsobnika(new osobnikFlowShop(wynik.rozmiarOsobnika()));
-            return wynik;
         }
         return p;
     }
