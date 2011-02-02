@@ -9,10 +9,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author bejnan
+ * @author Jakub Banaszewski
  */
 public class SelekcjaSort implements iFPopulacjiRozmiar {
 
@@ -45,14 +47,18 @@ public class SelekcjaSort implements iFPopulacjiRozmiar {
         double prwd = 1.0;
         Para<Double, iOsobnik> tmp = null;
         while (odpSize < rozmiar) {
-            sum = 0;
-            prwd = los.nextDouble();
-            for (Iterator<Para<Double, iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
-                tmp = i.next();
-                sum += tmp.getFirst();
+            try {
+                sum = 0;
+                prwd = los.nextDouble();
+                for (Iterator<Para<Double, iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
+                    tmp = i.next();
+                    sum += tmp.getFirst();
+                }
+                wybrPop.dodajOsobnika(tmp.getSecond()); //TODO!
+                odpSize++;
+            } catch (Exception ex) {
+                Logger.getLogger(SelekcjaSort.class.getName()).log(Level.SEVERE, null, ex);
             }
-            wybrPop.dodajOsobnika(tmp.getSecond()); //TODO!
-            odpSize++;
         }
         return wybrPop;
     }

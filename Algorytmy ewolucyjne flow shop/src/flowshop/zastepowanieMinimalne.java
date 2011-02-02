@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *Funkcja się nie sprawdziła może będzie rozwijana później
@@ -43,21 +45,28 @@ public class zastepowanieMinimalne implements iZastepowanie
     {
         populacja p = new populacja();
         Random r = new Random();
-        Object[] przetrwaja = p1.osobnikiPop().toArray();
+        Object[] przetrwaja = p1.osobniki().keySet().toArray();
         while(p.rozmiarPopulacji()<iloscKoncowa*ilePozostawic)
         {
+            try {
                 p.dodajOsobnika((iOsobnik) przetrwaja[r.nextInt(p1.szerokoscPopulacji())]);
+            } catch (Exception ex) {
+                Logger.getLogger(zastepowanieMinimalne.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         p1.polaczPopulacje(p2);
         p2=new populacja();
-        iOsobnik o;
         
         List<iOsobnik> osobniki = p1.osobnikiPop();
         Collections.sort(osobniki,funkcja.porownaj(dane));
         ListIterator<iOsobnik> li = osobniki.listIterator();
         while(li.hasNext()&&(p.rozmiarPopulacji()<iloscKoncowa))
         {
+            try {
                 p.dodajOsobnika(li.next());
+            } catch (Exception ex) {
+                Logger.getLogger(zastepowanieMinimalne.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return p;
     }

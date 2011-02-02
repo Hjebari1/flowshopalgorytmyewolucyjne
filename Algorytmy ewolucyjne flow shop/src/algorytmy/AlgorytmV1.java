@@ -14,6 +14,8 @@ import flowshop.zastepowanieMinimalne;
 import flowshop.zastepowanieTurniej;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import operatory.multiOperator;
 import operatory.operatorPMX;
 
@@ -34,25 +36,30 @@ public class AlgorytmV1 extends VAlgorytm {
      * @param d dane wejsciowe
      */
     public AlgorytmV1(int iloscOsobnikow, iDane d) {
-        dane = d;
-        f = new funkcjaCeluFlowShop();
-        this.iloscOsobnikow = iloscOsobnikow;
-        zbiorOsobnikow = new populacja();
-        zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow,0.1);
-        mutacja = new MutacjaPrzesuniecie(0.02);
-        oczyszczacz = new Kataklizm(2000,iloscOsobnikow, iloscOsobnikow/10,iloscOsobnikow/5,new MutacjaPrzesuniecie(0.1));
-        selekcja = new SelekcjaSort(dane, f);
-        operatorKrzyżowania = new multiOperator();
-        NehAlgorytm nehAlg = new NehAlgorytm(d);
-        List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
-        int[] genom = new int[d.iloscZadan()];
-        int licznik = 0;
-        for (Iterator<Integer> i = startowyOsobnik.iterator(); i.hasNext();) {
-            genom[licznik++] = i.next();
-        }
-        zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan(), genom));
-        for (int i = 1; i < iloscOsobnikow; i++) {
-            zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
+        try {
+            dane = d;
+            min = Double.MAX_VALUE;
+            f = new funkcjaCeluFlowShop();
+            this.iloscOsobnikow = iloscOsobnikow;
+            zbiorOsobnikow = new populacja();
+            zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow, 0.5);
+            mutacja = new MutacjaPrzesuniecie(0.025);
+            oczyszczacz = new Kataklizm(5000, iloscOsobnikow, iloscOsobnikow / 20, iloscOsobnikow / 20, new MutacjaPrzesuniecie(0.1));
+            selekcja = new SelekcjaSort(dane, f);
+            operatorKrzyżowania = new operatorPMX();
+            NehAlgorytm nehAlg = new NehAlgorytm(d);
+            List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
+            int[] genom = new int[d.iloscZadan()];
+            int licznik = 0;
+            for (Iterator<Integer> i = startowyOsobnik.iterator(); i.hasNext();) {
+                genom[licznik++] = i.next();
+            }
+            zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan(), genom));
+            for (int i = 1; i < iloscOsobnikow; i++) {
+                zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AlgorytmV1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

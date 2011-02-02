@@ -23,7 +23,7 @@ public class AlgorytmPrzyklad extends VAlgorytm {
     * @param iloscOsobnikow rozmiar populacji
     * @param d dane wejsciowe
    */
-    public AlgorytmPrzyklad(int iloscOsobnikow, iDane d) {
+    public AlgorytmPrzyklad(int iloscOsobnikow, iDane d) throws Exception {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;

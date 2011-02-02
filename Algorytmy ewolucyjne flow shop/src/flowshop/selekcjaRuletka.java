@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Klasa implementująca metodę ruletki na populacji.
@@ -43,14 +45,18 @@ public class selekcjaRuletka implements iFPopulacjiRozmiar {
         double prwd = 1.0;
         Para<Double, iOsobnik> tmp = null;
         while (odpSize < rozmiar) {
-            sum = 0;
-            prwd = los.nextDouble();
-            for (Iterator<Para<Double, iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
-                tmp = i.next();
-                sum += tmp.getFirst();
+            try {
+                sum = 0;
+                prwd = los.nextDouble();
+                for (Iterator<Para<Double, iOsobnik>> i = wspTab.iterator(); i.hasNext() && sum < prwd;) {
+                    tmp = i.next();
+                    sum += tmp.getFirst();
+                }
+                wybrPop.dodajOsobnika(tmp.getSecond());
+                odpSize++;
+            } catch (Exception ex) {
+                Logger.getLogger(selekcjaRuletka.class.getName()).log(Level.SEVERE, null, ex);
             }
-            wybrPop.dodajOsobnika(tmp.getSecond());
-            odpSize++;
         }
         return wybrPop;
     }

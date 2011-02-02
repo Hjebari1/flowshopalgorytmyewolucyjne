@@ -5,6 +5,8 @@ import flowshop.Interfejsy.iOsobnik;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Seleckja elementów w populacji w sposób losowy.
@@ -23,8 +25,12 @@ public class SelekcjaRand implements iFPopulacjiRozmiar {
         int ileOsob = 0;
         List<iOsobnik> osobniki = wyn.osobnikiPop();
         while (ileOsob < rozmiar) {
-            wyn.dodajOsobnika(osobniki.remove(r.nextInt(osobniki.size())));
-            ileOsob++;
+            try {
+                wyn.dodajOsobnika(osobniki.remove(r.nextInt(osobniki.size())));
+                ileOsob++;
+            } catch (Exception ex) {
+                Logger.getLogger(SelekcjaRand.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         p.polaczPopulacje(wyn);
         return wyn;
