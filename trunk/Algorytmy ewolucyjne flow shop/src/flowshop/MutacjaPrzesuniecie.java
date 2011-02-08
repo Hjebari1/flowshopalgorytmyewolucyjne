@@ -41,7 +41,7 @@ public class MutacjaPrzesuniecie implements iFPopulacjiRozmiar {
             for (Iterator<iOsobnik> j = p.popIterator(); j.hasNext() && wynik.rozmiarPopulacji() < rozmiar;) {
                 try {
                     iOsobnik o = j.next().makeCopy();
-                    if (r.nextDouble() > wsp) {
+                    if (r.nextDouble() < wsp) {
                         Integer start = r.nextInt(o.dlugoscGenomu());
                         Integer meta = r.nextInt(o.dlugoscGenomu());
                         int tmp;
