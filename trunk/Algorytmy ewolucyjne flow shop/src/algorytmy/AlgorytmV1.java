@@ -5,7 +5,6 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Kataklizm;
 import flowshop.MutacjaPrzesuniecie;
 import flowshop.NehAlgorytm;
-import flowshop.Rewolucja;
 import flowshop.SelekcjaSort;
 import flowshop.funkcjaCeluFlowShop;
 import flowshop.osobnikFlowShop;
@@ -25,7 +24,6 @@ public class AlgorytmV1 extends VAlgorytm {
 
     int iloscOsobnikow;
     Kataklizm oczyszczacz;
-    Rewolucja mieszacz;
     double min;
 
     /**

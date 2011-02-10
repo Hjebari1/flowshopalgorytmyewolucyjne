@@ -1,6 +1,7 @@
 package flowshop;
 
 import algorytmy.AlgorytmV1;
+import algorytmy.AlgorytmV2;
 import dane.Dane3;
 import flowshop.Interfejsy.VAlgorytm;
 import flowshop.Interfejsy.iDane;
@@ -23,18 +24,20 @@ public class Main {
         try {
             wejscie = new Dane3("MyFile5.txt");
             VAlgorytm algorytm = new AlgorytmV1(1000, wejscie);
-            double[] wyn;
-            for (int i = 0; i < 1000;i++)
-            {
-                wyn = algorytm.wykonajIteracje(10);
-                System.out.println(i + " " + wyn[0] + " " + wyn[1] + " " + wyn[2]);
+            int ileIter = 1000;
+            if (args.length > 0) {
+                ileIter = Integer.parseInt(args[0]);
             }
-            
+            for (int i = 0; i < ileIter / 20; i++) {
+                algorytm.wykonajIteracje(20);
+                System.out.println(i * 20 + " " + algorytm.toString());
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
