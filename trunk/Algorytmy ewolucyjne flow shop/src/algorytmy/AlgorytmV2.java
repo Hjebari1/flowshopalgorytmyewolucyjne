@@ -9,6 +9,8 @@ import flowshop.Interfejsy.*;
 import flowshop.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import operatory.*;
 
 
@@ -30,18 +32,20 @@ public class AlgorytmV2 extends VAlgorytm {
      * @param iloscOsobnikow rozmiar populacji
      * @param d dane wejsciowe
      */
-    public AlgorytmV2(int iloscOsobnikow, iDane d) {
+    public AlgorytmV2(int iloscOsobnikow, iDane d) throws Exception {
         dane = d;
         f = new funkcjaCeluFlowShop();
         this.iloscOsobnikow = iloscOsobnikow;
         zbiorOsobnikow = new populacja();
-        wg = new wagiPar((funkcjaCeluFlowShop) f,d,0.001);
-        zastepowanie = new zastepowanieTurniej(dane, f, iloscOsobnikow);
-        mutacja = new MultiMutacjaWaga(0.001,wg); 
+        wg = new wagiPar((funkcjaCeluFlowShop) f,d,0.0001);
+        //zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow);
+        zastepowanie = new multiZastepowanie(dane,f,iloscOsobnikow,0.00001);
+        mutacja = new MultiMutacjaWaga(0.001,wg);
         //= new MutacjaZamianaWaga(0.001,wg);
         //mutacja = new MutacjaZamiana(0.5);
-        oczyszczacz = new Kataklizm(500,iloscOsobnikow, iloscOsobnikow/10,iloscOsobnikow/5,new MutacjaPrzesuniecieWaga(0.1,wg));
-        selekcja = new SelekcjaSort(dane, f);
+        oczyszczacz = new Kataklizm(400,iloscOsobnikow, iloscOsobnikow/10,iloscOsobnikow/2,new MutacjaPrzesuniecieWaga(0.1,wg));
+        //selekcja = new SelekcjaSort(dane, f);
+        selekcja =  new multiSelekcja(dane,f,0.5);
         operatorKrzyżowania = new multiOperator();
         NehAlgorytm nehAlg = new NehAlgorytm(d);
         List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
@@ -54,6 +58,7 @@ public class AlgorytmV2 extends VAlgorytm {
         for (int i = 1; i < iloscOsobnikow; i++) {
             zbiorOsobnikow.dodajOsobnika(new osobnikFlowShop(d.iloscZadan()));
         }
+        this.min = Double.MAX_VALUE;
     }
 
     @Override
@@ -63,11 +68,20 @@ public class AlgorytmV2 extends VAlgorytm {
             nowaPopulacja = operatorKrzyżowania.wykonaj(selekcja.wykonaj(zbiorOsobnikow));
             nowaPopulacja = mutacja.wykonaj(nowaPopulacja);
             zbiorOsobnikow = zastepowanie.wykonaj(zbiorOsobnikow, nowaPopulacja);
-            if (getMin() < min) {
+            if ((getMin() < min) ) {
                 min = getMin();
                 oczyszczacz.reset();
             } else {
-                oczyszczacz.wykonaj(zbiorOsobnikow);
+                    iOsobnik o1 = zbiorOsobnikow.min(f, dane);
+                    zbiorOsobnikow = oczyszczacz.wykonaj(zbiorOsobnikow);
+                    iOsobnik o2 = zbiorOsobnikow.min(f, dane);
+                    if (f.wartoscFunkcji(o1, dane)<f.wartoscFunkcji(o2, dane)) zbiorOsobnikow.usunOsobnika(o2);
+                    try {
+                        zbiorOsobnikow.dodajOsobnika(o1);
+                    } catch (Exception ex) {
+                        Logger.getLogger(AlgorytmV2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
             }
         }
     }
