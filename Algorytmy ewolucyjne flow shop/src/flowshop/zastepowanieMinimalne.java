@@ -11,7 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *Funkcja się nie sprawdziła może będzie rozwijana później
+ * Klasa sortująca unikalne osobniki w populacji i wybierająca te
+ * o najmniejszej wartości funkcji celu (bliższe optymalnemu rozwiązaniu).
  * @author Łukasz Synówka
  */
 public class zastepowanieMinimalne implements iZastepowanie
@@ -21,6 +22,13 @@ public class zastepowanieMinimalne implements iZastepowanie
     int iloscKoncowa;
     double ilePozostawic;
 
+    /**
+     * Konstruktor definiujący dane i funkcję dla których będą liczone wartości
+     * osobników. Ilość końcowa to rozmiar populacji wynikowej.
+     * @param dane Dane do obliczeń
+     * @param funkcja Funkcja celu korzystająca z danych
+     * @param iloscKoncowa Rozmiar populacji po połączeniu
+     */
     public zastepowanieMinimalne(iDane dane, iFunkcjaCelu funkcja, int iloscKoncowa)
     {
         this.dane = dane;
@@ -28,6 +36,12 @@ public class zastepowanieMinimalne implements iZastepowanie
         this.iloscKoncowa = iloscKoncowa;
         ilePozostawic = 0.0;
     }
+    /**
+     * Konstruktor z dodatkowym parametrem definiującym ile losowych osobników
+     * z orginalnie zadanej populacji przetrwa zastępowanie bez uczestniczenia w
+     * wyborze najlepiej przystosowanych osobników.
+     * @param ileZostanie Współczynnik, który określa jaka część pierwotnej populacji ma pozostać.
+     */
     public zastepowanieMinimalne(iDane dane, iFunkcjaCelu funkcja, int iloscKoncowa, double ileZostanie)
     {
         this.dane = dane;
@@ -36,20 +50,20 @@ public class zastepowanieMinimalne implements iZastepowanie
         ilePozostawic = ileZostanie;
     }
     /**
-     *
+     * Właściwa funcja populacji.
      * @param p1 Populacja obecna
      * @param p2 Populacja wygenerowana
      * @return Połączenie populacji
      */
     public populacja wykonaj(populacja p1, populacja p2) 
     {
-        populacja p = new populacja();
+        populacja populacjaWynikowa = new populacja();
         Random r = new Random();
         Object[] przetrwaja = p1.osobniki().keySet().toArray();
-        while(p.rozmiarPopulacji()<iloscKoncowa*ilePozostawic)
+        while(populacjaWynikowa.rozmiarPopulacji()<iloscKoncowa*ilePozostawic)
         {
             try {
-                p.dodajOsobnika((iOsobnik) przetrwaja[r.nextInt(p1.szerokoscPopulacji())]);
+                populacjaWynikowa.dodajOsobnika((iOsobnik) przetrwaja[r.nextInt(p1.szerokoscPopulacji())]);
             } catch (Exception ex) {
                 Logger.getLogger(zastepowanieMinimalne.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -60,15 +74,15 @@ public class zastepowanieMinimalne implements iZastepowanie
         List<iOsobnik> osobniki = p1.osobnikiPop();
         Collections.sort(osobniki,funkcja.porownaj(dane));
         ListIterator<iOsobnik> li = osobniki.listIterator();
-        while(li.hasNext()&&(p.rozmiarPopulacji()<iloscKoncowa))
+        while(li.hasNext()&&(populacjaWynikowa.rozmiarPopulacji()<iloscKoncowa))
         {
             try {
-                p.dodajOsobnika(li.next());
+                populacjaWynikowa.dodajOsobnika(li.next());
             } catch (Exception ex) {
                 Logger.getLogger(zastepowanieMinimalne.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return p;
+        return populacjaWynikowa;
     }
 
 }

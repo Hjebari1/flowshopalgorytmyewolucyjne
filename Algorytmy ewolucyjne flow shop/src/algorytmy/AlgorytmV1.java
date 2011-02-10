@@ -5,19 +5,17 @@ import flowshop.Interfejsy.iDane;
 import flowshop.Kataklizm;
 import flowshop.MutacjaPrzesuniecie;
 import flowshop.NehAlgorytm;
+import flowshop.Rewolucja;
 import flowshop.SelekcjaSort;
 import flowshop.funkcjaCeluFlowShop;
 import flowshop.osobnikFlowShop;
 import flowshop.populacja;
-import flowshop.selekcjaRuletka;
 import flowshop.zastepowanieMinimalne;
-import flowshop.zastepowanieTurniej;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operatory.multiOperator;
-import operatory.operatorPMX;
 
 /**
  *
@@ -27,11 +25,11 @@ public class AlgorytmV1 extends VAlgorytm {
 
     int iloscOsobnikow;
     Kataklizm oczyszczacz;
+    Rewolucja mieszacz;
     double min;
 
     /**
      * Kostruktor konkretnej implementacji abstrakcyjnej klasy VAlgorytm.
-     * TODO parametry przekazywane w konstruktorze czy wpisywane na sztywno ?
      * @param iloscOsobnikow rozmiar populacji
      * @param d dane wejsciowe
      */
@@ -43,11 +41,11 @@ public class AlgorytmV1 extends VAlgorytm {
             this.iloscOsobnikow = iloscOsobnikow;
             zbiorOsobnikow = new populacja();
             zastepowanie = new zastepowanieMinimalne(dane, f, iloscOsobnikow, 0.5);
-            mutacja = new MutacjaPrzesuniecie(0.025);
-            oczyszczacz = new Kataklizm(5000, iloscOsobnikow, iloscOsobnikow / 20, iloscOsobnikow / 20, new MutacjaPrzesuniecie(0.1));
+            mutacja = new MutacjaPrzesuniecie(0.5);
+            oczyszczacz = new Kataklizm(2000, iloscOsobnikow, 4, 100, new MutacjaPrzesuniecie(0.1));
             selekcja = new SelekcjaSort(dane, f);
-            operatorKrzyżowania = new operatorPMX();
-            NehAlgorytm nehAlg = new NehAlgorytm(d);
+            operatorKrzyżowania = new multiOperator();
+           NehAlgorytm nehAlg = new NehAlgorytm(d);
             List<Integer> startowyOsobnik = nehAlg.wyliczPorzadek();
             int[] genom = new int[d.iloscZadan()];
             int licznik = 0;
@@ -84,7 +82,7 @@ public class AlgorytmV1 extends VAlgorytm {
         StringBuilder wynik = new StringBuilder("");
         wynik = wynik.append(getMin()).append(" ").
                 append(getMed()).append(" ").
-                append(getMax()).append("\n"); // mam nadzieję, że to jest to samo co było
+                append(getMax()).append("\n");
         return wynik.toString();
     }
 }

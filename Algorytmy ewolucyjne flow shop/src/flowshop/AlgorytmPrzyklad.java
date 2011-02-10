@@ -1,17 +1,10 @@
 package flowshop;
 
 import flowshop.Interfejsy.VAlgorytm;
-import flowshop.Interfejsy.iAlgorytm;
 import flowshop.Interfejsy.iDane;
-import flowshop.Interfejsy.iOsobnik;
-import flowshop.Interfejsy.iZastepowanie;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ListIterator;
-import java.util.Random;
 
 /**
- *
+ * Przykładowa implementacja abstrakcyjnej  klasy algorytmu
  * @author Jakub Banaszewski
  */
 public class AlgorytmPrzyklad extends VAlgorytm {
@@ -19,7 +12,6 @@ public class AlgorytmPrzyklad extends VAlgorytm {
     int iloscOsobnikow;
    /**
     * Kostruktor konkretnej implementacji abstrakcyjnej klasy VAlgorytm.
-    * TODO parametry przekazywane w konstruktorze czy wpisywane na sztywno ?
     * @param iloscOsobnikow rozmiar populacji
     * @param d dane wejsciowe
    */
@@ -39,7 +31,7 @@ public class AlgorytmPrzyklad extends VAlgorytm {
     @Override
     public String toString() {
         StringBuilder wynik = new StringBuilder("");
-        wynik = wynik.append(getMin()).append("\n"); // mam nadzieję, że to jest to samo co było
+        wynik = wynik.append(getMin()).append("\n");
         return wynik.toString();
     }
 }

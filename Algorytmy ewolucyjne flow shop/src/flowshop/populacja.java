@@ -42,7 +42,7 @@ public class populacja {
     public int rozmiarOsobnika() {
         return rozmiarOsobnika;
     }
-    
+
     public HashMap<iOsobnik,Integer> osobniki()
     {
         return osobniki;
@@ -132,7 +132,6 @@ public class populacja {
        }
         return wyn;
     }
-    //TODO kopiowanie populacji do operatorów ??
 
     @Override
     public String toString() {

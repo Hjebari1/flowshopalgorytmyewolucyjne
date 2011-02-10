@@ -34,7 +34,12 @@ public class selekcjaRuletka implements iFPopulacjiRozmiar {
     public selekcjaRuletka(iDane dane, int zakresLos) {
         this.dane = dane;
     }
-
+    /**
+     * Realizacji metody ruletki korzystając z wyliczania współczynników dla każdego osobnika.
+     * @param p Populacja wejściowa
+     * @param rozmiar Rozmiar populacji wyjściowej
+     * @return Populacja wybrana
+     */
     public populacja wykonaj(populacja p, int rozmiar) {
         populacja wybrPop = new populacja();
         Random los = new Random();
