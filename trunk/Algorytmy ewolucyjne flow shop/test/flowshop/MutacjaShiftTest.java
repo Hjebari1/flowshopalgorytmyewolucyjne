@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package flowshop;
 
 import flowshop.Interfejsy.iOsobnik;
@@ -14,7 +10,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author bejnan
+ * @author Jakub Banaszewski
  */
 public class MutacjaShiftTest {
 
@@ -41,7 +37,7 @@ public class MutacjaShiftTest {
      * Test of wynonaj method, of class MutacjaShift.
      */
     @Test
-    public void testWynonaj() {
+    public void testWynonaj() throws Exception {
         System.out.println("wynonaj");
         populacja p = new populacja();
         p.dodajOsobnika(new osobnikFlowShop(20));

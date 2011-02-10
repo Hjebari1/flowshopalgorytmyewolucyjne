@@ -20,7 +20,7 @@ public class MutacjaZamiana implements iFunkcjaPopulacji {
         Random r = new Random();
         for (Iterator i = p.popIterator(); i.hasNext();) {
             iOsobnik o = (iOsobnik) i.next();
-            if (r.nextDouble() > wsp) {
+            if (r.nextDouble() < wsp) {
                 Integer a1 = r.nextInt(o.dlugoscGenomu());
                 Integer a2 = r.nextInt(o.dlugoscGenomu());
                 Integer b1 = (Integer) o.wartoscOsobnika(a1);

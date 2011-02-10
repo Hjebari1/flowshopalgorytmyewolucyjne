@@ -44,6 +44,12 @@ public class funkcjaCeluFlowShop implements iFunkcjaCelu {
         return q[dane.iloscMaszyn() - 1][dane.iloscZadan() - 1];
     }
 
+    /**
+     * Funkcja zwracająca klasę porównującą dwa osobniki według wyników
+     * które wyznacza klasa funkcji celu.
+     * @param dane Dale dla funkcji celu
+     * @return Klasa porównująca dwa osobniki
+     */
     public Comparator<iOsobnik> porownaj(final iDane dane) {
         return new Comparator<iOsobnik>() {
 

@@ -4,11 +4,12 @@ import flowshop.identycznosc;
 import flowshop.osobnikFlowShop;
 import flowshop.populacja;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 /**
- * Moja propozycja implementacji algorytmów. Warto pewnie jeszcze dodać funkcję
- * znajdywania mediany i max.
+ * Klasa abstrakcyjna implementująca algorytm wykonujący obliczenia.
+ * Zawiera ona podstawowe operatory i fukcję, które działają na populacji.
+ * Klasy rozszerzające tylko przypisują tym właśnie operatorom i funkcjom
+ * wybrane metody.
  * @author Jakub Banaszewski
  */
 public abstract class VAlgorytm {
@@ -35,6 +36,7 @@ public abstract class VAlgorytm {
         }
         return min;
     }
+    
     public double getMax() {
         Iterator<iOsobnik> iter = zbiorOsobnikow.popIterator();
         osobnikFlowShop o;
@@ -55,9 +57,21 @@ public abstract class VAlgorytm {
         }
         return med;
     }
+    /**
+     * Metoda podmieniająca aktualną populację, na której pracuje algorytm
+     * @param osobniki Nowa populacja, na której ma działać algorytm.
+     */
+    public void ustawPopulacje(populacja osobniki) {
+        zbiorOsobnikow = osobniki;
+    }
+    
     public void wykonajIteracje() {
         wykonajIteracje(1);
     }
+    /**
+     * Funcja wykonująca zadaną ilość iteracji algorytmu.
+     * @param iloscIteracji Ilość iteracji do wykonania przez algorytm.
+     */
     public void wykonajIteracje(int iloscIteracji) {
         populacja nowaPopulacja = new populacja();
         for (int i=0; i < iloscIteracji; i++)

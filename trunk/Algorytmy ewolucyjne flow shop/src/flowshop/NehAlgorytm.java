@@ -26,11 +26,11 @@ public class NehAlgorytm {
     List<Integer> porzadek;
     List<Para<Double, Integer>> wyniki;
     /**
-     * Metoda, któa dla dwóch prac podaje, którą bardziej opłaca się wykonać
-     * pierwszą.
+     * Metoda, któa dla dwóch prac podaje koszt ich wykonania
+     * w tej kolejności
      * @param p1 numer pierwszej pracy
      * @param p2 numer drugiej pracy
-     * @return Numer pracy, którą się opłaca wykonać najpierw, oraz koszt wykonania obu prac.
+     * @return Koszt wykonania tych prac według zadanej kolejności
      */
     private double  paraPrac(int p1, int p2) {
         double wyn1 = daneWejsciowe.czasZadania(0, p1);
@@ -85,6 +85,14 @@ public class NehAlgorytm {
         }
         return q[daneWejsciowe.iloscMaszyn()-1][kolejnosc.size()-1];
     }
+    /**
+     * Funcja, która korzystając z fukncji klasy
+     * wyznacza kolejność prac w sposób optymalny
+     * według jej kryteriów. Przy próbie dodania zadania
+     * jest sprawdzane między które zadania najbardziej opłaca się
+     * je wsadzić.
+     * @return Kolejność prac do wykonania
+     */
     public List<Integer> wyliczPorzadek() {
         double wynik;
         for (int i = 0; i < daneWejsciowe.iloscZadan(); i++) {
