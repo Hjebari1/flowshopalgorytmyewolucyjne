@@ -17,6 +17,8 @@ import operatory.*;
 /**
  *
  * @author Łukasz Synówka
+ * Alternatywna wersja algorytmu AlgorytmV1
+ * 
  */
 public class AlgorytmV2 extends VAlgorytm {
 
@@ -27,8 +29,6 @@ public class AlgorytmV2 extends VAlgorytm {
 
 
     /**
-     * Kostruktor konkretnej implementacji abstrakcyjnej klasy VAlgorytm.
-     * TODO parametry przekazywane w konstruktorze czy wpisywane na sztywno ?
      * @param iloscOsobnikow rozmiar populacji
      * @param d dane wejsciowe
      */

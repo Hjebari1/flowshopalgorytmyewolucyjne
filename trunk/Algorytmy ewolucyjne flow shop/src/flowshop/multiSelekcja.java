@@ -13,6 +13,7 @@ import java.util.Random;
 /**
  *
  * @author Łukasz Synówka
+ * muliSelekcja pozwala wykonywać na przemiennie selecja rand i sort
  */
 public class multiSelekcja implements iFPopulacjiRozmiar
 {
@@ -21,7 +22,12 @@ public class multiSelekcja implements iFPopulacjiRozmiar
     iFPopulacjiRozmiar selekcjaRand;
     iFPopulacjiRozmiar selekcjaSort;
     double wsp;
-
+    /**
+     *
+     * @param dane dane z zadania do wykonania
+     * @param fCel funkcja celu
+     * @param wsp współczynnik określający częstotliwość wykonywania operacji selekcjaRand i Sort
+     */
     public multiSelekcja(iDane dane, iFunkcjaCelu fCel, double wsp) {
         this.dane = dane;
         this.fCel = fCel;

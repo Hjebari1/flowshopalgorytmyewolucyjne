@@ -12,6 +12,8 @@ import java.util.Random;
 /**
  *
  * @author Łukasz Synówka
+ *
+ * Pozwala wykożystywać dwie metody zastępowania w jednym algorytmie
  */
 public class multiZastepowanie implements iZastepowanie
 {
@@ -22,7 +24,13 @@ public class multiZastepowanie implements iZastepowanie
     double wsp;
     iZastepowanie zm;
     iZastepowanie zt;
-
+    /**
+     *
+     * @param dane dane z zadania
+     * @param funkcja funkcja celu
+     * @param iloscKoncowa ilość końcow jaka ma zostać po zastępowaniu
+     * @param wsp współcznynnik określający z jaką częśtotliwością wykonuje się określone Zastępowanie
+     */
     public multiZastepowanie(iDane dane, iFunkcjaCelu funkcja, int iloscKoncowa,double wsp)
     {
         this.dane = dane;
