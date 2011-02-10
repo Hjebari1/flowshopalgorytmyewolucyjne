@@ -4,6 +4,8 @@ import flowshop.Interfejsy.iFPopulacjiRozmiar;
 import flowshop.Interfejsy.iOsobnik;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Łukasz Synówka
@@ -16,6 +18,7 @@ public class MutacjaPrzesuniecieWaga implements iFPopulacjiRozmiar {
     /**
      * Konstruktor domyślny.
      * @param wsp Prawdopodobieństwo wystąpienia mutacji
+     * @param wg obiekt zawierający wagi par
      */
     public MutacjaPrzesuniecieWaga(double czestotliwosc, wagiPar wg) {
         this.wg = wg;
@@ -87,7 +90,11 @@ public class MutacjaPrzesuniecieWaga implements iFPopulacjiRozmiar {
 
                 }
                 wg.wagaMutacjaZamiana( (osobnikFlowShop) oc, (osobnikFlowShop) o);
-                wynik.dodajOsobnika(o);
+                try {
+                    wynik.dodajOsobnika(o);
+                } catch (Exception ex) {
+                    Logger.getLogger(MutacjaPrzesuniecieWaga.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return wynik;

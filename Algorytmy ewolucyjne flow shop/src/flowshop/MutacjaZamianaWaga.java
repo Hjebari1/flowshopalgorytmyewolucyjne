@@ -19,7 +19,11 @@ public class MutacjaZamianaWaga implements iFunkcjaPopulacji
 {
     private double wsp = 0;
     private wagiPar wg ;
-
+    /**
+     *
+     * @param czestotliwosc częstotliwość z jaką wykonywana jest mutacja
+     * @param wg obiekt z wagami par
+     */
     public MutacjaZamianaWaga(double czestotliwosc, wagiPar wg) 
     {
         this.wg = wg;
