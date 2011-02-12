@@ -43,7 +43,7 @@ public class operatorPMX implements iFPopulacjiRozmiar {
         iOsobnik wyn1 = o1.makeCopy();
         iOsobnik wyn2 = o2.makeCopy();
 
-        if (poz1 > poz2) {
+        if (Math.abs(poz1 - poz2) > o1.dlugoscGenomu()-Math.abs(poz1 - poz2)) {
             int tmp = poz1;
             poz1 = poz2;
             poz2 = tmp;
@@ -51,36 +51,36 @@ public class operatorPMX implements iFPopulacjiRozmiar {
         HashMap genyDoZmiany = new HashMap();
         Object tmp, tmp2;
         // poz1 w przedziale, poz2 poza przedzialem!
-        for (int i = poz1; i < poz2; i++) {
-            wyn1.modyfikujGen(i, o2.wartoscOsobnika(i));
-            wyn2.modyfikujGen(i, o1.wartoscOsobnika(i));
+        for (int i = poz1; i % o1.dlugoscGenomu() != poz2; i++) {
+            wyn1.modyfikujGen(i % o1.dlugoscGenomu(), o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
+            wyn2.modyfikujGen(i % o1.dlugoscGenomu(), o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
         }
         //sprawdzenie, czy nie przenosimy powtarzajacych sie genów
-        for (int i = poz1; i < poz2; i++) {
-            if (o1.wartoscOsobnika(i) == o2.wartoscOsobnika(i)) continue;
-            if (!genyDoZmiany.containsKey(o1.wartoscOsobnika(i))) {
-                if (!genyDoZmiany.containsKey(o2.wartoscOsobnika(i))) {
-                    genyDoZmiany.put(o1.wartoscOsobnika(i), o2.wartoscOsobnika(i));
-                    genyDoZmiany.put(o2.wartoscOsobnika(i), o1.wartoscOsobnika(i));
+        for (int i  = poz1; i % o1.dlugoscGenomu() != poz2; i++) {
+            if (o1.wartoscOsobnika(i % o1.dlugoscGenomu()) == o2.wartoscOsobnika(i % o1.dlugoscGenomu())) continue;
+            if (!genyDoZmiany.containsKey(o1.wartoscOsobnika(i % o1.dlugoscGenomu()))) {
+                if (!genyDoZmiany.containsKey(o2.wartoscOsobnika(i % o1.dlugoscGenomu()))) {
+                    genyDoZmiany.put(o1.wartoscOsobnika(i % o1.dlugoscGenomu()), o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.put(o2.wartoscOsobnika(i % o1.dlugoscGenomu()), o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
                 } else {
-                    tmp = genyDoZmiany.get(o2.wartoscOsobnika(i));
-                    genyDoZmiany.put(tmp, o1.wartoscOsobnika(i));
-                    genyDoZmiany.put(o1.wartoscOsobnika(i), tmp);
-                    genyDoZmiany.remove(o2.wartoscOsobnika(i));
+                    tmp = genyDoZmiany.get(o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.put(tmp, o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.put(o1.wartoscOsobnika(i % o1.dlugoscGenomu()), tmp);
+                    genyDoZmiany.remove(o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
                 }
             } else {
-                if (!genyDoZmiany.containsKey(o2.wartoscOsobnika(i))) {
-                    tmp = genyDoZmiany.get(o1.wartoscOsobnika(i));
-                    genyDoZmiany.put(o2.wartoscOsobnika(i), tmp);
-                    genyDoZmiany.put(tmp, o2.wartoscOsobnika(i));
-                    genyDoZmiany.remove(o1.wartoscOsobnika(i));
+                if (!genyDoZmiany.containsKey(o2.wartoscOsobnika(i % o1.dlugoscGenomu()))) {
+                    tmp = genyDoZmiany.get(o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.put(o2.wartoscOsobnika(i % o1.dlugoscGenomu()), tmp);
+                    genyDoZmiany.put(tmp, o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.remove(o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
                 } else {
-                    tmp = genyDoZmiany.get(o1.wartoscOsobnika(i));
-                    tmp2 = genyDoZmiany.get(o2.wartoscOsobnika(i));
+                    tmp = genyDoZmiany.get(o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    tmp2 = genyDoZmiany.get(o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
                     genyDoZmiany.put(tmp, tmp2);
                     genyDoZmiany.put(tmp2, tmp);
-                    genyDoZmiany.remove(o1.wartoscOsobnika(i));
-                    genyDoZmiany.remove(o2.wartoscOsobnika(i));
+                    genyDoZmiany.remove(o1.wartoscOsobnika(i % o1.dlugoscGenomu()));
+                    genyDoZmiany.remove(o2.wartoscOsobnika(i % o1.dlugoscGenomu()));
                 }
             }
 
@@ -88,13 +88,13 @@ public class operatorPMX implements iFPopulacjiRozmiar {
         //faza PMX
         Object zmGen = null;
         int pozZmian = -1;
-        for (int i = poz1; i < poz2; i++) {
-            zmGen = wyn1.wartoscOsobnika(i);
+        for (int i = poz1; i % o1.dlugoscGenomu() != poz2; i++) {
+            zmGen = wyn1.wartoscOsobnika(i % o1.dlugoscGenomu());
             if (genyDoZmiany.containsKey(zmGen)) {
                 pozZmian = wyn1.znajdzPozGenuPoza(poz1, poz2, zmGen);
                 wyn1.modyfikujGen(pozZmian, genyDoZmiany.get(zmGen));
             }
-            zmGen = wyn2.wartoscOsobnika(i);
+            zmGen = wyn2.wartoscOsobnika(i % o1.dlugoscGenomu());
             if (genyDoZmiany.containsKey(zmGen)) {
                 pozZmian = wyn2.znajdzPozGenuPoza(poz1, poz2, zmGen);
                 wyn2.modyfikujGen(pozZmian, genyDoZmiany.get(zmGen));
